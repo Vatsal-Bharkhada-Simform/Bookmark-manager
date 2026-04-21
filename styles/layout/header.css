@@ -1,0 +1,8 @@
+.header{
+    border-bottom: 1px solid grey;
+    
+    .header__name{
+        padding: .8rem;
+        border-right: 1px solid grey;
+    }
+}

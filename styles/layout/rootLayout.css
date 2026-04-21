@@ -1,0 +1,15 @@
+.root__wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    .header, .main{
+        display: grid;
+        grid-template-columns: minmax(10rem, 14vw) 1fr;
+    }
+
+    .main {
+        flex: 1;
+        /* background-color: yellow; */
+    }
+}

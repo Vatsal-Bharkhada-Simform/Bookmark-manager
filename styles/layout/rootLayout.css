@@ -5,7 +5,7 @@
 
     .header, .main{
         display: grid;
-        grid-template-columns: minmax(10rem, 14vw) 1fr;
+        grid-template-columns: minmax(16rem, 14vw) 1fr;
     }
 
     .main {

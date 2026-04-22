@@ -10,8 +10,10 @@ body {
     width: 100%;
     height: 100vh;
     overflow: hidden;
-    font-family: "Inter Tight", Arial, Helvetica, sans-serif;
+    font-family: "Inter", Arial, Helvetica, sans-serif;
     font-size: 62.5%;
+    color: var(--text-primary);
+    letter-spacing: -.2px;
 }
 
 input {

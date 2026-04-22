@@ -30,7 +30,6 @@
                 font-family: inherit;
                 font-weight: var(--font-regular);
                 font-size: var(--text-sm);
-                letter-spacing: .4px;
             }
             
             button{

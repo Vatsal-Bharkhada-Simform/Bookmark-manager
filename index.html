@@ -12,7 +12,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="root__wrapper">
@@ -32,7 +32,56 @@
             </div>
         </header>
         <main class="main">
-            <aside class="sidebar"></aside>
+            <aside class="sidebar">
+                <nav class="nav__wrapper">
+                    <span class="nav__head">Bookmarks</span>
+                    <ul class="nav__list">
+                        <li class="nav__list-item" data-selected="true">
+                            <a href="#" class="nav-link">
+                                <svg class="u-icon">
+                                    <use href="./assets/icons/sprite.svg#bookmark"></use>
+                                </svg>
+                                All bookmarks
+                            </a>
+                        </li>
+                        <li class="nav__list-item">
+                            <a href="#" class="nav-link">
+                                <svg class="u-icon">
+                                    <use href="./assets/icons/sprite.svg#collection"></use>
+                                </svg>
+                                Collections
+                            </a>
+                        </li>
+                        <li class="nav__list-item">
+                            <a href="#" class="nav-link">
+                                <svg class="u-icon">
+                                    <use href="./assets/icons/sprite.svg#trash-bin"></use>
+                                </svg>
+                                Recently deleted
+                            </a>
+                        </li>
+                    </ul>
+                    <span class="nav__head">Profiles</span>
+                    <ul class="nav__list">
+                        <li class="nav__list-item">
+                            <a href="#" class="nav-link">
+                                <svg class="u-icon">
+                                    <use href="./assets/icons/sprite.svg#profile"></use>
+                                </svg>
+                                All profiles
+                            </a>
+                        </li>
+                        <li class="nav__list-item">
+                            <a href="#" class="nav-link">
+                                <svg class="u-icon">
+                                    <use href="./assets/icons/sprite.svg#trash-bin"></use>
+                                </svg>
+                                Recently deleted
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </aside>
             <section class="main__content"></section>
         </main>
     </div>

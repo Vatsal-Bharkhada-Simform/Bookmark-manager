@@ -1,0 +1,6 @@
+.u-icon {
+    width: var(--text-lg);
+    aspect-ratio: 1/1;
+    vertical-align: middle;
+    margin-top: -.1rem;
+}

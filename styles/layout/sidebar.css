@@ -1,3 +1,4 @@
 .sidebar {
-    border-right: 1px solid grey;
+    background-color: var(--gray-50);
+    border-right: 1px solid var(--border-color);
 }

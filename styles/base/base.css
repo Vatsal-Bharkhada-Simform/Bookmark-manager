@@ -11,4 +11,10 @@ body {
     height: 100vh;
     overflow: hidden;
     font-family: "Inter Tight", Arial, Helvetica, sans-serif;
+    font-size: 62.5%;
+}
+
+input {
+    -webkit-appearance: none;
+    appearance: none;
 }

@@ -61,7 +61,7 @@
     --space-md: 0.8rem;
     --space-lg: 1.2rem;
     --space-xl: 1.6rem;
-    --space-xxl: 2rem;
+    --space-2xl: 2rem;
 
     /* Font size */
     --text-xs: 0.75rem;
@@ -82,6 +82,7 @@
     --round-sm: .2rem;
     --round-md: .4rem;
     --round-lg: .6rem;
+    --round-xl: .8rem;
 
     /* Experimental palette, will be used later */
     /* --amber-50: #fffbeb;

@@ -13,3 +13,15 @@
         /* background-color: yellow; */
     }
 }
+
+@media (max-width: 768px){
+    .root__wrapper{
+        .header, .main{
+            display: flex;
+        }
+
+        .main__content{
+            width: 100%;
+        }
+    }
+}

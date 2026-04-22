@@ -18,6 +18,11 @@
     <div class="root__wrapper">
         <header class="header">
             <div class="header__name">
+                <button type="button" class="button-ghost" title="Open sidebar">
+                    <svg class="u-icon">
+                        <use href="./assets/icons/sprite.svg#menu"></use>
+                    </svg>
+                </button>
                 <h1>ZenTabs</h1>
             </div>
             <div class="header__main">
@@ -33,6 +38,13 @@
         </header>
         <main class="main">
             <aside class="sidebar">
+                <div class="sidebar__head">
+                    <button class="button-ghost" title="Close sidebar" type="button">
+                        <svg class="u-icon">
+                            <use href="./assets/icons/sprite.svg#close"></use>
+                        </svg>
+                    </button>
+                </div>
                 <nav class="nav__wrapper">
                     <span class="nav__head">Bookmarks</span>
                     <ul class="nav__list">
@@ -82,7 +94,64 @@
                     </ul>
                 </nav>
             </aside>
-            <section class="main__content"></section>
+            <section class="main__content">
+                <div id="all-bookmarks" class="content__wrapper">
+                    <div class="content__head">
+                        <div class="head__name">
+                            <h2>All bookmarks</h2>
+                        </div>
+                        <div class="head__options">
+                            <div class="head__options-left">
+                                <form name="container-search-form" class="head__search">
+                                    <input type="search" name="search" placeholder="Search">
+                                    <button type="submit" title="search">
+                                        <svg class="u-icon" aria-hidden="true">
+                                            <use href="./assets/icons/sprite.svg#search"></use>
+                                        </svg>
+                                    </button>
+                                </form>
+                            </div>
+                            <div class="head__options-right">
+                                <div class="dropdown">
+                                    <button type="button" class="dropdown__label">
+                                        Filter
+                                        <svg class="u-icon">
+                                            <use href="./assets/icons/sprite.svg#filter"></use>
+                                        </svg>
+                                    </button>
+                                    <div class="dropdown__items">
+                                        <button type="button" class="item">
+                                            By name
+                                        </button>
+                                        <button type="button" class="item">
+                                            By URL content
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="dropdown">
+                                    <button type="button" class="dropdown__label">
+                                        Sort
+                                        <svg class="u-icon">
+                                            <use href="./assets/icons/sprite.svg#sort"></use>
+                                        </svg>
+                                    </button>
+                                    <div class="dropdown__items">
+                                        <button type="button" class="item">
+                                            By name (A-Z)
+                                        </button>
+                                        <button type="button" class="item">
+                                            By domain (A-Z)
+                                        </button>
+                                        <button type="button" class="item">
+                                            By creation date
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </main>
     </div>
 </body>

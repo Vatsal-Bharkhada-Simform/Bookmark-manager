@@ -59,3 +59,32 @@
         }
     }
 }
+
+@media (max-width: 768px){
+    .content__wrapper {
+        padding: var(--space-md);
+
+        .content__head {
+
+            .head__name {
+                padding: var(--space-sm) 0;
+            }
+
+            .head__options {
+                padding: var(--space-sm) 0;
+                flex-direction: column;
+                gap: var(--space-sm);
+
+                .head__options-left, .head__options-right{
+                    width: 100%;
+                }
+
+                .head__options-left {
+                    .head__search input {
+                        width: 100%;
+                    }
+                }
+            }
+        }
+    }
+}

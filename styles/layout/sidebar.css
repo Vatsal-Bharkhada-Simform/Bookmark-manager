@@ -71,8 +71,9 @@
         position: absolute;
         left: -100%;
         top: 0;
+        z-index: 1;
         height: 100vh;
-        width: clamp(5rem, 20vw+2rem, 80vw);
+        width: clamp(14rem, 16rem, 80vw);
         background-color: var(--bg-primary);
 
         .sidebar__head {

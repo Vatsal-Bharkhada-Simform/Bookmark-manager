@@ -1,58 +1,31 @@
-import { getStore } from "./db.controller";
+import getRequestPromise from "../utils/getRequestPromise.js";
+import { getStore } from "./db.controller.js";
+
+const STORE = "profile";
 
 function addProfile(profile){
-    const profileStore = getStore("profile", "readwrite");
-
-    return new Promise((resolve, reject) => {
-        let req = profileStore.add(profile);
-
-        req.onsuccess = () => resolve(req.result);
-        req.onerror = () => reject(req.error);
-    })
+    const profileStore = getStore(STORE, "readwrite");
+    return getRequestPromise(profileStore.add(profile));
 }
 
 function getAllProfiles() {
-    const profileStore = getStore("profile", "readonly");
-
-    return new Promise((resolve, reject) => {
-        const req = profileStore.getAll();
-
-        req.onsuccess = () => resolve(req.result);
-        req.onerror = () => reject(req.error);
-    });
+    const profileStore = getStore(STORE, "readonly");
+    return getRequestPromise(profileStore.getAll());
 }
 
 function getProfileById(id) {
-    const profileStore = getStore("profile", "readonly");
-    
-    return new Promise((resolve, reject) => {
-        const req = profileStore.get(id);
-        
-        req.onsuccess = () => resolve(req.result);
-        req.onerror = () => reject(req.error);
-    });
+    const profileStore = getStore(STORE, "readonly");
+    return getRequestPromise(profileStore.get(id));
 }
 
 function updateProfile(profile) {
-    const profileStore = getStore("profile", "readwrite");
-
-    return new Promise((resolve, reject) => {
-        const req = profileStore.put(profile);
-
-        req.onsuccess = () => resolve(req.result);
-        req.onerror = () => reject(req.error);
-    });
+    const profileStore = getStore(STORE, "readwrite");
+    return getRequestPromise(profileStore.put(profile));
 }
 
 function deleteProfile(id) {
-    const profileStore = getStore("profile", "readwrite");
-
-    return new Promise((resolve, reject) => {
-        const req = profileStore.delete(id);
-
-        req.onsuccess = () => resolve(req.result);
-        req.onerror = () => reject(req.error);
-    });
+    const profileStore = getStore(STORE, "readwrite");
+    return getRequestPromise(profileStore.delete(id));
 }
 
 export { addProfile, getProfileById, getAllProfiles, updateProfile, deleteProfile };

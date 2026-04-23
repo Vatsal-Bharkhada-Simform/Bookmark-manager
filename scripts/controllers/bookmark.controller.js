@@ -1,58 +1,31 @@
+import getRequestPromise from "../utils/getRequestPromise.js";
 import { getStore } from "./db.controller.js";
 
+const STORE = "bookmark";
+
 function addBookmark(bookmark){
-    const bookmarkStore = getStore("bookmark", "readwrite");
-
-    return new Promise((resolve, reject) => {
-        let req = bookmarkStore.add(bookmark);
-
-        req.onsuccess = () => resolve(req.result);
-        req.onerror = () => reject(req.error);
-    })
+    const bookmarkStore = getStore(STORE, "readwrite");
+    return getRequestPromise(bookmarkStore.add(bookmark));
 }
 
 function getAllBookmarks() {
-    const bookmarkStore = getStore("bookmark", "readonly");
-
-    return new Promise((resolve, reject) => {
-        const req = bookmarkStore.getAll();
-
-        req.onsuccess = () => resolve(req.result);
-        req.onerror = () => reject(req.error);
-    });
+    const bookmarkStore = getStore(STORE, "readonly");
+    return getRequestPromise(bookmarkStore.getAll());
 }
 
 function getBookmarkById(id) {
-    const bookmarkStore = getStore("bookmark", "readonly");
-
-    return new Promise((resolve, reject) => {
-        const req = bookmarkStore.get(id);
-
-        req.onsuccess = () => resolve(req.result);
-        req.onerror = () => reject(req.error);
-    });
+    const bookmarkStore = getStore(STORE, "readonly");
+    return getRequestPromise(bookmarkStore.get(id));
 }
 
 function updateBookmark(bookmark) {
-    const bookmarkStore = getStore("bookmark", "readwrite");
-
-    return new Promise((resolve, reject) => {
-        const req = bookmarkStore.put(bookmark);
-
-        req.onsuccess = () => resolve(req.result);
-        req.onerror = () => reject(req.error);
-    });
+    const bookmarkStore = getStore(STORE, "readwrite");
+    return getRequestPromise(bookmarkStore.put(bookmark));
 }
 
 function deleteBookmark(id) {
-    const bookmarkStore = getStore("bookmark", "readwrite");
-
-    return new Promise((resolve, reject) => {
-        const req = bookmarkStore.delete(id);
-
-        req.onsuccess = () => resolve(req.result);
-        req.onerror = () => reject(req.error);
-    });
+    const bookmarkStore = getStore(STORE, "readwrite");
+    return getRequestPromise(bookmarkStore.delete(id));
 }
 
 export {addBookmark, getAllBookmarks, getBookmarkById, updateBookmark, deleteBookmark};

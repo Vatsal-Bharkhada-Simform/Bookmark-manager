@@ -28,7 +28,6 @@
         position: absolute;
         top: 100%;
         right: 0;
-        display: flex;
         flex-direction: column;
         border: 1px solid var(--border-color);
         padding: var(--space-sm);
@@ -52,6 +51,15 @@
             &:hover, &:focus {
                 background-color: var(--blue-50);
             }
+        }
+    }
+}
+
+@media (max-width: 768px){
+    .dropdown {
+        .dropdown__items{
+            right: auto;
+            left: 0;
         }
     }
 }

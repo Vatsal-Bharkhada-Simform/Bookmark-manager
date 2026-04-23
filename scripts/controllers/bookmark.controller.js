@@ -34,7 +34,7 @@ function getBookmarkById(id) {
 }
 
 function updateBookmark(bookmark) {
-    const bookmarkStore = getStore("bookmark", "readonly");
+    const bookmarkStore = getStore("bookmark", "readwrite");
 
     return new Promise((resolve, reject) => {
         const req = bookmarkStore.put(bookmark);
@@ -45,7 +45,7 @@ function updateBookmark(bookmark) {
 }
 
 function deleteBookmark(id) {
-    const bookmarkStore = getStore("bookmark", "readonly");
+    const bookmarkStore = getStore("bookmark", "readwrite");
 
     return new Promise((resolve, reject) => {
         const req = bookmarkStore.delete(id);

@@ -1,5 +1,5 @@
-import { getAllBookmarks } from "./controllers/bookmark.controller.js";
-import { getStore, initDB } from "./controllers/db.controller.js";
+import { addBookmark, deleteBookmark, getAllBookmarks, getBookmarkById, updateBookmark } from "./controllers/bookmark.controller.js";
+import { initDB } from "./controllers/db.controller.js";
 // let data = null;
 
 async function connectDB(){

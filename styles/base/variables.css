@@ -23,6 +23,15 @@
     --gray-700: #374151;
     --gray-800: #1f2933;
     --gray-900: #111827;
+    
+    /* ========== RED ========== */
+    --red-50: #ffd2d0;
+    --red-100: #fdc0bc;
+    --red-200: #fcaca7;
+    --red-300: #ff8178;
+    --red-400: #ff766c;
+    --red-600: #ff4d40;
+    --red-700: #ff2c1d;
 
     /* ========== BACKGROUND ========== */
     --bg-primary: #ffffff;

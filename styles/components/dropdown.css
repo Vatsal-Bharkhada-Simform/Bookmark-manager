@@ -5,7 +5,7 @@
         border: 1px solid var(--border-color);
         background-color: inherit;
         padding: calc(var(--space-sm) + var(--space-xs));
-        border-radius: var(--round-lg);
+        border-radius: var(--round-xl);
         font-family: inherit;
         font-size: var(--text-sm);
         font-weight: var(--font-semi-bold);

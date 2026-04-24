@@ -2,7 +2,7 @@
     position: relative;
     
     .dropdown__label{
-        border: none;
+        border: 1px solid var(--border-color);
         background-color: inherit;
         padding: calc(var(--space-sm) + var(--space-xs));
         border-radius: var(--round-lg);

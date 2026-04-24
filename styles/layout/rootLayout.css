@@ -15,7 +15,7 @@
 
         .main__content{
             overflow: hidden;
-            padding: var(--space-2xl);
+            /* padding: var(--space-2xl); */
         }
     }
 }

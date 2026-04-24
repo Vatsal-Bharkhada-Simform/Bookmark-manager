@@ -3,14 +3,12 @@
     flex: 1;
     min-height: 0;
     overflow-y: overlay;
-    border: 1px solid var(--border-color);
-    border-radius: var(--round-md);
+    border-bottom: 1px solid var(--gray-300);
 
     table {
         width: 100%;
         border-collapse: separate;
         border-spacing: 0;
-        border-radius: var(--round-md);
         color: inherit;
 
         thead {
@@ -20,28 +18,22 @@
                 left: 0;
                 z-index: 2;
                 background-color: var(--gray-100);
-
-                &::after {
-                    content: "";
-                    width: 100%;
-                    height: 100%;
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    z-index: -1;
-                    background-color: white;
-                }
             }
 
             th {
                 padding: var(--space-md);
                 text-align: left;
                 font-size: var(--text-sm);
-                background-color: var(--blue-50);
+                background-color: var(--gray-50);
+                color: var(--gray-700);
             }
         }
 
         tbody {
+            tr:hover{
+                background-color: var(--gray-50);
+            }
+            
             td {
                 padding: var(--space-md);
                 font-size: var(--text-sm);
@@ -54,8 +46,8 @@
 
         th,
         td {
-            border-left: 1px solid var(--gray-200);
-            border-bottom: 1px solid var(--gray-200);
+            border-left: 1px solid var(--gray-300);
+            border-bottom: 1px solid var(--gray-300);
 
             &:first-child {
                 border-left: none;
@@ -78,20 +70,6 @@
                 }
             }
         }
-    }
-
-    table th:first-child {
-        border-top-left-radius: var(--round-md);
-    }
-    table th:last-child {
-        border-top-right-radius: var(--round-md);
-    }
-    /* Round bottom-left and bottom-right corners of last row cells */
-    table tr:last-child td:first-child {
-        border-bottom-left-radius: var(--round-md);
-    }
-    table tr:last-child td:last-child {
-        border-bottom-right-radius: var(--round-md);
     }
 
     &::-webkit-scrollbar {

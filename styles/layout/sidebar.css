@@ -1,0 +1,82 @@
+.sidebar {
+    border-right: 1px solid var(--border-color);
+
+    .sidebar__head {
+        display: none;
+        padding: var(--space-md);
+        padding-bottom: 0;
+    }
+
+    .nav__wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-sm);
+        overflow-y: auto;
+        font-size: var(--text-sm);
+        padding: var(--space-md);
+
+        .nav__head {
+            padding: var(--space-sm);
+            font-weight: var(--font-bold);
+            color: var(--gray-500);
+        }
+
+        .nav__list {
+            list-style-type: none;
+            font-weight: var(--font-semi-bold);
+            margin-left: var(--space-md);
+            padding: var(--space-sm);
+            border-left: 1px solid var(--gray-200);
+
+            .nav__list-item {
+                padding: var(--space-md) var(--space-lg);
+                background-color: transparent;
+                border-radius: var(--round-lg);
+                margin-bottom: var(--space-xs);
+                cursor: pointer;
+
+                &:hover {
+                    background-color: var(--blue-50);
+
+                    .nav-link {
+                        color: inherit;
+                    }
+                }
+
+                &[data-selected="true"] {
+                    background-color: var(--blue-50);
+
+                    .nav-link {
+                        color: var(--color-primary-hover);
+                    }
+                }
+
+                .nav-link {
+                    text-decoration: none;
+                    color: var(--text-secondary);
+                    white-space: nowrap;
+
+                    svg {
+                        margin-right: var(--space-xs);
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        position: absolute;
+        left: -100%;
+        top: 0;
+        z-index: 1;
+        height: 100vh;
+        width: clamp(14rem, 16rem, 80vw);
+        background-color: var(--bg-primary);
+
+        .sidebar__head {
+            display: block;
+        }
+    }
+}

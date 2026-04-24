@@ -1,0 +1,11 @@
+.button-ghost{
+    border: none;
+    background-color: transparent;
+    color: inherit;
+    padding: calc(var(--space-sm) + var(--space-xs));
+    border-radius: var(--round-lg);
+
+    &:hover{
+        background-color: var(--gray-200);
+    }
+}

@@ -11,4 +11,12 @@ const bookmark = {
     visits: 0
 }
 
-export { bookmark };
+const bookmarkTemplate = {
+    title: "text",
+    url: "hyperlink",
+    collections: "tags",
+    tags: "tags",
+    visits: "visits",
+}
+
+export { bookmark, bookmarkTemplate };

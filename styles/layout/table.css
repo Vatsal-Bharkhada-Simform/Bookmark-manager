@@ -38,16 +38,28 @@
                 padding: var(--space-md);
                 font-size: var(--text-sm);
                 border-top: none;
+                max-width: 10rem;
+                white-space: word-break;
+                overflow: hidden;
+                
+                a {
+                    color: var(--blue-600);
+                    text-decoration: none;
+                    white-space: break-word;
+
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
             }
             td:first-child {
                 border-left: none;
             }
 
-            .tag-container {
-                span {
-                    margin-right: var(--space-sm);
-                    margin-top: var(--space-sm);
-                }
+            .tag-list {
+                display: inline-flex;
+                gap: var(--space-xs);
+                flex-wrap: wrap;
             }
         }
 

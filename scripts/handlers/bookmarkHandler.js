@@ -1,7 +1,7 @@
 import { addBookmark, getAllBookmarks } from "../controllers/bookmark.controller.js"
 import { bookmarkTemplate } from "../models/bookmark.model.js";
 import { domElements } from "../views/domElements.js";
-import { generateIconElement } from "../views/iconElements.js";
+import { generateIconElement } from "../views/generateElements.js";
 import tagColors from "../views/tagColors.js";
 import { insertionHandler } from "./insertionHandler.js";
 
@@ -36,6 +36,7 @@ const bookmarkHandler = {
             editButton.classList.add('button-ghost');
             editButton.classList.add('button-edit');
             editButton.dataset.id = bookmark?.id;
+            editButton.dataset.type = 'edit';
             tr.appendChild(editButton);
             
             domElements.tableBody.appendChild(tr);

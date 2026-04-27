@@ -1,6 +1,7 @@
 import { addBookmark, getAllBookmarks } from "../controllers/bookmark.controller.js";
 import { bookmarkHandler } from "../handlers/bookmarkHandler.js";
 import { dialogElements } from "../views/dialogElements.js";
+import { generateIconElement, generateTagElement } from "../views/generateElements.js";
 import tagColors from "../views/tagColors.js";
 
 function addDialogEvents() {
@@ -17,18 +18,8 @@ function addDialogEvents() {
             e.preventDefault();
             const tag = e.target.value?.trim();
             if (tag) {
-                console.log('Tag added:', tag);
                 e.target.value = ''; 
-
-                let tagElement = document.createElement('span');
-
-                tagElement.textContent = tag;
-                tagElement.classList.add('u-tag');
-
-                tagElement.style.backgroundColor = tagColors[tag[0].toUpperCase()]?.background || '#E0E0E0';
-                tagElement.style.color = tagColors[tag[0].toUpperCase()]?.color || '#000000';
-                tagElement.style.borderColor = tagColors[tag[0].toUpperCase()]?.border || '#E0E0E0';
-
+                let tagElement = generateTagElement(tag);
                 dialogElements.tagList.appendChild(tagElement);
             }
         }
@@ -39,18 +30,8 @@ function addDialogEvents() {
             e.preventDefault();
             const collection = e.target.value?.trim();
             if (collection) {
-                console.log('Collection added:', collection);
                 e.target.value = ''; 
-
-                let collectionElement = document.createElement('span');
-
-                collectionElement.textContent = collection;
-                collectionElement.classList.add('u-tag');
-
-                collectionElement.style.backgroundColor = tagColors[collection[0].toUpperCase()]?.background || '#E0E0E0';
-                collectionElement.style.color = tagColors[collection[0].toUpperCase()]?.color || '#000000';
-                collectionElement.style.borderColor = tagColors[collection[0].toUpperCase()]?.border || '#E0E0E0';
-
+                let collectionElement = generateTagElement(collection);
                 dialogElements.collectionList.appendChild(collectionElement);
             }
         }

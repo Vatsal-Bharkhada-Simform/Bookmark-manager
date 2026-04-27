@@ -1,4 +1,4 @@
-import tagColors from "../views/tagColors.js";
+import { generateTagElement } from "../views/generateElements.js";
 
 const insertionHandler = {
     insertData: (data, type) => {
@@ -28,13 +28,8 @@ const insertionHandler = {
         let wrapper = document.createElement('div');
         wrapper.classList.add('tag-list');
         tags.forEach(item => {
-            let span = document.createElement('span');
-            span.textContent = item;
-            span.classList.add('u-tag');
-            span.style.backgroundColor = tagColors[item[0].toUpperCase()]?.background || '#E0E0E0';
-            span.style.color = tagColors[item[0].toUpperCase()]?.color || '#000000';
-            span.style.borderColor = tagColors[item[0].toUpperCase()]?.border || '#E0E0E0';
-            wrapper.appendChild(span);
+            let tag = generateTagElement(item);
+            wrapper.appendChild(tag);
         });
         return wrapper;
     },

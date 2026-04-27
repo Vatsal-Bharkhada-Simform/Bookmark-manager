@@ -2,6 +2,7 @@
     border: none;
     background-color: transparent;
     color: inherit;
+    cursor: pointer;
     padding: calc(var(--space-sm) + var(--space-xs));
     border-radius: var(--round-lg);
 

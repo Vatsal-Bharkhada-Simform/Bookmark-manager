@@ -17,10 +17,40 @@
 <body>
     <dialog class="dialog__add-bookmark">
             <form method="dialog" class="dialog__wrapper">
-                <h2>Add Bookmark</h2>
+                <div class="dialog__head">
+                    <h2>Add Bookmark</h2>
+                    <button type="button" id="dialog-cancel" class="button-ghost">
+                        <svg class="u-icon">
+                            <use href="./assets/icons/sprite.svg#close"></use>
+                        </svg>
+                    </button>
+                </div>
+                <div class="dialog__body">
+                    <div class="input-wrapper">
+                        <label for="bookmark-name">Name</label>
+                        <input  class="input-primary" type="text" id="bookmark-name" name="bookmark-name" placeholder="Enter bookmark name" required>
+                    </div>
+
+                    <div class="input-wrapper">
+                        <label for="bookmark-url">URL</label>
+                        <input  class="input-primary" type="url" id="bookmark-url" name="bookmark-url" placeholder="Enter bookmark URL" required>
+                    </div>
+
+                    <div class="input-wrapper">
+                        <label for="bookmark-tags">Tags (comma separated)</label>
+                        <div class="tag-container">
+                            <div class="tag-list"></div>
+                            <input  class="input-primary" type="text" id="bookmark-tags" name="bookmark-tags" placeholder="e.g. React, JavaScript">
+                        </div>
+                    </div>
+
+                    <div class="input-wrapper">
+                        <label for="bookmark-collections">Collections (comma separated)</label>
+                        <input  class="input-primary" type="text" id="bookmark-collections" name="bookmark-collections" placeholder="e.g. Frontend, Learning">
+                    </div>
+                </div>
                 <menu class="dialog__actions">
-                    <button type="button" id="dialog-cancel">Cancel</button>
-                    <button type="button" id="dialog-confirm">Confirm</button>
+                    <button type="button" id="dialog-confirm" class="button-primary">Add Bookmark</button>
                 </menu>
             </form>
     </dialog>

@@ -7,6 +7,50 @@ dialog {
     border: 1px solid var(--border-color);
     border-radius: var(--space-sm);
     padding: var(--space-lg);
+
+    .dialog__head{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        h2{
+            font-size: var(--text-lg);
+        }
+    }
+
+    .dialog__body{
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-md);
+        font-size: var(--text-sm);
+        padding: var(--space-md) 0;
+
+        .input-wrapper{
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-xs);
+
+            label{
+                font-weight: var(--font-semi-bold);
+                color: var(--text-secondary);
+            }
+
+            .tag-container{
+                display: flex;
+                flex-direction: column;
+                gap: var(--space-xs);
+            }
+        }
+    }
+
+    .dialog__actions{
+        display: flex;
+        padding-top: var(--space-md);
+
+        button {
+            flex: 1;
+        }
+    }
 }
 
 ::backdrop {

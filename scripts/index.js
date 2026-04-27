@@ -1,4 +1,5 @@
 import { initDB } from "./controllers/db.controller.js";
+import { addBookmarkEvents } from "./events/addBookmarkEvents.js";
 import { addDialogEvents } from "./events/addDialogEvents.js";
 import { bookmarkHandler } from "./handlers/bookmarkHandler.js";
 
@@ -23,4 +24,5 @@ async function connectDB() {
 
 await connectDB();
 
+addBookmarkEvents();
 addDialogEvents();

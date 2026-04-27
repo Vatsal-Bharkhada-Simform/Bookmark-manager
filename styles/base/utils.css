@@ -6,6 +6,13 @@
     pointer-events: none;
 }
 
+.u-icon-del {
+    width: var(--text-md);
+    aspect-ratio: 1/1;
+    vertical-align: middle;
+    margin-top: -0.1rem;
+}
+
 .u-search {
     display: flex;
     align-items: center;
@@ -44,7 +51,10 @@
     font-weight: var(--font-semi-bold);
     border-width: 2px;
     border-style: solid;
-    /* text-transform: uppercase; */
+
+    &:has(button){
+        padding-right: var(--space-xs);
+    }
 }
 
 .u-collection {

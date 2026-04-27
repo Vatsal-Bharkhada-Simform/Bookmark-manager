@@ -16,6 +16,9 @@ const bookmarkHandler = {
         this.bookmarksToDisplay = data;
         this.loadBookmarks();
     },
+    getBookmark(id){
+        return this.allBookmarks.find(bookmark => bookmark.id === id);
+    },
     async populateBookmarks(){
         this.allBookmarks = await getAllBookmarks();
         this.bookmarks = [...this.allBookmarks];

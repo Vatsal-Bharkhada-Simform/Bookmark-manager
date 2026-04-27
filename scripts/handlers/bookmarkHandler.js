@@ -1,5 +1,6 @@
-import { getAllBookmarks } from "../controllers/bookmark.controller.js"
+import { addBookmark, getAllBookmarks } from "../controllers/bookmark.controller.js"
 import { bookmarkTemplate } from "../models/bookmark.model.js";
+import { domElements } from "../views/domElements.js";
 import tagColors from "../views/tagColors.js";
 import { insertionHandler } from "./insertionHandler.js";
 
@@ -17,13 +18,10 @@ const bookmarkHandler = {
     async populateBookmarks(){
         this.allBookmarks = await getAllBookmarks();
         this.bookmarks = [...this.allBookmarks];
-        // this.loadBookmarks();
-        return this.bookmarks;
     },
     loadBookmarks(){
-        console.log('Bookmarks loaded:', this.bookmarks);
+        domElements.tableBody.replaceChildren();
         this.bookmarks.forEach(bookmark => {
-            console.log('Bookmark:', bookmark);
             let tr = document.createElement('tr');
             this.displayProperties.forEach(prop => {
                 let td = document.createElement('td');
@@ -31,9 +29,20 @@ const bookmarkHandler = {
                 td.appendChild(element);
                 tr.appendChild(td);
             });
-            document.querySelector('.table__body').appendChild(tr);
+            domElements.tableBody.appendChild(tr);
         });
     },
+    async addNewBookmark(bookmarkData){
+        return addBookmark(bookmarkData)
+        .then(() => {
+            this.populateBookmarks();
+            return true;
+        })
+        .catch(err => {
+            console.error('Error adding bookmark:', err);
+            return false;
+        });
+    }
 }
 
 export { bookmarkHandler };

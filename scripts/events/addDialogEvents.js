@@ -1,4 +1,5 @@
 import { addBookmark, getAllBookmarks } from "../controllers/bookmark.controller.js";
+import { bookmarkHandler } from "../handlers/bookmarkHandler.js";
 import { dialogElements } from "../views/dialogElements.js";
 import tagColors from "../views/tagColors.js";
 
@@ -57,6 +58,7 @@ function addDialogEvents() {
 
     dialogElements.form.addEventListener('submit', async (e) => {
         e.preventDefault();
+        dialogElements.confirm.disabled = true;
         let formData = new FormData(dialogElements.form);
 
         const title = formData.get('bookmark-title').trim();
@@ -64,14 +66,20 @@ function addDialogEvents() {
 
         const collections = dialogElements.collectionList.querySelectorAll('.u-tag');
         const collectionNames = Array.from(collections).map(col => col.textContent);
+
         const tags = dialogElements.tagList.querySelectorAll('.u-tag');
         const tagNames = Array.from(tags).map(tag => tag.textContent);
 
         if (title && url) {
-            await addBookmark({ title, url, tags: tagNames, collections: collectionNames });
-            let data = await getAllBookmarks();
-            console.log(data);
-            dialogElements.dialog.close();
+            let res = await bookmarkHandler.addNewBookmark({ title, url, tags: tagNames, collections: collectionNames, createdAt: new Date().toISOString()});
+            console.log(res);
+            if(res){
+                dialogElements.form.reset();
+                dialogElements.tagList.replaceChildren();
+                dialogElements.collectionList.replaceChildren();
+                dialogElements.dialog.close();
+                dialogElements.confirm.disabled = false;
+            }
         }   else {
             alert('Please fill in both Title and URL fields.');
         }

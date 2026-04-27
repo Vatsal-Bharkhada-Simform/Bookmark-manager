@@ -1,8 +1,7 @@
-import { addBookmark, getAllBookmarks } from "../controllers/bookmark.controller.js"
+import { addBookmark, getAllBookmarks, updateBookmark } from "../controllers/bookmark.controller.js"
 import { bookmarkTemplate } from "../models/bookmark.model.js";
 import { domElements } from "../views/domElements.js";
 import { generateIconElement } from "../views/generateElements.js";
-import tagColors from "../views/tagColors.js";
 import { insertionHandler } from "./insertionHandler.js";
 
 const bookmarkHandler = {
@@ -47,6 +46,17 @@ const bookmarkHandler = {
     },
     async addNewBookmark(bookmarkData){
         return addBookmark(bookmarkData)
+        .then(() => {
+            this.populateBookmarks();
+            return true;
+        })
+        .catch(err => {
+            console.error('Error adding bookmark:', err);
+            return false;
+        });
+    },
+    async editBookmark(bookmarkData){
+        return updateBookmark(bookmarkData)
         .then(() => {
             this.populateBookmarks();
             return true;

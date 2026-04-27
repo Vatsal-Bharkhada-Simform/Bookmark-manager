@@ -52,7 +52,12 @@ function addDialogEvents() {
         const tagNames = Array.from(tags).map(tag => tag.textContent);
 
         if (title && url) {
-            let res = await bookmarkHandler.addNewBookmark({ title, url, tags: tagNames, collections: collectionNames, createdAt: new Date().toISOString() });
+            let res;
+            if(dialogElements.form.dataset.mode === "ADD"){
+                res = await bookmarkHandler.addNewBookmark({ title, url, tags: tagNames, collections: collectionNames, createdAt: new Date().toISOString() });
+            } else if (dialogElements.form.dataset.mode === "EDIT") {
+                res = await bookmarkHandler.editBookmark({ id: +dialogElements.form.dataset?.id, title, url, tags: tagNames, collections: collectionNames });
+            }
             console.log(res);
             if (res) {
                 resetForm();
@@ -65,10 +70,44 @@ function addDialogEvents() {
 
 function resetForm() {
     dialogElements.form.reset();
+    dialogElements.form.dataset.id = "";
+    dialogElements.form.dataset.mode = "";
+
     dialogElements.tagList.replaceChildren();
     dialogElements.collectionList.replaceChildren();
-    dialogElements.dialog.close();
+
+    dialogElements.formTitle.textContent = "Add bookmark";
+    dialogElements.confirm.textContent = "Add bookmark";
     dialogElements.confirm.disabled = false;
+    
+    dialogElements.dialog.close();
 }
 
-export { addDialogEvents, resetForm };
+function openEditDialog(bookmark){
+    dialogElements.form.dataset.mode = "EDIT";
+    dialogElements.form.dataset.id = bookmark.id;
+
+    dialogElements.form.elements["bookmark-title"].value = bookmark.title;
+    dialogElements.form.elements["bookmark-url"].value = bookmark.url;
+
+    if(bookmark.tags && bookmark.tags.length !== 0){
+        bookmark.tags.forEach(tag => {
+            let tagElement = generateDeletableTag(tag);
+            dialogElements.tagList.appendChild(tagElement);
+        })
+    }
+
+    if(bookmark.collections && bookmark.collections.length !== 0){
+        bookmark.collections.forEach(collection => {
+            let collectionElement = generateDeletableTag(collection);
+            dialogElements.collectionList.appendChild(collectionElement);
+        })
+    }
+
+    dialogElements.formTitle.textContent = "Edit bookmark";
+    dialogElements.confirm.textContent = "Save changes";
+
+    dialogElements.dialog.showModal();
+}
+
+export { addDialogEvents, resetForm, openEditDialog };

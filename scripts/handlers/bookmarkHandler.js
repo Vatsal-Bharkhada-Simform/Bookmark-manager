@@ -1,6 +1,7 @@
 import { addBookmark, getAllBookmarks } from "../controllers/bookmark.controller.js"
 import { bookmarkTemplate } from "../models/bookmark.model.js";
 import { domElements } from "../views/domElements.js";
+import { generateIconElement } from "../views/iconElements.js";
 import tagColors from "../views/tagColors.js";
 import { insertionHandler } from "./insertionHandler.js";
 
@@ -29,6 +30,14 @@ const bookmarkHandler = {
                 td.appendChild(element);
                 tr.appendChild(td);
             });
+
+            let editButton = document.createElement('button');
+            editButton.appendChild(generateIconElement('edit'));
+            editButton.classList.add('button-ghost');
+            editButton.classList.add('button-edit');
+            editButton.dataset.id = bookmark?.id;
+            tr.appendChild(editButton);
+            
             domElements.tableBody.appendChild(tr);
         });
     },

@@ -32,6 +32,25 @@
         tbody {
             tr:hover{
                 background-color: var(--gray-50);
+
+                .button-edit{
+                    opacity: 1;
+                    pointer-events: all;
+                }
+            }
+
+            tr {
+                position: relative;
+
+                .button-edit{
+                    opacity: 0;
+                    pointer-events: none;
+                    position: absolute;
+                    right: var(--space-md);
+                    top: 50%;
+                    transform: translateY(-50%);
+                    transition: opacity .2s;
+                }
             }
             
             td {

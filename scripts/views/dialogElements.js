@@ -1,6 +1,6 @@
 const dialogElements = {
     dialog: document.querySelector('dialog'),
-    form: document.querySelector('.dialog__wrapper'),
+    form: document.querySelector('#add-bookmark-form'),
     cancel: document.querySelector('#dialog-cancel'),
     confirm: document.querySelector('#dialog-confirm'),
     btnAddBookmark: document.querySelector('#btn-add-bookmark'),

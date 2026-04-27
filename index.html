@@ -16,7 +16,7 @@
 </head>
 <body>
     <dialog class="dialog__add-bookmark">
-            <form method="dialog" class="dialog__wrapper">
+            <form method="dialog" id="add-bookmark-form" class="dialog__wrapper">
                 <div class="dialog__head">
                     <h2>Add Bookmark</h2>
                     <button type="button" id="dialog-cancel" class="button-ghost">
@@ -28,7 +28,7 @@
                 <div class="dialog__body">
                     <div class="input-wrapper">
                         <label for="bookmark-name">Name</label>
-                        <input  class="input-primary" type="text" id="bookmark-name" name="bookmark-name" placeholder="Enter bookmark name" required>
+                        <input  class="input-primary" type="text" id="bookmark-title" name="bookmark-name" placeholder="Enter bookmark name" required>
                     </div>
 
                     <div class="input-wrapper">
@@ -53,7 +53,7 @@
                     </div>
                 </div>
                 <menu class="dialog__actions">
-                    <button type="button" id="dialog-confirm" class="button-primary">Add Bookmark</button>
+                    <button type="submit" id="dialog-confirm" class="button-primary">Add Bookmark</button>
                 </menu>
             </form>
     </dialog>
@@ -209,223 +209,7 @@
                                     <th>Visits</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Test</td>
-                                    <td class="td-link">
-                                        https://google.com
-                                        <svg class="u-icon">
-                                            <use href="./assets/icons/sprite.svg#link"></use>
-                                        </svg>
-                                    </td>
-                                    <td><span class="u-tag">React</span></td>
-                                    <td><span class="u-collection">Frontend</span></td>
-                                    <td>12</td>
-                                </tr>
-                                <tr>
-                                    <td>Test</td>
-                                    <td class="td-link">
-                                        https://google.com
-                                        <svg class="u-icon">
-                                            <use href="./assets/icons/sprite.svg#link"></use>
-                                        </svg>
-                                    </td>
-                                    <td><span class="u-tag">React</span></td>
-                                    <td><span class="u-collection">Frontend</span></td>
-                                    <td>12</td>
-                                </tr>
-                                <tr>
-                                    <td>Test</td>
-                                    <td class="td-link">
-                                        https://google.com
-                                        <svg class="u-icon">
-                                            <use href="./assets/icons/sprite.svg#link"></use>
-                                        </svg>
-                                    </td>
-                                    <td><span class="u-tag">React</span></td>
-                                    <td><span class="u-collection">Frontend</span></td>
-                                    <td>12</td>
-                                </tr>
-                                <tr>
-                                    <td>Test</td>
-                                    <td class="td-link">
-                                        https://google.com
-                                        <svg class="u-icon">
-                                            <use href="./assets/icons/sprite.svg#link"></use>
-                                        </svg>
-                                    </td>
-                                    <td><span class="u-tag">React</span></td>
-                                    <td><span class="u-collection">Frontend</span></td>
-                                    <td>12</td>
-                                </tr>
-                                <tr>
-                                    <td>Test</td>
-                                    <td class="td-link">
-                                        https://google.com
-                                        <svg class="u-icon">
-                                            <use href="./assets/icons/sprite.svg#link"></use>
-                                        </svg>
-                                    </td>
-                                    <td><span class="u-tag">React</span></td>
-                                    <td><span class="u-collection">Frontend</span></td>
-                                    <td>12</td>
-                                </tr>
-                                <tr>
-                                    <td>Test</td>
-                                    <td class="td-link">
-                                        https://google.com
-                                        <svg class="u-icon">
-                                            <use href="./assets/icons/sprite.svg#link"></use>
-                                        </svg>
-                                    </td>
-                                    <td><span class="u-tag">React</span></td>
-                                    <td><span class="u-collection">Frontend</span></td>
-                                    <td>12</td>
-                                </tr>
-                                <tr>
-                                    <td>Test</td>
-                                    <td class="td-link">
-                                        https://google.com
-                                        <svg class="u-icon">
-                                            <use href="./assets/icons/sprite.svg#link"></use>
-                                        </svg>
-                                    </td>
-                                    <td><span class="u-tag">React</span></td>
-                                    <td><span class="u-collection">Frontend</span></td>
-                                    <td>12</td>
-                                </tr>
-                                <tr>
-                                    <td>Test</td>
-                                    <td class="td-link">
-                                        https://google.com
-                                        <svg class="u-icon">
-                                            <use href="./assets/icons/sprite.svg#link"></use>
-                                        </svg>
-                                    </td>
-                                    <td><span class="u-tag">React</span></td>
-                                    <td><span class="u-collection">Frontend</span></td>
-                                    <td>12</td>
-                                </tr>
-                                <tr>
-                                    <td>Test</td>
-                                    <td class="td-link">
-                                        https://google.com
-                                        <svg class="u-icon">
-                                            <use href="./assets/icons/sprite.svg#link"></use>
-                                        </svg>
-                                    </td>
-                                    <td><span class="u-tag">React</span></td>
-                                    <td><span class="u-collection">Frontend</span></td>
-                                    <td>12</td>
-                                </tr>
-                                <tr>
-                                    <td>Test</td>
-                                    <td class="td-link">
-                                        https://google.com
-                                        <svg class="u-icon">
-                                            <use href="./assets/icons/sprite.svg#link"></use>
-                                        </svg>
-                                    </td>
-                                    <td><span class="u-tag">React</span></td>
-                                    <td><span class="u-collection">Frontend</span></td>
-                                    <td>12</td>
-                                </tr>
-                                <tr>
-                                    <td>Test</td>
-                                    <td class="td-link">
-                                        https://google.com
-                                        <svg class="u-icon">
-                                            <use href="./assets/icons/sprite.svg#link"></use>
-                                        </svg>
-                                    </td>
-                                    <td><span class="u-tag">React</span></td>
-                                    <td><span class="u-collection">Frontend</span></td>
-                                    <td>12</td>
-                                </tr>
-                                <tr>
-                                    <td>Test</td>
-                                    <td class="td-link">
-                                        https://google.com
-                                        <svg class="u-icon">
-                                            <use href="./assets/icons/sprite.svg#link"></use>
-                                        </svg>
-                                    </td>
-                                    <td><span class="u-tag">React</span></td>
-                                    <td><span class="u-collection">Frontend</span></td>
-                                    <td>12</td>
-                                </tr>
-                                <tr>
-                                    <td>Test</td>
-                                    <td class="td-link">
-                                        https://google.com
-                                        <svg class="u-icon">
-                                            <use href="./assets/icons/sprite.svg#link"></use>
-                                        </svg>
-                                    </td>
-                                    <td><span class="u-tag">React</span></td>
-                                    <td><span class="u-collection">Frontend</span></td>
-                                    <td>12</td>
-                                </tr>
-                                <tr>
-                                    <td>Test</td>
-                                    <td class="td-link">
-                                        https://google.com
-                                        <svg class="u-icon">
-                                            <use href="./assets/icons/sprite.svg#link"></use>
-                                        </svg>
-                                    </td>
-                                    <td><span class="u-tag">React</span></td>
-                                    <td><span class="u-collection">Frontend</span></td>
-                                    <td>12</td>
-                                </tr>
-                                <tr>
-                                    <td>Test</td>
-                                    <td class="td-link">
-                                        https://google.com
-                                        <svg class="u-icon">
-                                            <use href="./assets/icons/sprite.svg#link"></use>
-                                        </svg>
-                                    </td>
-                                    <td><span class="u-tag">React</span></td>
-                                    <td><span class="u-collection">Frontend</span></td>
-                                    <td>12</td>
-                                </tr>
-                                <tr>
-                                    <td>Test</td>
-                                    <td class="td-link">
-                                        https://google.com
-                                        <svg class="u-icon">
-                                            <use href="./assets/icons/sprite.svg#link"></use>
-                                        </svg>
-                                    </td>
-                                    <td><span class="u-tag">React</span></td>
-                                    <td><span class="u-collection">Frontend</span></td>
-                                    <td>12</td>
-                                </tr>
-                                <tr>
-                                    <td>Test</td>
-                                    <td class="td-link">
-                                        https://google.com
-                                        <svg class="u-icon">
-                                            <use href="./assets/icons/sprite.svg#link"></use>
-                                        </svg>
-                                    </td>
-                                    <td><span class="u-tag">React</span></td>
-                                    <td><span class="u-collection">Frontend</span></td>
-                                    <td>12</td>
-                                </tr>
-                                <tr>
-                                    <td>Testfgdsfg</td>
-                                    <td class="td-link">
-                                        https://google.com
-                                        <svg class="u-icon">
-                                            <use href="./assets/icons/sprite.svg#link"></use>
-                                        </svg>
-                                    </td>
-                                    <td><span class="u-tag">React</span></td>
-                                    <td><span class="u-collection">Frontend</span></td>
-                                    <td>12</td>
-                                </tr>
+                            <tbody class="table__body">
                             </tbody>
                         </table>
                     </div>

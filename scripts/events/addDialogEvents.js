@@ -11,16 +11,6 @@ function addDialogEvents() {
         dialogElements.dialog.close();
     });
 
-    dialogElements.confirm.addEventListener('click', async () => {
-        addBookmark({
-            title: 'Google',
-            url: 'https://www.google.com',
-        });
-        let data = await getAllBookmarks();
-        console.log(data);
-        dialogElements.dialog.close();
-    });
-
     dialogElements.tagInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') {
             e.preventDefault();
@@ -67,7 +57,8 @@ function addDialogEvents() {
 
     dialogElements.form.addEventListener('submit', async (e) => {
         e.preventDefault();
-        const formData = new FormData(dialogElements.form);
+        let formData = new FormData(dialogElements.form);
+
         const title = formData.get('bookmark-title').trim();
         const url = formData.get('bookmark-url').trim();
 

@@ -112,3 +112,18 @@ button {
         filter: brightness(90%);
     }
 }
+
+.button-close-tag{
+    font-family: inherit;
+    border: none;
+    color: inherit;
+    border-radius: var(--round-xl);
+    background-color: inherit;
+    margin-left: var(--space-sm);
+    padding: var(--space-xs);
+    cursor: pointer;
+
+    &:hover{
+        filter: brightness(90%);
+    }
+}

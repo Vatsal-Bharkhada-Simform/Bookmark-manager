@@ -16,3 +16,9 @@
         color: var(--gray-500);
     }
 }
+
+.input-checkbox{
+    padding: var(--space-md);
+    accent-color: var(--color-primary);
+    transform: scale(1);
+}

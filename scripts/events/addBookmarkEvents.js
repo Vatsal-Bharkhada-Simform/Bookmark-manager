@@ -9,6 +9,10 @@ function addBookmarkEvents(){
             openEditDialog(bookmarkHandler.getBookmark(+element.dataset.id));
         }
     })
+
+    domElements.deleteButton.addEventListener("click", () => {
+        bookmarkHandler.deleteSelectedBookmark();
+    })
 }
 
 export { addBookmarkEvents };

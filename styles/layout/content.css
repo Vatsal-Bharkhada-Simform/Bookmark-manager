@@ -31,6 +31,10 @@
             .head__options-right{
                 display: flex;
                 gap: var(--space-md);
+
+                #btn-delete-bookmark{
+                    display: none;
+                }
             }
         }
     }

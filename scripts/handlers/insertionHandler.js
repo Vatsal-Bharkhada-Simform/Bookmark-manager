@@ -1,10 +1,13 @@
 import { generateTagElement } from "../views/generateElements.js";
+import { bookmarkHandler } from "./bookmarkHandler.js";
 
 const insertionHandler = {
-    insertData: (data, type) => {
+    insertData: (data, type, id) => {
         switch (type) {
+            case 'selection':
+                return insertionHandler.insertSelectBox(id);
             case 'hyperlink':
-                return insertionHandler.insertHyperlink(data);
+                return insertionHandler.insertHyperlink(data, id);
             case 'tags':
                 return insertionHandler.insertTagList(data);
             case 'visits':
@@ -13,7 +16,7 @@ const insertionHandler = {
                 return insertionHandler.insertText(data);
         }
     },
-    insertHyperlink: (url) => {
+    insertHyperlink: (url, id) => {
         if (!/^https?:\/\//i.test(url)) {
             url = 'http://' + url;
         }
@@ -21,6 +24,9 @@ const insertionHandler = {
         a.href = url;
         a.textContent = url;
         a.target = '_blank';
+        a.onclick = () => {
+            bookmarkHandler.incrementVisitCount(id);
+        }
         return a;
     },
     insertTagList: (tags) => {
@@ -42,6 +48,16 @@ const insertionHandler = {
         let span = document.createElement('span');
         span.textContent = text;
         return span;
+    },
+    insertSelectBox: (id) => {
+        let checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.checked = false;
+        checkbox.classList.add("input-checkbox");
+        checkbox.onchange = () => {
+            bookmarkHandler.toggleSelectedBookmark(+id);
+        }
+        return checkbox;
     }
 }
 

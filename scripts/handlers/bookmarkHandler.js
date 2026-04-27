@@ -1,4 +1,4 @@
-import { addBookmark, getAllBookmarks, updateBookmark } from "../controllers/bookmark.controller.js"
+import { addBookmark, deleteBookmark, getAllBookmarks, updateBookmark } from "../controllers/bookmark.controller.js"
 import { bookmarkTemplate } from "../models/bookmark.model.js";
 import { domElements } from "../views/domElements.js";
 import { generateIconElement } from "../views/generateElements.js";
@@ -7,12 +7,14 @@ import { insertionHandler } from "./insertionHandler.js";
 const bookmarkHandler = {
     allBookmarks: [],
     bookmarksToDisplay: [],
-    displayProperties: ['title', 'url', 'tags', 'collections', 'visits'],
+    selectedBookmarks: [],
+    displayProperties: ['checkbox', 'title', 'url', 'tags', 'collections', 'visits'],
     get bookmarks(){
         return this.bookmarksToDisplay;
     },
     set bookmarks(data){
         this.bookmarksToDisplay = data;
+        this.selectedBookmarks = [];
         this.loadBookmarks();
     },
     getBookmark(id){
@@ -28,7 +30,7 @@ const bookmarkHandler = {
             let tr = document.createElement('tr');
             this.displayProperties.forEach(prop => {
                 let td = document.createElement('td');
-                let element = insertionHandler.insertData(bookmark[prop], bookmarkTemplate[prop]);
+                let element = insertionHandler.insertData(bookmark[prop], bookmarkTemplate[prop], +bookmark.id);
                 td.appendChild(element);
                 tr.appendChild(td);
             });
@@ -65,6 +67,30 @@ const bookmarkHandler = {
             console.error('Error adding bookmark:', err);
             return false;
         });
+    },
+    incrementVisitCount(id){
+        let bookmark = this.getBookmark(id);
+        console.log(bookmark);
+        bookmark.visits = +(bookmark.visits || 0) + 1;
+        this.editBookmark(bookmark);
+    },
+    toggleSelectedBookmark(id){
+        if(this.selectedBookmarks.find(b_id => b_id === id)){
+            this.selectedBookmarks = this.selectedBookmarks.filter(b_id => b_id !== id);
+        } else {
+            this.selectedBookmarks.push(id);
+        }
+        if(this.selectedBookmarks.length){
+            domElements.deleteButton.style.display = 'inline-block';
+        } else {
+            domElements.deleteButton.style.display = 'none';
+        }
+    },
+    deleteSelectedBookmark(){
+        this.selectedBookmarks.forEach(id => {
+            deleteBookmark(id);
+        })
+        this.populateBookmarks();
     }
 }
 

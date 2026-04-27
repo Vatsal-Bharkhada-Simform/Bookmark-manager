@@ -12,6 +12,7 @@ const bookmark = {
 }
 
 const bookmarkTemplate = {
+    checkbox: "selection",
     title: "text",
     url: "hyperlink",
     collections: "tags",

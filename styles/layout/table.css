@@ -80,6 +80,11 @@
                 gap: var(--space-xs);
                 flex-wrap: wrap;
             }
+
+            td:has(input[type="checkbox"]){
+                width: 4rem;
+                text-align: center;
+            }
         }
 
         th,

@@ -1,4 +1,4 @@
-export const tagColors = {
+const tagColors = {
   A: { background: "#FDE8EC", color: "#8B2232", border: "#F4AABB" },
   B: { background: "#E0EFFE", color: "#1A4A8A", border: "#9DC4F8" },
   C: { background: "#DFFAEE", color: "#1A5E3A", border: "#82DDB8" },
@@ -26,3 +26,5 @@ export const tagColors = {
   Y: { background: "#EFF8E0", color: "#3A5810", border: "#C0DF88" },
   Z: { background: "#FCE4F1", color: "#801A52", border: "#F2A0CF" },
 };
+
+export default tagColors;

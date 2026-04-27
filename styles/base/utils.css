@@ -38,12 +38,11 @@
 
 .u-tag {
     padding: var(--space-xs) var(--space-md);
-    background-color: #FDE8EC;
-    color: #8B2232;
-    border: 2px solid #F4AABB;
     border-radius: 3rem;
     font-size: var(--text-xs);
     font-weight: var(--font-semi-bold);
+    border-width: 2px;
+    border-style: solid;
     /* text-transform: uppercase; */
 }
 

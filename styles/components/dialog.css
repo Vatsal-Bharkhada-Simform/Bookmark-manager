@@ -39,6 +39,13 @@ dialog {
                 display: flex;
                 flex-direction: column;
                 gap: var(--space-xs);
+
+                .tag-list{
+                    display: flex;
+                    gap: var(--space-sm);
+                    flex-wrap: wrap;
+                    padding: var(--space-sm);
+                }
             }
         }
     }

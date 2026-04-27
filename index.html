@@ -15,6 +15,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
 </head>
 <body>
+    <dialog class="dialog__add-bookmark">
+            <form method="dialog" class="dialog__wrapper">
+                <h2>Add Bookmark</h2>
+                <menu class="dialog__actions">
+                    <button type="button" id="dialog-cancel">Cancel</button>
+                    <button type="button" id="dialog-confirm">Confirm</button>
+                </menu>
+            </form>
+    </dialog>
     <div class="root__wrapper">
         <header class="header">
             <div class="header__name">
@@ -112,7 +121,7 @@
                                 </form>
                             </div>
                             <div class="head__options-right">
-                                <button class="button-primary">
+                                <button class="button-primary" type="button" id="btn-add-bookmark">
                                     Add
                                     <svg class="u-icon">
                                         <use href="./assets/icons/sprite.svg#plus"></use>
@@ -387,6 +396,9 @@
                             </tbody>
                         </table>
                     </div>
+                </div>
+                <div class="footer">
+                    <p>&copy; 2026 ZenTabs. All rights reserved.</p>
                 </div>
             </section>
         </main>

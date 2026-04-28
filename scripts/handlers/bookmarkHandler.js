@@ -28,7 +28,8 @@ const bookmarkHandler = {
     async populateBookmarks() {
         this.allBookmarks = await getAllBookmarks();
         this.bookmarks = [...this.allBookmarks];
-        console.log(this.allBookmarks);
+        this.mode.for = "";
+        this.mode.type = "";
     },
     loadBookmarks() {
         domElements.tableBody.replaceChildren();
@@ -100,6 +101,7 @@ const bookmarkHandler = {
             deleteBookmark(id);
         })
         this.populateBookmarks();
+        domElements.deleteButton.style.display = 'none';
     },
     searchBookmarks(query) {
         clearTimeout(this.debounceTimer);
@@ -131,6 +133,7 @@ const bookmarkHandler = {
         let mode_type = query.includes("FILTER") ? query.slice(7) : query.slice(5);
 
         if(this.mode.for === mode_for && this.mode.type === mode_type){
+            this.populateBookmarks();
             return false;
         }
 

@@ -44,6 +44,12 @@
             text-align: left;
             white-space: nowrap;
         }
+
+        .active {
+            background-color: var(--blue-100);
+            color: var(--blue-600);
+            box-shadow: 0 0 9px 0px var(--blue-100);
+        }
     }
 
     .show{

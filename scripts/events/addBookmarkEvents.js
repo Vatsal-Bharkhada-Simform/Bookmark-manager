@@ -38,6 +38,12 @@ function handleDropdownEvents(e) {
         let value = target.dataset.value;
         console.log(value);
         let res = bookmarkHandler.handleFilterAndSort(value);
+        
+        let currentActive = document.querySelector(".dropdown__items > .active");
+        if(currentActive && currentActive !== value){
+            currentActive.classList.remove("active");
+        }
+        
         if(res){
             target.classList.add("active");
         } else {

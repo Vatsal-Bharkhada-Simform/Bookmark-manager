@@ -9,6 +9,10 @@ const bookmarkHandler = {
     bookmarksToDisplay: [],
     selectedBookmarks: [],
     displayProperties: ['checkbox', 'title', 'url', 'tags', 'collections', 'visits'],
+    mode: {
+        for: "",
+        type: ""
+    },
     debounceTimer: null,
     get bookmarks() {
         return this.bookmarksToDisplay;
@@ -24,6 +28,7 @@ const bookmarkHandler = {
     async populateBookmarks() {
         this.allBookmarks = await getAllBookmarks();
         this.bookmarks = [...this.allBookmarks];
+        console.log(this.allBookmarks);
     },
     loadBookmarks() {
         domElements.tableBody.replaceChildren();
@@ -52,6 +57,8 @@ const bookmarkHandler = {
         return addBookmark(bookmarkData)
             .then(() => {
                 this.populateBookmarks();
+                this.mode.for = "";
+                this.mode.type = "";
                 return true;
             })
             .catch(err => {
@@ -101,14 +108,69 @@ const bookmarkHandler = {
             return;
         }
         this.debounceTimer = setTimeout(() => {
-            query = query.toLowerCase();
-            this.bookmarks = this.allBookmarks.filter(bookmark => {
-                return bookmark.title.toLowerCase().includes(query) ||
-                    bookmark.url.toLowerCase().includes(query) ||
-                    (bookmark.tags && bookmark.tags.some(tag => tag.toLowerCase().includes(query))) ||
-                    (bookmark.collections && bookmark.collections.some(collection => collection.toLowerCase().includes(query)));
-            });
+            this.handleSearch(query);
         }, 400);
+    },
+    handleSearch(query) {
+        query = query.toLowerCase();
+
+        if(this.mode.for === "FILTER"){
+            this.handleFilter(query);
+            return;
+        }
+        
+        this.bookmarks = this.allBookmarks.filter(bookmark => {
+            return bookmark.title.toLowerCase().includes(query) ||
+                bookmark.url.toLowerCase().includes(query) ||
+                (bookmark.tags && bookmark.tags.some(tag => tag.toLowerCase().includes(query))) ||
+                (bookmark.collections && bookmark.collections.some(collection => collection.toLowerCase().includes(query)));
+        });
+    },
+    handleFilterAndSort(query = "") {
+        let mode_for = query.includes("FILTER") ? "FILTER" : "SORT";
+        let mode_type = query.includes("FILTER") ? query.slice(7) : query.slice(5);
+
+        if(this.mode.for === mode_for && this.mode.type === mode_type){
+            return false;
+        }
+
+        this.mode.for = mode_for;
+        this.mode.type = mode_type;
+
+        if(mode_for === "SORT") this.handleSort();
+
+        return true;
+    },
+    handleFilter(query) {
+        switch (this.mode.type) {
+            case "NAME":
+                this.bookmarks = this.bookmarks.filter(bookmark => {
+                    return bookmark.title.toLowerCase().includes(query)
+                })
+                break;
+
+            case "URL":
+                this.bookmarks = this.bookmarks.filter(bookmark => {
+                    return bookmark.url.toLowerCase().includes(query)
+                })
+                break;
+        }
+    },
+    handleSort() {
+        switch (this.mode.type) {
+            case "NAME":
+                // console.log(this.bookmarks.sort((b1, b2) => String(b1.title).localeCompare(String(b2.title))));
+                this.bookmarks = this.bookmarks.sort((b1, b2) => String(b1.title).localeCompare(String(b2.title)));
+                break;
+
+            case "URL":
+                this.bookmarks = this.bookmarks.sort((b1, b2) => String(b1.url).localeCompare(String(b2.url)));
+                break;
+            
+            case "DATE":
+                this.bookmarks = this.bookmarks.sort((b1, b2) => (Date.parse(b1.createdAt) > Date.parse(b2.createdAt)) ? -1 : 1);
+                break;
+        }
     }
 }
 

@@ -13,6 +13,11 @@ function addBookmarkEvents(){
     domElements.deleteButton.addEventListener("click", () => {
         bookmarkHandler.deleteSelectedBookmark();
     })
+
+    domElements.bookmarkSearch.addEventListener("input", (e) => {
+        let query = e.target.value.trim().toLowerCase();
+        bookmarkHandler.searchBookmarks(query);
+    });
 }
 
 export { addBookmarkEvents };

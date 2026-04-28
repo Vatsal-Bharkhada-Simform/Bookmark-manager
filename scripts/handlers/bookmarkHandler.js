@@ -9,22 +9,23 @@ const bookmarkHandler = {
     bookmarksToDisplay: [],
     selectedBookmarks: [],
     displayProperties: ['checkbox', 'title', 'url', 'tags', 'collections', 'visits'],
-    get bookmarks(){
+    debounceTimer: null,
+    get bookmarks() {
         return this.bookmarksToDisplay;
     },
-    set bookmarks(data){
+    set bookmarks(data) {
         this.bookmarksToDisplay = data;
         this.selectedBookmarks = [];
         this.loadBookmarks();
     },
-    getBookmark(id){
+    getBookmark(id) {
         return this.allBookmarks.find(bookmark => bookmark.id === id);
     },
-    async populateBookmarks(){
+    async populateBookmarks() {
         this.allBookmarks = await getAllBookmarks();
         this.bookmarks = [...this.allBookmarks];
     },
-    loadBookmarks(){
+    loadBookmarks() {
         domElements.tableBody.replaceChildren();
         this.bookmarks.forEach(bookmark => {
             let tr = document.createElement('tr');
@@ -36,61 +37,78 @@ const bookmarkHandler = {
             });
 
             let editButton = document.createElement('button');
+            editButton.textContent = "Edit";
             editButton.appendChild(generateIconElement('edit'));
-            editButton.classList.add('button-ghost');
+            editButton.classList.add('button-secondary');
             editButton.classList.add('button-edit');
             editButton.dataset.id = bookmark?.id;
             editButton.dataset.type = 'edit';
             tr.appendChild(editButton);
-            
+
             domElements.tableBody.appendChild(tr);
         });
     },
-    async addNewBookmark(bookmarkData){
+    async addNewBookmark(bookmarkData) {
         return addBookmark(bookmarkData)
-        .then(() => {
-            this.populateBookmarks();
-            return true;
-        })
-        .catch(err => {
-            console.error('Error adding bookmark:', err);
-            return false;
-        });
+            .then(() => {
+                this.populateBookmarks();
+                return true;
+            })
+            .catch(err => {
+                console.error('Error adding bookmark:', err);
+                return false;
+            });
     },
-    async editBookmark(bookmarkData){
+    async editBookmark(bookmarkData) {
         return updateBookmark(bookmarkData)
-        .then(() => {
-            this.populateBookmarks();
-            return true;
-        })
-        .catch(err => {
-            console.error('Error adding bookmark:', err);
-            return false;
-        });
+            .then(() => {
+                this.populateBookmarks();
+                return true;
+            })
+            .catch(err => {
+                console.error('Error adding bookmark:', err);
+                return false;
+            });
     },
-    incrementVisitCount(id){
+    incrementVisitCount(id) {
         let bookmark = this.getBookmark(id);
         console.log(bookmark);
         bookmark.visits = +(bookmark.visits || 0) + 1;
         this.editBookmark(bookmark);
     },
-    toggleSelectedBookmark(id){
-        if(this.selectedBookmarks.find(b_id => b_id === id)){
+    toggleSelectedBookmark(id) {
+        if (this.selectedBookmarks.find(b_id => b_id === id)) {
             this.selectedBookmarks = this.selectedBookmarks.filter(b_id => b_id !== id);
         } else {
             this.selectedBookmarks.push(id);
         }
-        if(this.selectedBookmarks.length){
+        if (this.selectedBookmarks.length) {
             domElements.deleteButton.style.display = 'inline-block';
         } else {
             domElements.deleteButton.style.display = 'none';
         }
     },
-    deleteSelectedBookmark(){
+    deleteSelectedBookmark() {
         this.selectedBookmarks.forEach(id => {
             deleteBookmark(id);
         })
         this.populateBookmarks();
+    },
+    searchBookmarks(query) {
+        clearTimeout(this.debounceTimer);
+        if (!query) {
+            this.bookmarks = [...this.allBookmarks];
+            return;
+        }
+        this.debounceTimer = setTimeout(() => {
+            query = query.toLowerCase();
+            this.bookmarks = this.allBookmarks.filter(bookmark => {
+                return bookmark.title.toLowerCase().includes(query) ||
+                    bookmark.url.toLowerCase().includes(query) ||
+                    (bookmark.tags && bookmark.tags.some(tag => tag.toLowerCase().includes(query))) ||
+                    (bookmark.collections && bookmark.collections.some(collection => collection.toLowerCase().includes(query)));
+            });
+        }, 400);
     }
 }
 

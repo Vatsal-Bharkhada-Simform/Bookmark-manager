@@ -18,6 +18,22 @@ function addBookmarkEvents(){
         let query = e.target.value.trim().toLowerCase();
         bookmarkHandler.searchBookmarks(query);
     });
+
+    domElements.filterDropdown.addEventListener("click", (e) => {
+        let target = e.target;
+        if(target.className === "dropdown__label"){
+            let dropdownContainer = target.nextElementSibling;
+            dropdownContainer.classList.toggle("show");
+        }
+    })
+    
+    domElements.sortDropdown.addEventListener("click", (e) => {
+        let target = e.target;
+        if(target.className === "dropdown__label"){
+            let dropdownContainer = target.nextElementSibling;
+            dropdownContainer.classList.toggle("show");
+        }
+    })
 }
 
 export { addBookmarkEvents };

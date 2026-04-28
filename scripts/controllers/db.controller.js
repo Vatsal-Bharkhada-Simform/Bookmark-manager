@@ -5,10 +5,10 @@ export async function initDB() {
         const request = indexedDB.open("BookmarkDB", 1);
 
         request.onupgradeneeded = (event) => {
-            const db = event.target.result;
+            const temp_db = event.target.result;
 
-            db.createObjectStore("bookmark", { keyPath: "id", autoIncrement: true });
-            db.createObjectStore("profile", { keyPath: "id", autoIncrement: true });
+            temp_db.createObjectStore("bookmark", { keyPath: "id", autoIncrement: true });
+            temp_db.createObjectStore("profile", { keyPath: "id", autoIncrement: true });
         };
 
         request.onsuccess = (event) => {
@@ -22,6 +22,8 @@ export async function initDB() {
 }
 
 export function getStore(name, mode = "readonly") {
-    const tx = db.transaction(name, mode);
-    return tx.objectStore(name);
+    if(db !== null){
+        const tx = db.transaction(name, mode);
+        return tx.objectStore(name);
+    }
 }

@@ -1,7 +1,6 @@
 // This is the basic structure which will be followed to store bookmark entry in IndexedDB database.
 
 const bookmark = {
-    id: 0,
     title: "",
     url: "",
     collections: [],

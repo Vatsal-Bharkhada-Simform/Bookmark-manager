@@ -15,7 +15,6 @@ export async function initDB() {
         request.onsuccess = (event) => {
             db = event.target.result;
             resolve(db);
-            console.log("Connected to Database!");
         }
 
         request.onerror = reject;

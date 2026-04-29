@@ -32,9 +32,13 @@ const bookmarkHandler = {
         this.mode.type = "";
     },
     loadBookmarks() {
+        // Clear table
         domElements.tableBody.replaceChildren();
+
+        // Load bookamrk entries
         this.bookmarks.forEach(bookmark => {
             let tr = document.createElement('tr');
+
             this.displayProperties.forEach(prop => {
                 let td = document.createElement('td');
                 let element = insertionHandler.insertData(bookmark[prop], bookmarkTemplate[prop], +bookmark.id);
@@ -42,54 +46,50 @@ const bookmarkHandler = {
                 tr.appendChild(td);
             });
 
-            let editButton = document.createElement('button');
-            editButton.textContent = "Edit";
-            editButton.appendChild(generateIconElement('edit'));
-            editButton.classList.add('button-secondary');
-            editButton.classList.add('button-edit');
-            editButton.dataset.id = bookmark?.id;
-            editButton.dataset.type = 'edit';
-            tr.appendChild(editButton);
-
+            insertionHandler.insertEditButton(tr, bookmark);
             domElements.tableBody.appendChild(tr);
         });
     },
     async addNewBookmark(bookmarkData) {
         return addBookmark(bookmarkData)
-            .then(() => {
-                this.populateBookmarks();
-                this.mode.for = "";
-                this.mode.type = "";
-                return true;
-            })
-            .catch(err => {
-                console.error('Error adding bookmark:', err);
-                return false;
-            });
+        .then(() => {
+            this.populateBookmarks();
+            this.mode.for = "";
+            this.mode.type = "";
+            return true;
+        })
+        .catch(err => {
+            alert('Error adding bookmark!');
+            console.error('Error adding bookmark:', err);
+            return false;
+        });
     },
     async editBookmark(bookmarkData) {
         return updateBookmark(bookmarkData)
-            .then(() => {
-                this.populateBookmarks();
-                return true;
-            })
-            .catch(err => {
-                console.error('Error adding bookmark:', err);
-                return false;
-            });
+        .then(() => {
+            this.populateBookmarks();
+            return true;
+        })
+        .catch(err => {
+            alert('Error adding bookmark!');
+            console.error('Error adding bookmark:', err);
+            return false;
+        });
     },
     incrementVisitCount(id) {
         let bookmark = this.getBookmark(id);
-        console.log(bookmark);
         bookmark.visits = +(bookmark.visits || 0) + 1;
         this.editBookmark(bookmark);
     },
     toggleSelectedBookmark(id) {
+        // If bookmark already selected, remove it else add it.
         if (this.selectedBookmarks.find(b_id => b_id === id)) {
             this.selectedBookmarks = this.selectedBookmarks.filter(b_id => b_id !== id);
         } else {
             this.selectedBookmarks.push(id);
         }
+
+        // Show delete button if a bookmark is selected.
         if (this.selectedBookmarks.length) {
             domElements.deleteButton.style.display = 'inline-block';
         } else {
@@ -97,18 +97,37 @@ const bookmarkHandler = {
         }
     },
     deleteSelectedBookmark() {
+        let deletePromises = [];
+
+        // Delete bookmarks one by one
         this.selectedBookmarks.forEach(id => {
-            deleteBookmark(id);
-        })
-        this.populateBookmarks();
-        domElements.deleteButton.style.display = 'none';
+            deletePromises.push(deleteBookmark(id));
+        });
+
+        // Raise error if any request fails.
+        Promise.all(deletePromises)
+            .then(() => {
+                this.populateBookmarks();
+                domElements.deleteButton.style.display = 'none';
+            })
+            .catch(err => {
+                alert('Error deleting bookmark!');
+                console.error('Error deleting bookmark:', err);
+            });
     },
     searchBookmarks(query) {
+        // Remove previous debounced request if not executed
         clearTimeout(this.debounceTimer);
+
+        //Prevent search for empty queries
         if (!query) {
-            this.bookmarks = [...this.allBookmarks];
+            if(this.bookmarks.length !== this.allBookmarks.length){
+                this .bookmarks = [...this.allBookmarks];
+            }
             return;
         }
+
+        // Add debounced search query
         this.debounceTimer = setTimeout(() => {
             this.handleSearch(query);
         }, 400);
@@ -116,11 +135,13 @@ const bookmarkHandler = {
     handleSearch(query) {
         query = query.toLowerCase();
 
+        // If filter exists, use search query for filtering.
         if(this.mode.for === "FILTER"){
             this.handleFilter(query);
             return;
         }
         
+        // Search through entire array of bookmarks for the result.
         this.bookmarks = this.allBookmarks.filter(bookmark => {
             return bookmark.title.toLowerCase().includes(query) ||
                 bookmark.url.toLowerCase().includes(query) ||
@@ -129,17 +150,21 @@ const bookmarkHandler = {
         });
     },
     handleFilterAndSort(query = "") {
+        // Extract mode configuration
         let mode_for = query.includes("FILTER") ? "FILTER" : "SORT";
         let mode_type = query.includes("FILTER") ? query.slice(7) : query.slice(5);
 
+        // If same mode clicked again, disable it
         if(this.mode.for === mode_for && this.mode.type === mode_type){
             this.populateBookmarks();
             return false;
         }
 
+        // Update current mode
         this.mode.for = mode_for;
         this.mode.type = mode_type;
 
+        // Apply sort instantaneously
         if(mode_for === "SORT") this.handleSort();
 
         return true;
@@ -162,7 +187,6 @@ const bookmarkHandler = {
     handleSort() {
         switch (this.mode.type) {
             case "NAME":
-                // console.log(this.bookmarks.sort((b1, b2) => String(b1.title).localeCompare(String(b2.title))));
                 this.bookmarks = this.bookmarks.sort((b1, b2) => String(b1.title).localeCompare(String(b2.title)));
                 break;
 

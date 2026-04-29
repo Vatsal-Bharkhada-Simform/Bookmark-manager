@@ -1,4 +1,4 @@
-import { generateTagElement } from "../views/generateElements.js";
+import { generateIconElement, generateTagElement } from "../views/generateElements.js";
 import { bookmarkHandler } from "./bookmarkHandler.js";
 
 const insertionHandler = {
@@ -58,6 +58,16 @@ const insertionHandler = {
             bookmarkHandler.toggleSelectedBookmark(+id);
         }
         return checkbox;
+    },
+    insertEditButton: (tr, bookmark) => {
+        let editButton = document.createElement('button');
+        editButton.textContent = "Edit";
+        editButton.appendChild(generateIconElement('edit'));
+        editButton.classList.add('button-secondary');
+        editButton.classList.add('button-edit');
+        editButton.dataset.id = bookmark?.id;
+        editButton.dataset.type = 'edit';
+        tr.appendChild(editButton);
     }
 }
 

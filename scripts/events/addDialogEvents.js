@@ -58,7 +58,6 @@ function addDialogEvents() {
             } else if (dialogElements.form.dataset.mode === "EDIT") {
                 res = await bookmarkHandler.editBookmark({ id: +dialogElements.form.dataset?.id, title, url, tags: tagNames, collections: collectionNames });
             }
-            console.log(res);
             if (res) {
                 resetForm();
             }
@@ -87,9 +86,11 @@ function openEditDialog(bookmark){
     dialogElements.form.dataset.mode = "EDIT";
     dialogElements.form.dataset.id = bookmark.id;
 
+    // Insert title and url in form inputs
     dialogElements.form.elements["bookmark-title"].value = bookmark.title;
     dialogElements.form.elements["bookmark-url"].value = bookmark.url;
 
+    //Insert tags
     if(bookmark.tags && bookmark.tags.length !== 0){
         bookmark.tags.forEach(tag => {
             let tagElement = generateDeletableTag(tag);
@@ -97,6 +98,7 @@ function openEditDialog(bookmark){
         })
     }
 
+    // Insert collections
     if(bookmark.collections && bookmark.collections.length !== 0){
         bookmark.collections.forEach(collection => {
             let collectionElement = generateDeletableTag(collection);
@@ -104,6 +106,7 @@ function openEditDialog(bookmark){
         })
     }
 
+    // Modify dialog header and button text
     dialogElements.formTitle.textContent = "Edit bookmark";
     dialogElements.confirm.textContent = "Save changes";
 

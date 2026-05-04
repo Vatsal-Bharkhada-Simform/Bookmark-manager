@@ -18,8 +18,6 @@ async function connectDB() {
         console.log("Error in fetching data: ", err);
         data = [];
     }
-
-    console.log(data);
 }
 
 await connectDB();

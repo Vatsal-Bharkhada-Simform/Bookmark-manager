@@ -15,7 +15,8 @@ function addBookmarkEvents() {
     })
 
     domElements.bookmarkSearch.addEventListener("input", (e) => {
-        let query = e.target.value.trim().toLowerCase();
+        let value = e.target.value ?? "";
+        let query = value.trim().toLowerCase();
         bookmarkHandler.searchBookmarks(query);
     });
 

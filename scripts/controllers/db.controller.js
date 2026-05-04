@@ -18,12 +18,19 @@ export async function initDB() {
         }
 
         request.onerror = reject;
-    })
+    });
 }
 
+/**
+ * Get an IndexedDB object store
+ * @param {string} name - Store name
+ * @param {'readonly' | 'readwrite'} [mode='readonly'] - Transaction mode
+ * @returns {IDBObjectStore}
+ */
 export function getStore(name, mode = "readonly") {
-    if(db !== null){
-        const tx = db.transaction(name, mode);
-        return tx.objectStore(name);
+    if (!db) {
+        throw new Error("Database not initialized. Call initDB() first.");
     }
+    const tx = db.transaction(name, mode);
+    return tx.objectStore(name);
 }

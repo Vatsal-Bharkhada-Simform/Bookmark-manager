@@ -4,28 +4,48 @@ import { getStore } from "./db.controller.js";
 const STORE = "profile";
 
 function addProfile(profile){
-    const profileStore = getStore(STORE, "readwrite");
-    return getRequestPromise(profileStore.add(profile));
+    try {
+        const profileStore = getStore(STORE, "readwrite");
+        return getRequestPromise(profileStore.add(profile));
+    } catch (err) {
+        console.log("Error while executing operaion: ", err);
+    }
 }
 
 function getAllProfiles() {
-    const profileStore = getStore(STORE, "readonly");
-    return getRequestPromise(profileStore.getAll());
+    try {
+        const profileStore = getStore(STORE, "readonly");
+        return getRequestPromise(profileStore.getAll());
+    } catch (err) {
+        console.log("Error while executing operaion: ", err);
+    }
 }
 
 function getProfileById(id) {
-    const profileStore = getStore(STORE, "readonly");
-    return getRequestPromise(profileStore.get(id));
+    try {
+        const profileStore = getStore(STORE, "readonly");
+        return getRequestPromise(profileStore.get(id));
+    } catch (err) {
+        console.log("Error while executing operaion: ", err);
+    }
 }
 
 function updateProfile(profile) {
-    const profileStore = getStore(STORE, "readwrite");
-    return getRequestPromise(profileStore.put(profile));
+    try {
+        const profileStore = getStore(STORE, "readwrite");
+        return getRequestPromise(profileStore.put(profile));
+    } catch (err) {
+        console.log("Error while executing operaion: ", err);
+    }
 }
 
 function deleteProfile(id) {
-    const profileStore = getStore(STORE, "readwrite");
-    return getRequestPromise(profileStore.delete(id));
+    try {
+        const profileStore = getStore(STORE, "readwrite");
+        return getRequestPromise(profileStore.delete(id));
+    } catch (err) {
+        console.log("Error while executing operaion: ", err);
+    }
 }
 
 export { addProfile, getProfileById, getAllProfiles, updateProfile, deleteProfile };

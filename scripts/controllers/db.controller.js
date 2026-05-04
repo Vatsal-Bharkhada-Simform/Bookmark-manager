@@ -5,6 +5,7 @@ export async function initDB() {
         const request = indexedDB.open("BookmarkDB", 1);
 
         request.onupgradeneeded = (event) => {
+            // Use temp_db because event.target.result is not available until onsuccess
             const temp_db = event.target.result;
 
             temp_db.createObjectStore("bookmark", { keyPath: "id", autoIncrement: true });

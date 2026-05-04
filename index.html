@@ -89,9 +89,9 @@
                 </div>
                 <nav class="nav__wrapper">
                     <span class="nav__head">Bookmarks</span>
-                    <ul class="nav__list">
-                        <li class="nav__list-item" data-selected="true">
-                            <a href="#" class="nav-link">
+                    <ul class="nav__list" id="sidebar-container">
+                        <li class="nav__list-item">
+                            <a href="#all-bookmarks" class="nav-link" data-selected="true" data-target-container="all-bookmarks">
                                 <svg class="u-icon">
                                     <use href="./assets/icons/sprite.svg#bookmark"></use>
                                 </svg>
@@ -99,7 +99,7 @@
                             </a>
                         </li>
                         <li class="nav__list-item">
-                            <a href="#" class="nav-link">
+                            <a href="#collections" class="nav-link" data-target-container="collections">
                                 <svg class="u-icon">
                                     <use href="./assets/icons/sprite.svg#collection"></use>
                                 </svg>
@@ -107,7 +107,7 @@
                             </a>
                         </li>
                         <li class="nav__list-item">
-                            <a href="#" class="nav-link">
+                            <a href="#deleted-bookmarks" class="nav-link" data-target-container="deleted-bookmarks">
                                 <svg class="u-icon">
                                     <use href="./assets/icons/sprite.svg#trash-bin"></use>
                                 </svg>
@@ -115,7 +115,7 @@
                             </a>
                         </li>
                     </ul>
-                    <span class="nav__head">Profiles</span>
+                    <!-- <span class="nav__head">Profiles</span>
                     <ul class="nav__list">
                         <li class="nav__list-item">
                             <a href="#" class="nav-link">
@@ -133,7 +133,7 @@
                                 Recently deleted
                             </a>
                         </li>
-                    </ul>
+                    </ul> -->
                 </nav>
             </aside>
             <section class="main__content">
@@ -219,6 +219,20 @@
                             <tbody class="table__body">
                             </tbody>
                         </table>
+                    </div>
+                </div>
+                <div id="collections" class="content__wrapper">
+                    <div class="content__head">
+                        <div class="head__name">
+                            <h2>Collections</h2>
+                        </div>
+                    </div>
+                </div>
+                <div id="deleted-bookmarks" class="content__wrapper">
+                    <div class="content__head">
+                        <div class="head__name">
+                            <h2>Deleted Bookmarks</h2>
+                        </div>
                     </div>
                 </div>
                 <div class="footer">

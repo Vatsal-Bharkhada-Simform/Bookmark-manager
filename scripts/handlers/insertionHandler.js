@@ -52,6 +52,7 @@ const insertionHandler = {
     insertSelectBox: (id) => {
         let checkbox = document.createElement("input");
         checkbox.type = "checkbox";
+        checkbox.title = "Select";
         checkbox.checked = false;
         checkbox.classList.add("input-checkbox");
         checkbox.onchange = () => {

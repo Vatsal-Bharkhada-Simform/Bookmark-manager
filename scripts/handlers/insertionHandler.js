@@ -12,6 +12,8 @@ const insertionHandler = {
                 return insertionHandler.insertTagList(data);
             case 'visits':
                 return insertionHandler.insertVisits(data);
+            case 'delete_btn':
+                return insertionHandler.insertDeleteButton(id);
             default:
                 return insertionHandler.insertText(data);
         }
@@ -44,6 +46,16 @@ const insertionHandler = {
         let span = document.createElement('span');
         span.textContent = visits || '0';
         return span;
+    },
+    insertDeleteButton: (id) => {
+        let delButton = document.createElement('button');
+        let delIcon = generateIconElement('trash-bin');
+        delButton.append(delIcon);
+        delButton.classList.add("button-danger");
+        delButton.onclick = () => {
+            console.log("DELETE");
+        }
+        return delButton;
     },
     insertText: (text) => {
         let span = document.createElement('span');

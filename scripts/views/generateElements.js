@@ -78,4 +78,36 @@ function generateTable(data, blueprint, addEdit = false){
     return table;
 }
 
-export { generateIconElement, generateTagElement, generateDeletableTag, generateTable };
+function generateCollapsible(title, body){
+    let collapsible = document.createElement("div");
+    collapsible.classList.add("collapsible");
+
+    // Add Head content
+    let head = document.createElement("div");
+    head.classList.add("collapsible__head");
+    head.style.backgroundColor = tagColors[title[0].toUpperCase()]?.background || '#E0E0E0';
+    head.style.color = tagColors[title[0].toUpperCase()]?.color || '#000000';
+    head.style.borderColor = tagColors[title[0].toUpperCase()]?.border || '#E0E0E0';
+    
+    let title_cont = document.createElement("h2");
+    title_cont.append(title);
+    let icon = generateIconElement("chevron-down");
+
+    head.append(title_cont, icon);
+    
+    // Add body
+    let c_body = document.createElement("div");
+    c_body.classList.add("collapsible__body");
+    c_body.append(body);
+
+    head.onclick = () => {
+        let body = head.nextElementSibling;
+        body.classList.toggle("hidden");
+    }
+
+    collapsible.append(head, c_body);
+
+    return collapsible;
+}
+
+export { generateIconElement, generateTagElement, generateDeletableTag, generateTable, generateCollapsible };

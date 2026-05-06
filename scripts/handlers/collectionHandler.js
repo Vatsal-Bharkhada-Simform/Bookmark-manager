@@ -1,4 +1,6 @@
+import { collectionTableTemplate } from "../models/collections.model.js";
 import { domElements } from "../views/domElements.js";
+import { generateCollapsible, generateTable } from "../views/generateElements.js";
 import { bookmarkHandler } from "./bookmarkHandler.js";
 
 const collectionHandler = {
@@ -25,11 +27,16 @@ const collectionHandler = {
         this.collections = groupedBookmarks;
     },
     loadCollections(){
-        let wrapper = document.createElement("div");
+        let wrapper = document.createDocumentFragment();
         Object.keys(this.collections).forEach((key) => {
-            let span = document.createElement("span");
-            span.append(key);
-            wrapper.append(span);
+            let table = generateTable(this.collections[key], collectionTableTemplate);
+            
+            let tableCont = document.createElement("div");
+            tableCont.classList.add("table__wrapper");
+            tableCont.append(table);
+
+            let collapsible = generateCollapsible(key, tableCont);
+            wrapper.append(collapsible);
         })
         domElements.collectionContainer.append(wrapper);
     },

@@ -12,7 +12,7 @@ const insertionHandler = {
                 return insertionHandler.insertTagList(data);
             case 'visits':
                 return insertionHandler.insertVisits(data);
-            case 'delete_btn':
+            case 'delete_button':
                 return insertionHandler.insertDeleteButton(id);
             default:
                 return insertionHandler.insertText(data);
@@ -51,7 +51,7 @@ const insertionHandler = {
         let delButton = document.createElement('button');
         let delIcon = generateIconElement('trash-bin');
         delButton.append(delIcon);
-        delButton.classList.add("button-danger");
+        delButton.classList.add("button-danger-ghost");
         delButton.onclick = () => {
             console.log("DELETE");
         }

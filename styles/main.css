@@ -10,5 +10,6 @@
 
 @import url("./components/input.css");
 @import url("./components/buttons.css");
+@import url("./components/collapsible.css");
 @import url("./components/dropdown.css");
 @import url("./components/dialog.css");

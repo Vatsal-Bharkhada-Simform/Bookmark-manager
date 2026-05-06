@@ -3,7 +3,6 @@
     flex: 1;
     min-height: 0;
     overflow-y: overlay;
-    border-bottom: 1px solid var(--gray-300);
 
     table {
         width: 100%;

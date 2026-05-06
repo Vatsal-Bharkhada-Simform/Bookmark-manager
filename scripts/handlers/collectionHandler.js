@@ -32,10 +32,9 @@ const collectionHandler = {
             let table = generateTable(this.collections[key], collectionTableTemplate);
             
             let tableCont = document.createElement("div");
-            tableCont.classList.add("table__wrapper");
             tableCont.append(table);
 
-            let collapsible = generateCollapsible(key, tableCont);
+            let collapsible = generateCollapsible(key, tableCont, this.collections[key].length);
             wrapper.append(collapsible);
         })
         domElements.collectionContainer.append(wrapper);

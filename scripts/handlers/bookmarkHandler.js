@@ -1,7 +1,7 @@
 import { addBookmark, deleteBookmark, getAllBookmarks, updateBookmark } from "../controllers/bookmark.controller.js"
 import { bookmarkTemplate } from "../models/bookmark.model.js";
 import { domElements } from "../views/domElements.js";
-import { generateIconElement } from "../views/generateElements.js";
+import { generateIconElement, generateTable } from "../views/generateElements.js";
 import { insertionHandler } from "./insertionHandler.js";
 
 const bookmarkHandler = {
@@ -30,26 +30,16 @@ const bookmarkHandler = {
         this.bookmarks = [...this.allBookmarks];
         this.mode.for = "";
         this.mode.type = "";
-        console.log(this.allBookmarks);
     },
     loadBookmarks() {
         // Clear table
-        domElements.tableBody.replaceChildren();
+        domElements.bookmarkTableContainer.replaceChildren();
 
-        // Load bookamrk entries
-        this.bookmarks.forEach(bookmark => {
-            let tr = document.createElement('tr');
+        // Generate new table
+        let table = generateTable(this.bookmarks, bookmarkTemplate, true);
 
-            this.displayProperties.forEach(prop => {
-                let td = document.createElement('td');
-                let element = insertionHandler.insertData(bookmark[prop], bookmarkTemplate[prop], +bookmark.id);
-                td.appendChild(element);
-                tr.appendChild(td);
-            });
-
-            insertionHandler.insertEditButton(tr.lastElementChild, bookmark);
-            domElements.tableBody.appendChild(tr);
-        });
+        // Insert table
+        domElements.bookmarkTableContainer.append(table);
     },
     async addNewBookmark(bookmarkData) {
         return addBookmark(bookmarkData)

@@ -1,3 +1,4 @@
+import { insertionHandler } from "../handlers/insertionHandler.js";
 import tagColors from "./tagColors.js";
 
 function generateIconElement(name, className = "u-icon") {
@@ -35,4 +36,46 @@ function generateDeletableTag(tagName) {
     return tagElement;
 }
 
-export { generateIconElement, generateTagElement, generateDeletableTag };
+function createCell(content){
+    let td = document.createElement("td");
+    td.append(content);
+    return td;
+}
+
+function generateTable(data, blueprint, addEdit = false){
+    if(!Array.isArray(data) || data.length === 0 || !blueprint) return "";
+
+    let table = document.createElement("table");
+    let thead = document.createElement("thead");
+    let tbody = document.createElement("tbody");
+
+    let tr = document.createElement("tr");
+
+    // Add table header
+    Object.entries(blueprint).forEach(([_,item]) => {
+        let th = document.createElement("th");
+        th.append(item.th_title);
+        tr.append(th);
+    });
+
+    thead.append(tr);
+    table.append(thead);
+
+    // Add table body
+    data.forEach((item) => {
+        let tr = document.createElement("tr");
+        Object.keys(blueprint).forEach((key) => {
+            tr.append(createCell(insertionHandler.insertData(item[key] ?? "", blueprint[key].type, item.id)));
+        });
+        if(addEdit){
+            insertionHandler.insertEditButton(tr, item);
+        }
+        tbody.append(tr);
+    });
+
+    table.append(tbody);
+
+    return table;
+}
+
+export { generateIconElement, generateTagElement, generateDeletableTag, generateTable };

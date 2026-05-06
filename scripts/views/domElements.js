@@ -1,6 +1,6 @@
 const domElements = {
     sidebar: document.querySelector('#sidebar-container'),
-    tableBody: document.querySelector('.table__body'),
+    bookmarkTableContainer: document.querySelector(".table__wrapper , .bookmark-table"),
     deleteButton: document.querySelector('#btn-delete-bookmark'),
     bookmarkSearch: document.querySelector('#bookmark-search'),
     filterDropdown: document.querySelector("#dropdown__filter"),

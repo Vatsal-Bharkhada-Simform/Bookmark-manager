@@ -30,6 +30,7 @@ const bookmarkHandler = {
         this.bookmarks = [...this.allBookmarks];
         this.mode.for = "";
         this.mode.type = "";
+        console.log(this.allBookmarks);
     },
     loadBookmarks() {
         // Clear table

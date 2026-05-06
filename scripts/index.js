@@ -3,6 +3,7 @@ import { addBookmarkEvents } from "./events/addBookmarkEvents.js";
 import { addDialogEvents } from "./events/addDialogEvents.js";
 import { addNavigationEvents } from "./events/addNavigationEvents.js";
 import { bookmarkHandler } from "./handlers/bookmarkHandler.js";
+import { collectionHandler } from "./handlers/collectionHandler.js";
 
 async function connectDB() {
     try {
@@ -12,12 +13,11 @@ async function connectDB() {
         return;
     }
 
-    let data;
     try{
-        data = await bookmarkHandler.populateBookmarks();
+        await bookmarkHandler.populateBookmarks();
+        collectionHandler.populateCollections();
     } catch (err) {
-        console.log("Error in fetching data: ", err);
-        data = [];
+        console.log("Error in loading bookmarks.", err);
     }
 }
 

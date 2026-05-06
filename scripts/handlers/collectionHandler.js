@@ -1,3 +1,4 @@
+import { domElements } from "../views/domElements.js";
 import { bookmarkHandler } from "./bookmarkHandler.js";
 
 const collectionHandler = {
@@ -24,7 +25,13 @@ const collectionHandler = {
         this.collections = groupedBookmarks;
     },
     loadCollections(){
-        console.log("Loaded collections");
+        let wrapper = document.createElement("div");
+        Object.keys(this.collections).forEach((key) => {
+            let span = document.createElement("span");
+            span.append(key);
+            wrapper.append(span);
+        })
+        domElements.collectionContainer.append(wrapper);
     },
 }
 

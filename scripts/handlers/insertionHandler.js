@@ -2,6 +2,7 @@ import { generateIconElement, generateTagElement } from "../views/generateElemen
 import { bookmarkHandler } from "./bookmarkHandler.js";
 
 const insertionHandler = {
+    // Root function which manages insertion based on the type of node
     insertData: (data, type, id) => {
         switch (type) {
             case 'selection':
@@ -18,6 +19,7 @@ const insertionHandler = {
                 return insertionHandler.insertText(data);
         }
     },
+    // Function to create hyperlinks
     insertHyperlink: (url, id) => {
         if (!/^https?:\/\//i.test(url)) {
             url = 'http://' + url;
@@ -32,6 +34,7 @@ const insertionHandler = {
         }
         return a;
     },
+    // Function to create tag list from array of tag names
     insertTagList: (tags) => {
         if(!Array.isArray(tags) || tags.length === 0) return document.createTextNode('');
         let wrapper = document.createElement('div');
@@ -42,11 +45,13 @@ const insertionHandler = {
         });
         return wrapper;
     },
+    // Function to create element showing visit counts
     insertVisits: (visits) => {
         let span = document.createElement('span');
         span.textContent = visits || '0';
         return span;
     },
+    // Inserts delete button with metadata stored as dataset attributes
     insertDeleteButton: (id) => {
         let delButton = document.createElement('button');
         let delIcon = generateIconElement('trash-bin');
@@ -56,11 +61,13 @@ const insertionHandler = {
         delButton.dataset.id = id;
         return delButton;
     },
+    // For regular text
     insertText: (text) => {
         let span = document.createElement('span');
         span.textContent = text;
         return span;
     },
+    // Insert checkbox to mark bookmark as selected when checked
     insertSelectBox: (id) => {
         let checkbox = document.createElement("input");
         checkbox.type = "checkbox";
@@ -72,6 +79,7 @@ const insertionHandler = {
         }
         return checkbox;
     },
+    // Insert edit button with metadata stored in dataset attributes
     insertEditButton: (tr, bookmark) => {
         let container = document.createElement("div");
         container.classList.add("edit-container");

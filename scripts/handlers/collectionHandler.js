@@ -14,6 +14,8 @@ const collectionHandler = {
     },
     populateCollections(){
         let bookmarks = bookmarkHandler.bookmarks;
+
+        // Group bookmarks by collection names
         let groupedBookmarks = bookmarks.reduce((acc, bookmark) => {
             bookmark.collections.forEach((collection) => {
                 if(acc[collection]){
@@ -27,7 +29,10 @@ const collectionHandler = {
         this.collections = groupedBookmarks;
     },
     loadCollections(){
+        // Clear collection contents
         domElements.collectionContainer.replaceChildren();
+        
+        // Generate new content elements
         let wrapper = document.createDocumentFragment();
         Object.keys(this.collections).forEach((key) => {
             let table = generateTable(this.collections[key], collectionTableTemplate);
@@ -37,7 +42,9 @@ const collectionHandler = {
 
             let collapsible = generateCollapsible(key, tableCont, this.collections[key].length);
             wrapper.append(collapsible);
-        })
+        });
+
+        // Append generated content to the collection container
         domElements.collectionContainer.append(wrapper);
     },
     async removeBookmark(id, collection){

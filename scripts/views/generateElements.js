@@ -1,6 +1,8 @@
 import { insertionHandler } from "../handlers/insertionHandler.js";
 import tagColors from "./tagColors.js";
 
+// Generates an svg element where svg is used from sprite file.
+// Only needs svg name as defined in the sprite file to generate svg
 function generateIconElement(name, className = "u-icon") {
     let svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
     let useTag = document.createElementNS("http://www.w3.org/2000/svg", 'use');
@@ -10,6 +12,7 @@ function generateIconElement(name, className = "u-icon") {
     return svg;
 }
 
+// Generate tag element with color code taken from tagColors object based on the tag name
 function generateTagElement(tagName) {
     let tagElement = document.createElement('span');
 
@@ -23,6 +26,7 @@ function generateTagElement(tagName) {
     return tagElement;
 }
 
+// Generate tag element with a button to delete the tag. Used in add/edit forms of bookmark page.
 function generateDeletableTag(tagName) {
     let tagElement = generateTagElement(tagName);
 
@@ -36,12 +40,15 @@ function generateDeletableTag(tagName) {
     return tagElement;
 }
 
+// Create a <td> element with given content
 function createCell(content){
     let td = document.createElement("td");
     td.append(content);
     return td;
 }
 
+// Generate entire table using template(blueprint) passed as argument
+// Use passed data to fill table body as defined in the template
 function generateTable(data, blueprint, addEdit = false){
     if(!Array.isArray(data) || data.length === 0 || !blueprint) return "";
 
@@ -78,7 +85,8 @@ function generateTable(data, blueprint, addEdit = false){
     return table;
 }
 
-function generateCollapsible(title, body, itemCount){
+// Generate collapsible elements for collection page
+function generateCollapsible(title, body){
     let collapsible = document.createElement("div");
     collapsible.classList.add("collapsible");
     collapsible.dataset.collectionName = title;

@@ -5,6 +5,7 @@ const collections = {
     bookmarks: []
 };
 
+// Template for table of bookmarks of a common collection
 const collectionTableTemplate = {
     title: {
         th_title: "Name",

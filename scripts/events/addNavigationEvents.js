@@ -3,8 +3,10 @@ import { domElements } from "../views/domElements.js";
 let currentOpen = null;
 
 function addNavigationEvents() {
+    // Load the default page (Here: all bookmarks)
     loadDefault();
 
+    // Load selected page from the sidebar
     domElements.sidebar.addEventListener("click", (e) => {
         if (e.target.tagName === "A") {
             let targetId = e.target.href.split("#")[1] ?? "";
@@ -28,6 +30,7 @@ function addNavigationEvents() {
         }
     });
 
+    // Prevent loading invalid URL's. Load default page as fallback
     window.addEventListener('hashchange', function () {
         let hashValue = this.window.location.href.split("#")[1] ?? "";
         let targetElement = this.document.querySelector(`#${hashValue}`);
@@ -46,6 +49,7 @@ function addNavigationEvents() {
     });
 }
 
+// Find page set as default page and render it
 function loadDefault(){
     let defaultSelected = document.querySelector("[data-selected='true']");
     if (defaultSelected && defaultSelected.href) {

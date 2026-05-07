@@ -8,7 +8,6 @@ const bookmarkHandler = {
     allBookmarks: [],
     bookmarksToDisplay: [],
     selectedBookmarks: [],
-    displayProperties: ['checkbox', 'title', 'url', 'tags', 'collections', 'visits'],
     mode: {
         for: "",
         type: ""

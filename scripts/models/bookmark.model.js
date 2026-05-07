@@ -11,6 +11,7 @@ const bookmark = {
     visits: 0
 }
 
+// Template for table of bookmarks containing column headers and data format to generate specific elements dynamically
 const bookmarkTemplate = {
     checkbox: {
         th_title: "",

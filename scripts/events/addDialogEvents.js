@@ -56,7 +56,8 @@ function addDialogEvents() {
             if(dialogElements.form.dataset.mode === "ADD"){
                 res = await bookmarkHandler.addNewBookmark({ title, url, tags: tagNames, collections: collectionNames, createdAt: new Date().toISOString() });
             } else if (dialogElements.form.dataset.mode === "EDIT") {
-                res = await bookmarkHandler.editBookmark({ id: +dialogElements.form.dataset?.id, title, url, tags: tagNames, collections: collectionNames });
+                let bookmark = bookmarkHandler.getBookmark(+dialogElements.form.dataset?.id);
+                res = await bookmarkHandler.editBookmark({ ...bookmark, title, url, tags: tagNames, collections: collectionNames });
             }
             if (res) {
                 resetForm();

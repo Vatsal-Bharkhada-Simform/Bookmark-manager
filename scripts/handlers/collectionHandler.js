@@ -27,6 +27,7 @@ const collectionHandler = {
         this.collections = groupedBookmarks;
     },
     loadCollections(){
+        domElements.collectionContainer.replaceChildren();
         let wrapper = document.createDocumentFragment();
         Object.keys(this.collections).forEach((key) => {
             let table = generateTable(this.collections[key], collectionTableTemplate);
@@ -39,6 +40,12 @@ const collectionHandler = {
         })
         domElements.collectionContainer.append(wrapper);
     },
+    async removeBookmark(id, collection){
+        let bookmark = bookmarkHandler.getBookmark(+id);
+        bookmark.collections = bookmark.collections.filter(item => item !== collection);
+        await bookmarkHandler.editBookmark(bookmark);
+        this.populateCollections();
+    }
 }
 
 export {collectionHandler};

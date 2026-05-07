@@ -1,8 +1,8 @@
 import { addBookmark, deleteBookmark, getAllBookmarks, updateBookmark } from "../controllers/bookmark.controller.js"
 import { bookmarkTemplate } from "../models/bookmark.model.js";
 import { domElements } from "../views/domElements.js";
-import { generateIconElement, generateTable } from "../views/generateElements.js";
-import { insertionHandler } from "./insertionHandler.js";
+import { generateTable } from "../views/generateElements.js";
+import { collectionHandler } from "./collectionHandler.js";
 
 const bookmarkHandler = {
     allBookmarks: [],
@@ -21,6 +21,7 @@ const bookmarkHandler = {
         this.bookmarksToDisplay = data;
         this.selectedBookmarks = [];
         this.loadBookmarks();
+        collectionHandler.populateCollections();
     },
     getBookmark(id) {
         return this.allBookmarks.find(bookmark => bookmark.id === id);

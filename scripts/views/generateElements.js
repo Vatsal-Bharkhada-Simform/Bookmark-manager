@@ -81,6 +81,7 @@ function generateTable(data, blueprint, addEdit = false){
 function generateCollapsible(title, body, itemCount){
     let collapsible = document.createElement("div");
     collapsible.classList.add("collapsible");
+    collapsible.dataset.collectionName = title;
 
     // Add Head content
     let head = document.createElement("div");

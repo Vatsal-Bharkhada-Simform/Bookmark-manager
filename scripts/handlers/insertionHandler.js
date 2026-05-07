@@ -52,9 +52,8 @@ const insertionHandler = {
         let delIcon = generateIconElement('trash-bin');
         delButton.append(delIcon);
         delButton.classList.add("button-danger-ghost");
-        delButton.onclick = () => {
-            console.log("DELETE");
-        }
+        delButton.dataset.type = "DELETE";
+        delButton.dataset.id = id;
         return delButton;
     },
     insertText: (text) => {

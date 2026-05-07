@@ -22,11 +22,25 @@ function addBookmarkEvents() {
 
     domElements.filterDropdown.addEventListener("click", (e) => {
         handleDropdownEvents(e);
+        domElements.sortDropdown.lastElementChild.classList.remove("show");
     })
 
     domElements.sortDropdown.addEventListener("click", (e) => {
         handleDropdownEvents(e);
+        domElements.filterDropdown.lastElementChild.classList.remove("show");
     })
+    
+    domElements.filterDropdown.addEventListener("blur", (e) => {
+        if(!e.relatedTarget) {
+            domElements.filterDropdown.lastElementChild.classList.remove("show");
+        }
+    }, true);
+
+    domElements.sortDropdown.addEventListener("blur", (e) => {
+        if(!e.relatedTarget) {
+            domElements.sortDropdown.lastElementChild.classList.remove("show");
+        }
+    }, true);
 }
 
 function handleDropdownEvents(e) {
@@ -37,11 +51,10 @@ function handleDropdownEvents(e) {
     }
     else if (target.dataset.value !== undefined) {
         let value = target.dataset.value;
-        let currentActive = document.querySelector(".dropdown__items > .active");
+        let parent = target.closest(".dropdown");
 
-        if(currentActive && currentActive !== value){
-            currentActive.classList.remove("active");
-        }
+        let activeChild = parent?.querySelector(".active");
+        activeChild?.classList.remove("active");
 
         let res = bookmarkHandler.handleFilterAndSort(value);
         

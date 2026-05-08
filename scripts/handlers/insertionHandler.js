@@ -24,6 +24,7 @@ const insertionHandler = {
         a.href = url;
         a.textContent = url;
         a.target = '_blank';
+        a.rel = 'noopener noreferrer';
         a.onclick = () => {
             bookmarkHandler.incrementVisitCount(id);
         }

@@ -45,7 +45,7 @@ function addBookmarkEvents() {
 
 function handleDropdownEvents(e) {
     let target = e.target;
-    if (target.className === "dropdown__label") {
+    if (target.classList.contains("dropdown__label")) {
         let dropdownContainer = target.nextElementSibling;
         dropdownContainer.classList.toggle("show");
     }

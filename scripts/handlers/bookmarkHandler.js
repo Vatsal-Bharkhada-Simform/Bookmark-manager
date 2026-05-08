@@ -71,8 +71,8 @@ const bookmarkHandler = {
             return true;
         })
         .catch(err => {
-            alert('Error adding bookmark!');
-            console.error('Error adding bookmark:', err);
+            alert('Error updating bookmark!');
+            console.error('Error updating bookmark:', err);
             return false;
         });
     },

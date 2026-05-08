@@ -53,14 +53,18 @@ function addDialogEvents() {
 
         if (title && url) {
             let res;
-            if(dialogElements.form.dataset.mode === "ADD"){
-                res = await bookmarkHandler.addNewBookmark({ title, url, tags: tagNames, collections: collectionNames, createdAt: new Date().toISOString() });
-            } else if (dialogElements.form.dataset.mode === "EDIT") {
-                let bookmark = bookmarkHandler.getBookmark(+dialogElements.form.dataset?.id);
-                res = await bookmarkHandler.editBookmark({ ...bookmark, title, url, tags: tagNames, collections: collectionNames });
-            }
-            if (res) {
-                resetForm();
+            try {
+                if(dialogElements.form.dataset.mode === "ADD"){
+                    res = await bookmarkHandler.addNewBookmark({ title, url, tags: tagNames, collections: collectionNames, createdAt: new Date().toISOString() });
+                } else if (dialogElements.form.dataset.mode === "EDIT") {
+                    let bookmark = bookmarkHandler.getBookmark(+dialogElements.form.dataset?.id);
+                    res = await bookmarkHandler.editBookmark({ ...bookmark, title, url, tags: tagNames, collections: collectionNames });
+                }
+                if (res) {
+                    resetForm();
+                }
+            } finally {
+                dialogElements.confirm.disabled = false;
             }
         } else {
             alert('Please fill in both Title and URL fields.');

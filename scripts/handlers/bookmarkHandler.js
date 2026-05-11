@@ -151,8 +151,7 @@ const bookmarkHandler = {
     },
     handleFilterAndSort(query = "") {
         // Extract mode configuration
-        let mode_for = query.includes("FILTER") ? "FILTER" : "SORT";
-        let mode_type = query.includes("FILTER") ? query.slice(7) : query.slice(5);
+        let [mode_for, mode_type] = query.split("_");
 
         // If same mode clicked again, disable it
         if(this.mode.for === mode_for && this.mode.type === mode_type){
@@ -172,13 +171,13 @@ const bookmarkHandler = {
     handleFilter(query) {
         switch (this.mode.type) {
             case "NAME":
-                this.bookmarks = this.bookmarks.filter(bookmark => {
+                this.bookmarks = this.allBookmarks.filter(bookmark => {
                     return bookmark.title.toLowerCase().includes(query)
                 })
                 break;
 
             case "URL":
-                this.bookmarks = this.bookmarks.filter(bookmark => {
+                this.bookmarks = this.allBookmarks.filter(bookmark => {
                     return bookmark.url.toLowerCase().includes(query)
                 })
                 break;

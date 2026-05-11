@@ -62,6 +62,11 @@ const insertionHandler = {
         return checkbox;
     },
     insertEditButton: (tr, bookmark) => {
+        let container = document.createElement("div");
+        container.classList.add("edit-container");
+        container.append(tr.innerText);
+        tr.innerText = "";
+        
         let editButton = document.createElement('button');
         editButton.textContent = "Edit";
         editButton.appendChild(generateIconElement('edit'));
@@ -69,7 +74,10 @@ const insertionHandler = {
         editButton.classList.add('button-edit');
         editButton.dataset.id = bookmark?.id;
         editButton.dataset.type = 'edit';
-        tr.appendChild(editButton);
+
+        container.append(editButton);
+        
+        tr.appendChild(container);
     }
 }
 

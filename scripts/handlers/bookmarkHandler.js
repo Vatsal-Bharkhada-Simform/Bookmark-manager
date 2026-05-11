@@ -46,7 +46,7 @@ const bookmarkHandler = {
                 tr.appendChild(td);
             });
 
-            insertionHandler.insertEditButton(tr, bookmark);
+            insertionHandler.insertEditButton(tr.lastElementChild, bookmark);
             domElements.tableBody.appendChild(tr);
         });
     },

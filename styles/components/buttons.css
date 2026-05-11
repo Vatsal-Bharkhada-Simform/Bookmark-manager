@@ -1,3 +1,7 @@
+button {
+    white-space: nowrap;
+}
+
 .button-ghost{
     border: none;
     background-color: transparent;

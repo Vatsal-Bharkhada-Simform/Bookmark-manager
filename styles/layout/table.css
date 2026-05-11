@@ -42,13 +42,17 @@
             tr {
                 position: relative;
 
+                .edit-container{
+                    width: 100%;
+                    display: inline-flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    gap: var(--space-md);
+                }
+
                 .button-edit{
                     opacity: 0;
                     pointer-events: none;
-                    position: absolute;
-                    right: var(--space-md);
-                    top: 50%;
-                    transform: translateY(-50%);
                     transition: opacity .2s;
                 }
             }
@@ -69,6 +73,10 @@
                     &:hover {
                         text-decoration: underline;
                     }
+                }
+
+                &:has(.edit-container){
+                    padding: var(--space-xs) var(--space-md);
                 }
             }
             td:first-child {

@@ -28,6 +28,7 @@ function generateDeletableTag(tagName) {
     let closeButton = document.createElement('button');
     closeButton.classList.add("button-close-tag");
     closeButton.appendChild(generateIconElement("close", "u-icon-del"));
+    closeButton.type = "button";
     closeButton.onclick = () => tagElement.remove();
     tagElement.appendChild(closeButton);
 

@@ -1,4 +1,5 @@
 import { bookmarkHandler } from "../handlers/bookmarkHandler.js";
+import { isValidForm } from "../utils/bookmarkValidators.js";
 import { dialogElements } from "../views/dialogElements.js";
 import { generateDeletableTag } from "../views/generateElements.js";
 
@@ -50,6 +51,11 @@ function addDialogEvents() {
 
         const tags = dialogElements.tagList.querySelectorAll('.u-tag');
         const tagNames = Array.from(tags).map(tag => tag.textContent);
+
+        if(!isValidForm(title, url, collectionNames, tagNames)){
+            dialogElements.confirm.disabled = false;
+            return;
+        }
 
         if (title && url) {
             let res;

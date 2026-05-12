@@ -24,7 +24,7 @@ async function connectDB() {
 
 await connectDB();
 
+addNavigationEvents();
 addBookmarkEvents();
 addDialogEvents();
-addNavigationEvents();
 addCollectionEvents();

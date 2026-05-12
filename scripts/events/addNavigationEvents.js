@@ -51,6 +51,11 @@ function addNavigationEvents() {
 // Find page set as default page and render it
 function loadDefault(){
     let defaultSelected = document.querySelector("[data-selected='true']");
+    if(window.location.pathname !== "/"){
+        console.log("1");
+        window.location.pathname = "/";
+    }
+    
     if (defaultSelected && defaultSelected.href) {
         let targetId = defaultSelected.href.split("#")[1] ?? "";
 

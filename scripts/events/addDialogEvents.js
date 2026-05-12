@@ -1,5 +1,5 @@
 import { bookmarkHandler } from "../handlers/bookmarkHandler.js";
-import { isValidForm } from "../utils/bookmarkValidators.js";
+import { isValidForm, isValidText } from "../utils/bookmarkValidators.js";
 import { dialogElements } from "../views/dialogElements.js";
 import { generateDeletableTag } from "../views/generateElements.js";
 
@@ -17,8 +17,14 @@ function addDialogEvents() {
     dialogElements.tagInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') {
             e.preventDefault();
+            
             const tag = e.target.value?.trim();
+
             if (tag) {
+                if(!isValidText(tag)){
+                    alert("Please provide a proper tag name.");
+                    return;
+                }
                 e.target.value = '';
                 let tagElement = generateDeletableTag(tag);
                 dialogElements.tagList.appendChild(tagElement);
@@ -29,8 +35,14 @@ function addDialogEvents() {
     dialogElements.collectionInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') {
             e.preventDefault();
+            
             const collection = e.target.value?.trim();
+
             if (collection) {
+                if(!isValidText(collection)){
+                    alert("Please provide a proper collection name.");
+                    return;
+                }
                 e.target.value = '';
                 let collectionElement = generateDeletableTag(collection);
                 dialogElements.collectionList.appendChild(collectionElement);
@@ -52,7 +64,7 @@ function addDialogEvents() {
         const tags = dialogElements.tagList.querySelectorAll('.u-tag');
         const tagNames = Array.from(tags).map(tag => tag.textContent);
 
-        if(!isValidForm(title, url, collectionNames, tagNames)){
+        if(!isValidForm(title, url)){
             dialogElements.confirm.disabled = false;
             return;
         }

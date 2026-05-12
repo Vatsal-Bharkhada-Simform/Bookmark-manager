@@ -56,6 +56,7 @@ const insertionHandler = {
         let delButton = document.createElement('button');
         let delIcon = generateIconElement('trash-bin');
         delButton.append(delIcon);
+        delButton.title = "Remove bookmark from collection";
         delButton.classList.add("button-danger-ghost");
         delButton.dataset.type = "DELETE";
         delButton.dataset.id = id;

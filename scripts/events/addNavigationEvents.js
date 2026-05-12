@@ -12,6 +12,8 @@ function addNavigationEvents() {
             let targetId = e.target.href.split("#")[1] ?? "";
             let currentSelected = document.querySelector("[data-selected='true']");
 
+            if(window.location.pathname !== "/") window.location.href = window.location.origin + "#" + targetId;
+
             if (currentSelected) {
                 currentSelected.dataset.selected = false;
             }

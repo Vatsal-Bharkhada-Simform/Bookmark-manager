@@ -3,8 +3,38 @@ import { domElements } from "../views/domElements.js";
 let currentOpen = null;
 
 function addNavigationEvents() {
+    // Prevent loading invalid URL's. Load default page as fallback
+    window.addEventListener('hashchange', function () {
+        let hashValue = this.window.location.href.split("#")[1] ?? "";
+        if(hashValue.includes("/")){
+            hashValue = hashValue.split("/")[0];
+        }
+        let targetElement = this.document.querySelector(`#${hashValue}`);
+
+        if(!targetElement){
+            loadDefault();
+        } else {
+            if(targetElement === currentOpen) return;
+            else {
+                updateSidebarSelection(hashValue);
+                if(currentOpen){
+                    currentOpen.style.display = "none";
+                }
+                currentOpen = targetElement;
+                targetElement.style.display = "flex";
+            }
+        }
+    });
+    
     // Load the default page (Here: all bookmarks)
-    loadDefault();
+    let defaultSelected = document.querySelector("[data-selected='true']");
+    let defaultHref = defaultSelected.href.split("#")[1] ?? "";
+
+    if(window.location.hash === "" || window.location.hash === "#"+defaultHref){
+        loadDefault();
+    } else {
+        window.dispatchEvent(new HashChangeEvent("hashchange"));
+    }
 
     // Load selected page from the sidebar
     domElements.sidebar.addEventListener("click", (e) => {
@@ -27,27 +57,6 @@ function addNavigationEvents() {
                     currentOpen = targetElement;
                 }
 
-                targetElement.style.display = "flex";
-            }
-        }
-    });
-
-    // Prevent loading invalid URL's. Load default page as fallback
-    window.addEventListener('hashchange', function () {
-        let hashValue = this.window.location.href.split("#")[1] ?? "";
-        if(hashValue.includes("/")){
-            hashValue = hashValue.split("/")[0];
-        }
-        let targetElement = this.document.querySelector(`#${hashValue}`);
-
-        if(!targetElement){
-            loadDefault();
-        } else {
-            if(targetElement === currentOpen) return;
-            else {
-                updateSidebarSelection(hashValue);
-                currentOpen.style.display = "none";
-                currentOpen = targetElement;
                 targetElement.style.display = "flex";
             }
         }

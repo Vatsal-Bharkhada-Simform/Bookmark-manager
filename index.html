@@ -15,6 +15,48 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
 </head>
 <body>
+    <dialog class="dialog__add-bookmark">
+            <form method="dialog" id="add-bookmark-form" class="dialog__wrapper">
+                <div class="dialog__head">
+                    <h2>Add Bookmark</h2>
+                    <button type="button" id="dialog-cancel" title="Close dialog" class="button-ghost">
+                        <svg class="u-icon">
+                            <use href="./assets/icons/sprite.svg#close"></use>
+                        </svg>
+                    </button>
+                </div>
+                <div class="dialog__body">
+                    <div class="input-wrapper">
+                        <label for="bookmark-title">Name</label>
+                        <input  class="input-primary" type="text" id="bookmark-title" name="bookmark-title" placeholder="Enter bookmark name" required>
+                    </div>
+
+                    <div class="input-wrapper">
+                        <label for="bookmark-url">URL</label>
+                        <input  class="input-primary" type="url" id="bookmark-url" name="bookmark-url" placeholder="Enter bookmark URL" required>
+                    </div>
+
+                    <div class="input-wrapper">
+                        <label for="bookmark-tags">Tags <span>(Add name and press enter to create tag)</span></label>
+                        <div class="tag-container">
+                            <div class="tag-list"></div>
+                            <input  class="input-primary" type="text" id="bookmark-tags" name="bookmark-tags" placeholder="e.g. React, JavaScript">
+                        </div>
+                    </div>
+
+                    <div class="input-wrapper">
+                        <label for="bookmark-collections">Collections <span>(Add name and press enter to create collection)</span></label>
+                        <div class="collection-container">
+                            <div class="collection-list"></div>
+                            <input  class="input-primary" type="text" id="bookmark-collections" name="bookmark-collections" placeholder="e.g. Frontend, Learning">
+                        </div>
+                    </div>
+                </div>
+                <div class="dialog__actions">
+                    <button type="submit" id="dialog-confirm" class="button-primary">Add Bookmark</button>
+                </div>
+            </form>
+    </dialog>
     <div class="root__wrapper">
         <header class="header">
             <div class="header__name">
@@ -103,7 +145,7 @@
                         <div class="head__options">
                             <div class="head__options-left">
                                 <form name="container-search-form" class="head__search u-search">
-                                    <input type="search" title="Search anything" name="search" placeholder="Search">
+                                    <input type="search" title="Search in bookmarks" id="bookmark-search" name="search" placeholder="Search in bookmarks">
                                     <button type="submit" title="search">
                                         <svg class="u-icon" aria-hidden="true">
                                             <use href="./assets/icons/sprite.svg#search"></use>
@@ -112,7 +154,19 @@
                                 </form>
                             </div>
                             <div class="head__options-right">
-                                <div class="dropdown">
+                                <button class="button-danger" type="button" id="btn-delete-bookmark">
+                                    Delete
+                                    <svg class="u-icon">
+                                        <use href="./assets/icons/sprite.svg#trash-bin"></use>
+                                    </svg>
+                                </button>
+                                <button class="button-primary" type="button" id="btn-add-bookmark">
+                                    Add
+                                    <svg class="u-icon">
+                                        <use href="./assets/icons/sprite.svg#plus"></use>
+                                    </svg>
+                                </button>
+                                <div class="dropdown" id="dropdown__filter">
                                     <button type="button" class="dropdown__label">
                                         Filter
                                         <svg class="u-icon">
@@ -120,15 +174,15 @@
                                         </svg>
                                     </button>
                                     <div class="dropdown__items">
-                                        <button type="button" class="item">
+                                        <button type="button" data-value="FILTER_NAME" class="item button-tertiary">
                                             By name
                                         </button>
-                                        <button type="button" class="item">
+                                        <button type="button" data-value="FILTER_URL" class="item button-tertiary">
                                             By URL content
                                         </button>
                                     </div>
                                 </div>
-                                <div class="dropdown">
+                                <div class="dropdown" id="dropdown__sort">
                                     <button type="button" class="dropdown__label">
                                         Sort
                                         <svg class="u-icon">
@@ -136,13 +190,13 @@
                                         </svg>
                                     </button>
                                     <div class="dropdown__items">
-                                        <button type="button" class="item">
+                                        <button type="button" data-value="SORT_NAME" class="item button-tertiary">
                                             By name (A-Z)
                                         </button>
-                                        <button type="button" class="item">
+                                        <button type="button" data-value="SORT_URL" class="item button-tertiary">
                                             By domain (A-Z)
                                         </button>
-                                        <button type="button" class="item">
+                                        <button type="button" data-value="SORT_DATE" class="item button-tertiary">
                                             By creation date
                                         </button>
                                     </div>
@@ -150,6 +204,25 @@
                             </div>
                         </div>
                     </div>
+                    <div class="table__wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Name</th>
+                                    <th>URL</th>
+                                    <th>Tags</th>
+                                    <th>Collections</th>
+                                    <th>Visits</th>
+                                </tr>
+                            </thead>
+                            <tbody class="table__body">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="footer">
+                    <p>&copy; 2026 ZenTabs. All rights reserved.</p>
                 </div>
             </section>
         </main>

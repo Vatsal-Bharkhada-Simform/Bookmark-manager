@@ -2,55 +2,58 @@
     position: relative;
     
     .dropdown__label{
-        border: none;
+        border: 1px solid var(--border-color);
         background-color: inherit;
         padding: calc(var(--space-sm) + var(--space-xs));
-        border-radius: var(--round-lg);
+        border-radius: var(--round-xl);
         font-family: inherit;
         font-size: var(--text-sm);
         font-weight: var(--font-semi-bold);
         outline: 2px solid transparent;
         transition: all .2s ease;
+        cursor: pointer;
 
         &:hover{
             background-color: var(--blue-50);
         }
         
-        &:focus, &:focus-within{
+        &:active, &:has(~.show){
             background-color: var(--blue-50);
             color: var(--color-primary-active);
+            border-color: var(--blue-400);
         }
     }
 
     .dropdown__items{
         display: none;
         position: absolute;
-        top: 100%;
-        right: 0;
+        top: 105%;
+        right:0;
+        z-index: 3;
         flex-direction: column;
-        border: 1px solid var(--border-color);
+        gap: var(--space-sm);
+        border: 1px solid var(--gray-300);
         padding: var(--space-sm);
         border-radius: var(--round-xl);
         background-color: var(--bg-primary);
         overflow: hidden;
+        box-shadow: 0 2px 10px 0 #00000022;
         
         .item {
-            border: none;
-            background-color: inherit;
-            padding: var(--space-md);
-            font-family: inherit;
-            font-size: var(--text-sm);
-            font-weight: var(--font-semi-bold);
-            color: inherit;
-            border-radius: var(--round-lg);
-            cursor: pointer;
+            width: 100%;
             text-align: left;
             white-space: nowrap;
-
-            &:hover, &:focus {
-                background-color: var(--blue-50);
-            }
         }
+
+        .active {
+            background-color: var(--blue-100);
+            color: var(--blue-600);
+            box-shadow: 0 0 9px 0px var(--blue-100);
+        }
+    }
+
+    .show{
+        display: flex;
     }
 }
 

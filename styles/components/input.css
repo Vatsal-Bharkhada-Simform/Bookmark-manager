@@ -1,0 +1,24 @@
+.input-primary{
+    outline: none;
+    padding: var(--space-sm) var(--space-md);
+    border: 1px solid var(--border-color);
+    border-radius: var(--round-lg);
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-size: var(--text-sm);
+
+    &:focus {
+        border: 2px solid var(--color-primary);
+        box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
+    }
+
+    &::placeholder {
+        color: var(--gray-500);
+    }
+}
+
+.input-checkbox{
+    padding: var(--space-md);
+    accent-color: var(--color-primary);
+    transform: scale(1);
+}

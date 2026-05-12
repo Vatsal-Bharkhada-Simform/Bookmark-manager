@@ -1,5 +1,7 @@
-import { getAllBookmarks } from "./controllers/bookmark.controller.js";
 import { initDB } from "./controllers/db.controller.js";
+import { addBookmarkEvents } from "./events/addBookmarkEvents.js";
+import { addDialogEvents } from "./events/addDialogEvents.js";
+import { bookmarkHandler } from "./handlers/bookmarkHandler.js";
 
 async function connectDB() {
     try {
@@ -11,13 +13,14 @@ async function connectDB() {
 
     let data;
     try{
-        data = await getAllBookmarks();
+        data = await bookmarkHandler.populateBookmarks();
     } catch (err) {
         console.log("Error in fetching data: ", err);
         data = [];
     }
-
-    console.log(data);
 }
 
-connectDB();
+await connectDB();
+
+addBookmarkEvents();
+addDialogEvents();

@@ -1,28 +1,30 @@
-export const tagColors = {
-  A: "#FF6B81", // soft rose
-  B: "#6EC6FF", // sky blue
-  C: "#7ED957", // fresh green
-  D: "#FFB86B", // peach orange
-  E: "#B388FF", // lavender
-  F: "#4DD0E1", // aqua cyan
-  G: "#F06292", // pink
-  H: "#64B5F6", // light blue
-  I: "#81C784", // mint green
-  J: "#FF8A65", // coral
-  K: "#9575CD", // soft purple
-  L: "#4DB6AC", // teal
-  M: "#E57373", // muted red
-  N: "#7986CB", // indigo pastel
-  O: "#AED581", // lime green
-  P: "#FF7043", // orange coral
-  Q: "#BA68C8", // orchid
-  R: "#4FC3F7", // bright sky
-  S: "#66BB6A", // medium green
-  T: "#FFA726", // amber orange
-  U: "#AB47BC", // purple pink
-  V: "#26C6DA", // cyan teal
-  W: "#EF5350", // warm red
-  X: "#5C6BC0", // blue violet
-  Y: "#9CCC65", // yellow green
-  Z: "#EC407A"  // magenta pink
+const tagColors = {
+  A: { background: "#FDE8EC", color: "#8B2232", border: "#F4AABB" },
+  B: { background: "#E0EFFE", color: "#1A4A8A", border: "#9DC4F8" },
+  C: { background: "#DFFAEE", color: "#1A5E3A", border: "#82DDB8" },
+  D: { background: "#FEF1E0", color: "#7A3C0A", border: "#F9C97A" },
+  E: { background: "#EEE8FF", color: "#4A2A99", border: "#C5AFFA" },
+  F: { background: "#DFF9FB", color: "#0E5960", border: "#80D8E0" },
+  G: { background: "#FCE4EE", color: "#8B1A4A", border: "#F5A0C5" },
+  H: { background: "#E3F1FE", color: "#164380", border: "#93C6F6" },
+  I: { background: "#E4F7EA", color: "#1B5E30", border: "#88D9A0" },
+  J: { background: "#FEEAE2", color: "#7A2E14", border: "#F9B49A" },
+  K: { background: "#EFE7FA", color: "#4A2580", border: "#C9A8EF" },
+  L: { background: "#E0F5F2", color: "#0D5049", border: "#80D1CA" },
+  M: { background: "#FDEAEA", color: "#8B1A1A", border: "#F4A0A0" },
+  N: { background: "#E8EBFC", color: "#202A80", border: "#A8B4F4" },
+  O: { background: "#F0F9DF", color: "#3A5A10", border: "#C4E880" },
+  P: { background: "#FEECE4", color: "#7A2A0E", border: "#F9B090" },
+  Q: { background: "#F5E8FA", color: "#601A80", border: "#D9A8F0" },
+  R: { background: "#DEF5FE", color: "#0D4A6E", border: "#80CEED" },
+  S: { background: "#E4F7E6", color: "#1A5B20", border: "#8BD59A" },
+  T: { background: "#FEF3DC", color: "#7A4208", border: "#F9CF74" },
+  U: { background: "#F4E4FA", color: "#5A1A7A", border: "#D198EA" },
+  V: { background: "#DDFAF8", color: "#0B5056", border: "#78D8D4" },
+  W: { background: "#FDEAEA", color: "#7A1A1A", border: "#F4A0A0" },
+  X: { background: "#E8EAF8", color: "#1C2580", border: "#A8AEF4" },
+  Y: { background: "#EFF8E0", color: "#3A5810", border: "#C0DF88" },
+  Z: { background: "#FCE4F1", color: "#801A52", border: "#F2A0CF" },
 };
+
+export default tagColors;

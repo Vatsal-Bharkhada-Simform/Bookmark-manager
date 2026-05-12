@@ -11,4 +11,13 @@ const bookmark = {
     visits: 0
 }
 
-export { bookmark };
+const bookmarkTemplate = {
+    checkbox: "selection",
+    title: "text",
+    url: "hyperlink",
+    collections: "tags",
+    tags: "tags",
+    visits: "visits",
+}
+
+export { bookmark, bookmarkTemplate };

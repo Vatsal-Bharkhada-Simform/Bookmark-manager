@@ -16,7 +16,7 @@ body {
     letter-spacing: -.2px;
 }
 
-input {
+input:not(input[type="checkbox"]) {
     -webkit-appearance: none;
     appearance: none;
 }

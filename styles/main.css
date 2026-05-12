@@ -6,6 +6,9 @@
 @import url("./layout/header.css");
 @import url("./layout/sidebar.css");
 @import url("./layout/content.css");
+@import url("./layout/table.css");
 
+@import url("./components/input.css");
 @import url("./components/buttons.css");
 @import url("./components/dropdown.css");
+@import url("./components/dialog.css");

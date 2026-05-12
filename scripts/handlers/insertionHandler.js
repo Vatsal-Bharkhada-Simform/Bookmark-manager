@@ -80,11 +80,11 @@ const insertionHandler = {
         return checkbox;
     },
     // Insert edit button with metadata stored in dataset attributes
-    insertEditButton: (tr, bookmark) => {
+    insertEditButton: (td, bookmark) => {
         let container = document.createElement("div");
         container.classList.add("edit-container");
-        container.append(tr.innerText);
-        tr.innerText = "";
+        container.append(td.innerText);
+        td.innerText = "";
         
         let editButton = document.createElement('button');
         editButton.textContent = "Edit";
@@ -96,7 +96,7 @@ const insertionHandler = {
 
         container.append(editButton);
         
-        tr.appendChild(container);
+        td.appendChild(container);
     }
 }
 

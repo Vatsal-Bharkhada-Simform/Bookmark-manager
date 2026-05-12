@@ -75,7 +75,7 @@ function generateTable(data, blueprint, addEdit = false){
             tr.append(createCell(insertionHandler.insertData(item[key] ?? "", blueprint[key].type, item.id)));
         });
         if(addEdit){
-            insertionHandler.insertEditButton(tr, item);
+            insertionHandler.insertEditButton(tr.lastElementChild, item);
         }
         tbody.append(tr);
     });

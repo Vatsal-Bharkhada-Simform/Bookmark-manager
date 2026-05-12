@@ -100,7 +100,6 @@ function addDialogEvents() {
             const tag = e.target.value?.trim();
             if (tag) {
                 // Add the tag to the UI (you can create a tag element and append it to a container)
-                console.log('Tag added:', tag);
                 e.target.value = ''; // Clear the input after adding the tag
                 let tagElement = document.createElement('span');
                 tagElement.textContent = tag;

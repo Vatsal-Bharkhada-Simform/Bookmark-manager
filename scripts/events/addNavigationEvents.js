@@ -36,7 +36,6 @@ function addNavigationEvents() {
         let targetElement = this.document.querySelector(`#${hashValue}`);
 
         if(!targetElement){
-            console.log("Invalid: ", hashValue);
             loadDefault();
         } else {
             if(targetElement === currentOpen) return;

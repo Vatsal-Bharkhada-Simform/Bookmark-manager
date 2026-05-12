@@ -93,24 +93,6 @@ function addDialogEvents() {
             alert('Please fill in both Title and URL fields.');
         }
     });
-
-    dialogElements.tagInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-            e.preventDefault();
-            const tag = e.target.value?.trim();
-            if (tag) {
-                // Add the tag to the UI (you can create a tag element and append it to a container)
-                e.target.value = ''; // Clear the input after adding the tag
-                let tagElement = document.createElement('span');
-                tagElement.textContent = tag;
-                tagElement.classList.add('u-tag');
-                tagElement.style.backgroundColor = tagColors[tag[0].toUpperCase()]?.background || '#E0E0E0';
-                tagElement.style.color = tagColors[tag[0].toUpperCase()]?.color || '#000000';
-                tagElement.style.borderColor = tagColors[tag[0].toUpperCase()]?.border || '#E0E0E0';
-                dialogElements.tagList.appendChild(tagElement);
-            }
-        }
-    });
 }
 
 // Function to reset form fields

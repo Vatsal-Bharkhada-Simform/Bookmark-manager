@@ -24,6 +24,11 @@ function addBookmarkEvents() {
         let query = value.trim().toLowerCase();
         bookmarkHandler.searchBookmarks(query);
     });
+    
+    // Prevent search form submission
+    domElements.bookmarkSearchForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+    });
 
     // Handle clicks on filter dropdown
     domElements.filterDropdown.addEventListener("click", (e) => {

@@ -5,6 +5,7 @@ const domElements = {
 
     deleteButton: document.querySelector('#btn-delete-bookmark'),
     bookmarkSearch: document.querySelector('#bookmark-search'),
+    bookmarkSearchForm: document.querySelector('.head__search'),
     filterDropdown: document.querySelector("#dropdown__filter"),
     sortDropdown: document.querySelector("#dropdown__sort"),
 

@@ -61,4 +61,8 @@ const collectionHandler = {
     }
 }
 
+document.addEventListener("bookmarksUpdated", () => {
+    collectionHandler.populateCollections();
+})
+
 export {collectionHandler};

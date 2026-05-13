@@ -1,4 +1,4 @@
-import { generateIconElement, generateTagElement } from "../views/generateElements.js";
+import tagColors from "../views/tagColors.js";
 import { bookmarkHandler } from "./bookmarkHandler.js";
 
 const insertionHandler = {
@@ -40,7 +40,7 @@ const insertionHandler = {
         let wrapper = document.createElement('div');
         wrapper.classList.add('tag-list');
         tags.forEach(item => {
-            let tag = generateTagElement(item);
+            let tag = insertionHandler.getTagElement(item);
             wrapper.appendChild(tag);
         });
         return wrapper;
@@ -54,7 +54,7 @@ const insertionHandler = {
     // Inserts delete button with metadata stored as dataset attributes
     insertDeleteButton: (id) => {
         let delButton = document.createElement('button');
-        let delIcon = generateIconElement('trash-bin');
+        let delIcon = insertionHandler.getIconElement('trash-bin');
         delButton.append(delIcon);
         delButton.title = "Remove bookmark from collection";
         delButton.classList.add("button-danger-ghost");
@@ -89,7 +89,7 @@ const insertionHandler = {
         
         let editButton = document.createElement('button');
         editButton.textContent = "Edit";
-        editButton.appendChild(generateIconElement('edit'));
+        editButton.appendChild(insertionHandler.getIconElement('edit'));
         editButton.classList.add('button-secondary');
         editButton.classList.add('button-edit');
         editButton.dataset.id = bookmark?.id;
@@ -98,6 +98,26 @@ const insertionHandler = {
         container.append(editButton);
         
         td.appendChild(container);
+    },
+    getIconElement: (name, className = "u-icon") => {
+        let svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+        let useTag = document.createElementNS("http://www.w3.org/2000/svg", 'use');
+        svg.classList.add(className);
+        useTag.setAttribute("href", `./assets/icons/sprite.svg#${name}`);
+        svg.appendChild(useTag);
+        return svg;
+    },
+    getTagElement: (tagName) => {
+        let tagElement = document.createElement('span');
+
+        tagElement.textContent = tagName;
+        tagElement.classList.add('u-tag');
+
+        tagElement.style.backgroundColor = tagColors[tagName[0].toUpperCase()]?.background || '#E0E0E0';
+        tagElement.style.color = tagColors[tagName[0].toUpperCase()]?.color || '#000000';
+        tagElement.style.borderColor = tagColors[tagName[0].toUpperCase()]?.border || '#E0E0E0';
+
+        return tagElement;
     }
 }
 

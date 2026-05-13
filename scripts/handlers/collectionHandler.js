@@ -1,10 +1,10 @@
 import { collectionTableTemplate } from "../models/collections.model.js";
 import { domElements } from "../views/domElements.js";
-import { generateCollapsible, generateTable } from "../views/generateElements.js";
+import { generateCollapsible, generateEmptyStateElement, generateTable } from "../views/generateElements.js";
 import { bookmarkHandler } from "./bookmarkHandler.js";
 
 const collectionHandler = {
-    _collections: [],
+    _collections: {},
     get collections(){
         return this._collections;
     },
@@ -31,6 +31,12 @@ const collectionHandler = {
     loadCollections(){
         // Clear collection contents
         domElements.collectionContainer.replaceChildren();
+
+        console.log(this.collections);
+        if(!this.collections || Object.keys(this.collections).length === 0){
+            console.log("Found it!");
+            domElements.collectionContainer.append(generateEmptyStateElement("No collections created"));
+        }
         
         // Generate new content elements
         let wrapper = document.createDocumentFragment();

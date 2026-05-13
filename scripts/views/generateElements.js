@@ -50,7 +50,7 @@ function createCell(content){
 // Generate entire table using template(blueprint) passed as argument
 // Use passed data to fill table body as defined in the template
 function generateTable(data, blueprint, addEdit = false){
-    if(!Array.isArray(data) || data.length === 0 || !blueprint) return "";
+    if(!Array.isArray(data) || data.length === 0 || !blueprint) return generateEmptyStateElement("Nothing to show. Start by adding a bookmark.");
 
     let table = document.createElement("table");
     let thead = document.createElement("thead");
@@ -121,4 +121,22 @@ function generateCollapsible(title, body){
     return collapsible;
 }
 
-export { generateIconElement, generateTagElement, generateDeletableTag, generateTable, generateCollapsible };
+function generateEmptyStateElement(message = "Nothing to show"){
+    let wrapper = document.createElement("div");
+    wrapper.classList.add("u-empty-message");
+
+    let div = document.createElement("div");
+    let img = document.createElement("img");
+    img.src = "./assets/images/empty-box.png";
+    img.alt = "Empty box image";
+
+    let span = document.createElement("span");
+    span.innerText = message;
+
+    div.append(img, span);
+    wrapper.append(div);
+
+    return wrapper;
+}
+
+export { generateIconElement, generateTagElement, generateDeletableTag, generateTable, generateCollapsible, generateEmptyStateElement };

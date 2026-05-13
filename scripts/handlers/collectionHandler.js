@@ -29,9 +29,7 @@ const collectionHandler = {
         // Clear collection contents
         domElements.collectionContainer.replaceChildren();
 
-        console.log(this.collections);
         if(!this.collections || Object.keys(this.collections).length === 0){
-            console.log("Found it!");
             domElements.collectionContainer.append(generateEmptyStateElement("No collections created"));
         }
         

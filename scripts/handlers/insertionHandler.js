@@ -1,5 +1,4 @@
 import tagColors from "../views/tagColors.js";
-import { bookmarkHandler } from "./bookmarkHandler.js";
 
 const insertionHandler = {
     // Root function which manages insertion based on the type of node
@@ -29,9 +28,7 @@ const insertionHandler = {
         a.textContent = url;
         a.target = '_blank';
         a.rel = 'noopener noreferrer';
-        a.onclick = () => {
-            bookmarkHandler.incrementVisitCount(id);
-        }
+        a.dataset.id = id;
         return a;
     },
     // Function to create tag list from array of tag names

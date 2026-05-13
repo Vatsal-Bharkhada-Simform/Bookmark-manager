@@ -1,4 +1,4 @@
-import { collectionHandler } from "../handlers/collectionHandler.js";
+import { bookmarkHandler } from "../handlers/bookmarkHandler.js";
 import { domElements } from "../views/domElements.js";
 
 function addCollectionEvents(){
@@ -7,7 +7,7 @@ function addCollectionEvents(){
         let element = e.target;
         if(element.dataset?.type === "DELETE"){
             let parent = element.closest(".collapsible");
-            collectionHandler.removeBookmark(element.dataset.id, parent.dataset.collectionName);
+            bookmarkHandler.removeBookmarkFromCollection(element.dataset.id, parent.dataset.collectionName);
         }
     })
 }

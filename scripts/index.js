@@ -16,7 +16,6 @@ async function connectDB() {
 
     try{
         await bookmarkHandler.populateBookmarks();
-        collectionHandler.populateCollections();
     } catch (err) {
         console.log("Error in loading bookmarks.", err);
     }

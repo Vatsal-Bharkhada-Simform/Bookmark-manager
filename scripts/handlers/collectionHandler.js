@@ -1,7 +1,6 @@
 import { collectionTableTemplate } from "../models/collections.model.js";
 import { domElements } from "../views/domElements.js";
 import { generateCollapsible, generateEmptyStateElement, generateTable } from "../views/generateElements.js";
-import { bookmarkHandler } from "./bookmarkHandler.js";
 
 const collectionHandler = {
     _collections: {},
@@ -12,9 +11,7 @@ const collectionHandler = {
         this._collections = data;
         this.loadCollections();
     },
-    populateCollections(){
-        let bookmarks = bookmarkHandler.bookmarks;
-
+    populateCollections(bookmarks){ // Called by bookmarkHandler
         // Group bookmarks by collection names
         let groupedBookmarks = bookmarks.reduce((acc, bookmark) => {
             bookmark.collections.forEach((collection) => {
@@ -52,17 +49,7 @@ const collectionHandler = {
 
         // Append generated content to the collection container
         domElements.collectionContainer.append(wrapper);
-    },
-    async removeBookmark(id, collection){
-        let bookmark = bookmarkHandler.getBookmark(+id);
-        bookmark.collections = bookmark.collections.filter(item => item !== collection);
-        await bookmarkHandler.editBookmark(bookmark);
-        this.populateCollections();
     }
 }
-
-document.addEventListener("bookmarksUpdated", () => {
-    collectionHandler.populateCollections();
-})
 
 export {collectionHandler};

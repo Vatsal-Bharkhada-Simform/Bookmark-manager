@@ -2,6 +2,7 @@ import { addBookmark, deleteBookmark, getAllBookmarks, updateBookmark } from "..
 import { bookmarkTemplate } from "../models/bookmark.model.js";
 import { domElements } from "../views/domElements.js";
 import { generateTable } from "../views/generateElements.js";
+import { collectionHandler } from "./collectionHandler.js";
 
 const bookmarkHandler = {
     allBookmarks: [],
@@ -19,7 +20,7 @@ const bookmarkHandler = {
         this.bookmarksToDisplay = data;
         this.selectedBookmarks = [];
         this.loadBookmarks();
-        document.dispatchEvent(new CustomEvent("bookmarksUpdated"));
+        collectionHandler.populateCollections(this.allBookmarks);
     },
     getBookmark(id) {
         return this.allBookmarks.find(bookmark => bookmark.id === id);
@@ -67,7 +68,7 @@ const bookmarkHandler = {
         });
     },
     incrementVisitCount(id) {
-        let bookmark = this.getBookmark(id);
+        let bookmark = this.getBookmark(+id);
         bookmark.visits = +(bookmark.visits || 0) + 1;
         this.editBookmark(bookmark);
     },
@@ -187,6 +188,11 @@ const bookmarkHandler = {
                 this.bookmarks = this.bookmarks.sort((b1, b2) => (Date.parse(b1.createdAt) > Date.parse(b2.createdAt)) ? -1 : 1);
                 break;
         }
+    },
+    async removeBookmarkFromCollection(id, collection){
+        let bookmark = bookmarkHandler.getBookmark(+id);
+        bookmark.collections = bookmark.collections.filter(item => item !== collection);
+        await bookmarkHandler.editBookmark(bookmark);
     }
 }
 

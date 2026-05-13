@@ -2,6 +2,7 @@ import { bookmarkHandler } from "../handlers/bookmarkHandler.js";
 import { dialogElements } from "../views/dialogElements.js";
 import { domElements } from "../views/domElements.js";
 import { generateDeletableTag } from "../views/generateElements.js";
+import { resetForm } from "./addDialogEvents.js";
 
 function addBookmarkEvents() {
     // Open bookmark edit dialog
@@ -52,6 +53,7 @@ function addBookmarkEvents() {
 // Open dialog in EDIT mode.
 // Populate form fields with existing values
 function openEditDialog(bookmark){
+    resetForm();
     dialogElements.form.dataset.mode = "EDIT";
     dialogElements.form.dataset.id = bookmark.id;
 

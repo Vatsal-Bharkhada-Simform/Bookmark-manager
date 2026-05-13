@@ -6,6 +6,7 @@ import { generateDeletableTag } from "../views/generateElements.js";
 function addDialogEvents() {
     // Show dialog to add a new bookmark
     dialogElements.btnAddBookmark.addEventListener('click', () => {
+        resetForm();
         dialogElements.form.dataset.mode = "ADD";
         dialogElements.dialog.showModal();
     });
@@ -64,10 +65,16 @@ function addDialogEvents() {
         const url = formData.get('bookmark-url').trim();
 
         const collections = dialogElements.collectionList.querySelectorAll('.u-tag');
-        const collectionNames = Array.from(collections).map(col => col.textContent);
+        const collectionSet = new Set();
+        for(const item of collections){
+            collectionSet.add(item.innerText);
+        }
 
         const tags = dialogElements.tagList.querySelectorAll('.u-tag');
-        const tagNames = Array.from(tags).map(tag => tag.textContent);
+        const tagSet = new Set();
+        for(const item of tags){
+            tagSet.add(item.innerText);
+        }
 
         if(!isValidForm(title, url)){
             dialogElements.confirm.disabled = false;
@@ -78,10 +85,10 @@ function addDialogEvents() {
             let res;
             try {
                 if(dialogElements.form.dataset.mode === "ADD"){
-                    res = await bookmarkHandler.addNewBookmark({ title, url, tags: tagNames, collections: collectionNames, createdAt: new Date().toISOString() });
+                    res = await bookmarkHandler.addNewBookmark({ title, url, tags: Array.from(tagSet), collections: Array.from(collectionSet), createdAt: new Date().toISOString() });
                 } else if (dialogElements.form.dataset.mode === "EDIT") {
                     let bookmark = bookmarkHandler.getBookmark(+dialogElements.form.dataset?.id);
-                    res = await bookmarkHandler.editBookmark({ ...bookmark, title, url, tags: tagNames, collections: collectionNames });
+                    res = await bookmarkHandler.editBookmark({ ...bookmark, title, url, tags: Array.from(tagSet), collections: Array.from(collectionSet) });
                 }
                 if (res) {
                     resetForm();

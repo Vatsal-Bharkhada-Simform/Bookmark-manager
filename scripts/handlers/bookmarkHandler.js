@@ -190,9 +190,10 @@ const bookmarkHandler = {
         }
     },
     async removeBookmarkFromCollection(id, collection){
-        let bookmark = bookmarkHandler.getBookmark(+id);
+        let bookmark = this.getBookmark(+id);
+        if(!bookmark) return;
         bookmark.collections = bookmark.collections.filter(item => item !== collection);
-        await bookmarkHandler.editBookmark(bookmark);
+        await this.editBookmark(bookmark);
     }
 }
 

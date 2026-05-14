@@ -14,7 +14,7 @@ const collectionHandler = {
     populateCollections(bookmarks){ // Called by bookmarkHandler
         // Group bookmarks by collection names
         let groupedBookmarks = bookmarks.reduce((acc, bookmark) => {
-            bookmark.collections.forEach((collection) => {
+            (bookmark.collections || []).forEach((collection) => {
                 if(acc[collection]){
                     acc[collection].push(bookmark);
                 } else {

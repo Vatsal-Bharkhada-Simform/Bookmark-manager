@@ -4,7 +4,6 @@ import { addCollectionEvents } from "./events/addCollectionEvents.js";
 import { addDialogEvents } from "./events/addDialogEvents.js";
 import { addNavigationEvents } from "./events/addNavigationEvents.js";
 import { bookmarkHandler } from "./handlers/bookmarkHandler.js";
-import { collectionHandler } from "./handlers/collectionHandler.js";
 
 async function connectDB() {
     try {

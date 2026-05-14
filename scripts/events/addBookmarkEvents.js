@@ -56,7 +56,7 @@ function addBookmarkEvents() {
 
     domElements.bookmarkTableContainer.addEventListener("click", (e) => {
         let element = e.target;
-        if(element && element.tagName === "A" && element.dataset?.id !== ""){
+        if(element && element.tagName === "A" && element.dataset?.id){
             bookmarkHandler.incrementVisitCount(element.dataset.id);
         }
     })

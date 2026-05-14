@@ -117,9 +117,9 @@ function generateCollapsible(title, body, count){
     c_body.append(body);
 
     head.onclick = () => {
-        let body = head.nextElementSibling;
-        body.classList.toggle("hidden");
-        let icon = head.lastChild;
+        let collapsibleBody = head.nextElementSibling;
+        collapsibleBody.classList.toggle("hidden");
+        let icon = head.lastElementChild;
         icon.classList.toggle("close");
     }
 

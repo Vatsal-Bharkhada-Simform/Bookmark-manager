@@ -28,12 +28,15 @@ function addNavigationEvents() {
     
     // Load the default page (Here: all bookmarks)
     let defaultSelected = document.querySelector("[data-selected='true']");
-    let defaultHref = defaultSelected.href.split("#")[1] ?? "";
 
-    if(window.location.hash === "" || window.location.hash === "#"+defaultHref){
-        loadDefault();
-    } else {
-        window.dispatchEvent(new HashChangeEvent("hashchange"));
+    if(defaultSelected && defaultSelected.href){
+        let defaultHref = defaultSelected.href.split("#")[1] ?? "";
+        
+        if(window.location.hash === "" || window.location.hash === "#"+defaultHref){
+            loadDefault();
+        } else {
+            window.dispatchEvent(new HashChangeEvent("hashchange"));
+        }
     }
 
     // Load selected page from the sidebar
@@ -54,8 +57,8 @@ function addNavigationEvents() {
 
                 if (currentOpen) {
                     currentOpen.style.display = "none";
-                    currentOpen = targetElement;
                 }
+                currentOpen = targetElement;
 
                 targetElement.style.display = "flex";
             }
@@ -71,9 +74,11 @@ function loadDefault(){
 
         if (targetId) {
             let targetElement = document.querySelector(`#${targetId}`);
-            targetElement.style.display = "flex";
-            updateSidebarSelection(targetId);
-            currentOpen = targetElement;
+            if(targetElement){
+                targetElement.style.display = "flex";
+                updateSidebarSelection(targetId);
+                currentOpen = targetElement;
+            }
         }
 
         window.location.href = `#${targetId}`;

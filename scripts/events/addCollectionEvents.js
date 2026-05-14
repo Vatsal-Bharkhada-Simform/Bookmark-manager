@@ -7,6 +7,7 @@ function addCollectionEvents(){
         let element = e.target;
         if(element.dataset?.type === "DELETE"){
             let parent = element.closest(".collapsible");
+            if(!parent) return;
             bookmarkHandler.removeBookmarkFromCollection(element.dataset.id, parent.dataset.collectionName);
         }
     })

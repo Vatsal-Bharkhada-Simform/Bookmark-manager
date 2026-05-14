@@ -13,19 +13,25 @@
         justify-content: space-between;
         background-color: var(--gray-50);
 
-        h2{
-            font-size: var(--text-md);
-            padding: var(--space-xs) var(--space-md);
-            border: 2px solid;
-            border-radius: var(--round-2xl);
-            font-weight: var(--font-semi-bold);
-            color: var(--text-primary);
-            opacity: 0.95;
-
-            svg{
-                margin-left: var(--space-sm);
+        .head-wrapper {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            
+            h2{
+                font-size: var(--text-md);
+                padding: var(--space-xs) var(--space-md);
+                border: 2px solid;
+                border-radius: var(--round-2xl);
+                font-weight: var(--font-semi-bold);
+                color: var(--text-primary);
+                opacity: 0.95;
+                display: inline-block;
+    
+                svg{
+                    margin-left: var(--space-sm);
+                }
             }
-
         }
 
         svg {

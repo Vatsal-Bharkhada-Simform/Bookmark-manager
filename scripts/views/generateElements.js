@@ -86,7 +86,7 @@ function generateTable(data, blueprint, addEdit = false){
 }
 
 // Generate collapsible elements for collection page
-function generateCollapsible(title, body){
+function generateCollapsible(title, body, count){
     let collapsible = document.createElement("div");
     collapsible.classList.add("collapsible");
     collapsible.dataset.collectionName = title;
@@ -94,12 +94,19 @@ function generateCollapsible(title, body){
     // Add Head content
     let head = document.createElement("div");
     head.classList.add("collapsible__head");
-    let title_cont = document.createElement("h2");
-    title_cont.style.backgroundColor = tagColors[title[0].toUpperCase()]?.background || '#E0E0E0';
-    title_cont.style.color = tagColors[title[0].toUpperCase()]?.color || '#000000';
-    title_cont.style.borderColor = tagColors[title[0].toUpperCase()]?.border || '#E0E0E0';
+    let title_cont = document.createElement("div");
+    title_cont.classList.add("head-wrapper");
+    let heading = document.createElement("h2");
+    heading.style.backgroundColor = tagColors[title[0].toUpperCase()]?.background || '#E0E0E0';
+    heading.style.color = tagColors[title[0].toUpperCase()]?.color || '#000000';
+    heading.style.borderColor = tagColors[title[0].toUpperCase()]?.border || '#E0E0E0';
+
+    let countElement = generateTagElement(String(count));
+    countElement.classList.add("count");
     
-    title_cont.append(title);
+    heading.append(title);
+    title_cont.append(heading, countElement);
+    
     let icon = generateIconElement("chevron-down");
 
     head.append(title_cont, icon);

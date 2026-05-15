@@ -263,7 +263,7 @@ const bookmarkHandler = {
         let bookmark = await getBookmarkById(+id);
         if(bookmark && bookmark.deletedAt !== ""){
             bookmark.deletedAt = "";
-            this.editBookmark(bookmark);
+            return this.editBookmark(bookmark);
         }
     },
     deleteAllBookmarks(){

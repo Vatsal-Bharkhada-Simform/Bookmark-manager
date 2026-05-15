@@ -26,7 +26,8 @@ const bookmarkHandler = {
         return this.allBookmarks.find(bookmark => bookmark.id === id);
     },
     async populateBookmarks() {
-        this.allBookmarks = await getAllBookmarks();
+        let fetchedBookmarks = await getAllBookmarks(); 
+        this.allBookmarks = fetchedBookmarks.filter(bookmark => !bookmark.deletedAt);
         this.bookmarks = [...this.allBookmarks];
         this.mode.for = "";
         this.mode.type = "";
@@ -92,7 +93,9 @@ const bookmarkHandler = {
 
         // Delete bookmarks one by one
         this.selectedBookmarks.forEach(id => {
-            deletePromises.push(deleteBookmark(id));
+            let bookmark = this.getBookmark(id);
+            bookmark.deletedAt = new Date().toISOString();
+            deletePromises.push(this.editBookmark(bookmark));
         });
 
         // Raise error if any request fails.

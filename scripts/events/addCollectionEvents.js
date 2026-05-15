@@ -9,6 +9,8 @@ function addCollectionEvents(){
             let parent = element.closest(".collapsible");
             if(!parent) return;
             bookmarkHandler.removeBookmarkFromCollection(element.dataset.id, parent.dataset.collectionName);
+        } else if(element && element.tagName === "A" && element.dataset?.id){
+            bookmarkHandler.incrementVisitCount(element.dataset.id);
         }
     })
 }

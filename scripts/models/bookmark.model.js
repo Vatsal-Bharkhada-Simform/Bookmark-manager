@@ -41,10 +41,6 @@ const bookmarkTemplate = {
 }
 
 const deletedBookmarkTemplate = {
-    checkbox: {
-        th_title: "",
-        type: "selection",
-    },
     title: {
         th_title: "Name",
         type: "text",

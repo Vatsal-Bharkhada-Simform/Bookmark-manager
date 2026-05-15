@@ -92,3 +92,15 @@
         }
     }
 }
+
+.u-info{
+    padding: var(--space-sm) var(--space-md);
+    font-size: var(--text-sm);
+    color: var(--gray-600);
+    background-color: var(--gray-200);
+    border-radius: var(--round-lg);
+}
+
+.u-margin-left{
+    margin-left: var(--space-sm);
+}

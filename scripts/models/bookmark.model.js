@@ -1,5 +1,7 @@
 // This is the basic structure which will be followed to store bookmark entry in IndexedDB database.
-export const EXPIRY_RANGE = (1000*60*60*24*60);
+
+const EXPIRY_DAYS = 60;                                      // Update days to update expiry time 
+export const EXPIRY_RANGE = (1000*60*60*24*EXPIRY_DAYS);     // 60 days in milliseconds. 
 
 const bookmark = {
     title: "",

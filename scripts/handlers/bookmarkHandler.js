@@ -22,6 +22,7 @@ const bookmarkHandler = {
         this.bookmarksToDisplay = data;
         this.selectedBookmarks = [];
         this.loadBookmarks();
+        this.loadRecentlyDeleted();
         collectionHandler.populateCollections(this.allBookmarks);
     },
     getBookmark(id) {
@@ -50,7 +51,11 @@ const bookmarkHandler = {
         domElements.bookmarkTableContainer.replaceChildren();
 
         // Generate new table
-        let table = generateTable(this.bookmarks, bookmarkTemplate, true);
+        let table = generateTable({
+            data: this.bookmarks, 
+            blueprint: bookmarkTemplate, 
+            isDeleted: false}
+        );
 
         // Insert table
         domElements.bookmarkTableContainer.append(table);
@@ -237,6 +242,20 @@ const bookmarkHandler = {
             return true;
         }
         return false;
+    },
+    loadRecentlyDeleted(){
+        // Clear table
+        domElements.deletedBookmarkTableContainer.replaceChildren();
+
+        // Generate new table
+        let table = generateTable({
+            data: this.deletedBookmarks, 
+            blueprint: bookmarkTemplate, 
+            isDeleted: true
+        });
+
+        // Insert table
+        domElements.deletedBookmarkTableContainer.append(table);
     }
 }
 

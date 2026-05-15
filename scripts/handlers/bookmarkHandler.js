@@ -229,6 +229,7 @@ const bookmarkHandler = {
         Promise.all(deletePromises)
         .then(() => {
                 this.loadRecentlyDeleted();
+                this.deletionPipeline = [];
             })
             .catch(err => {
                 alert('Error deleting bookmark!');
@@ -236,7 +237,8 @@ const bookmarkHandler = {
             });
     },
     isExpiredBookmark(bookmark){
-        let parsedDate = Date.parse(bookmark?.deletedAt ?? "");
+        if(!bookmark.deletedAt) return;
+        let parsedDate = Date.parse(bookmark?.deletedAt);
         if((Date.now() - parsedDate) > EXPIRY_RANGE){
             this.deletionPipeline.push(bookmark);
             return true;
@@ -271,9 +273,13 @@ const bookmarkHandler = {
             this.deletedBookmarks = [];
         }
     },
-    restoreAllBookmarks(){
+    async restoreAllBookmarks(){
         if(this.deletedBookmarks.length === 0) return;
-        this.deletedBookmarks.forEach(bookmark => this.restoreBookmark(bookmark.id));
+        await Promise.all(
+            this.deletedBookmarks.map((bookmark) =>
+                this.restoreBookmark(bookmark.id)
+            )
+        );
     }
 }
 

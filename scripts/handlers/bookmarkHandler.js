@@ -33,7 +33,7 @@ const bookmarkHandler = {
         this.allBookmarks = [];
         this.deletedBookmarks = [];
         fetchedBookmarks.forEach(bookmark => {
-            if(bookmark.deletedAt !== ""){
+            if(bookmark.deletedAt){
                 if(!this.isExpiredBookmark(bookmark)){
                     this.deletedBookmarks.push(bookmark);
                 }
@@ -106,7 +106,7 @@ const bookmarkHandler = {
             domElements.deleteButton.style.display = 'none';
         }
     },
-    deleteSelectedBookmark() {
+    async deleteSelectedBookmark() {
         let deletePromises = [];
 
         // Delete bookmarks one by one
@@ -117,7 +117,7 @@ const bookmarkHandler = {
         });
 
         // Raise error if any request fails.
-        Promise.all(deletePromises)
+        await Promise.all(deletePromises)
             .then(() => {
                 this.populateBookmarks();
                 domElements.deleteButton.style.display = 'none';
@@ -216,7 +216,7 @@ const bookmarkHandler = {
         bookmark.collections = bookmark.collections.filter(item => item !== collection);
         await this.editBookmark(bookmark);
     },
-    permanentlyDeleteBookmarks(bookmarks){
+    async permanentlyDeleteBookmarks(bookmarks){
         if(!bookmarks || bookmarks.length === 0) return;
         let deletePromises = [];
 
@@ -226,7 +226,7 @@ const bookmarkHandler = {
         });
         
         // Raise error if any request fails.
-        Promise.all(deletePromises)
+        return Promise.all(deletePromises)
         .then(() => {
                 this.loadRecentlyDeleted();
                 this.deletionPipeline = [];
@@ -253,7 +253,8 @@ const bookmarkHandler = {
         let table = generateTable({
             data: this.deletedBookmarks, 
             blueprint: deletedBookmarkTemplate, 
-            addRestore: true
+            addRestore: true,
+            emptyMessage: "No deleted bookmarks"
         });
 
         // Insert table
@@ -263,14 +264,16 @@ const bookmarkHandler = {
         let bookmark = await getBookmarkById(+id);
         if(bookmark && bookmark.deletedAt !== ""){
             bookmark.deletedAt = "";
-            return this.editBookmark(bookmark);
+            return this.editBookmark(bookmark).catch(console.log);
         }
     },
-    deleteAllBookmarks(){
+    async deleteAllBookmarks(){
         let userIsSure = confirm("All bookmarks will be permanently deleted. Are you sure?");
         if(userIsSure){
-            this.permanentlyDeleteBookmarks(this.deletedBookmarks);
-            this.deletedBookmarks = [];
+            await this.permanentlyDeleteBookmarks(this.deletedBookmarks).then(() => {
+                this.deletedBookmarks = [];
+                this.loadRecentlyDeleted();
+            });
         }
     },
     async restoreAllBookmarks(){
@@ -279,7 +282,7 @@ const bookmarkHandler = {
             this.deletedBookmarks.map((bookmark) =>
                 this.restoreBookmark(bookmark.id)
             )
-        );
+        ).catch(console.log);
     }
 }
 

@@ -49,7 +49,7 @@ function createCell(content){
 
 // Generate entire table using template(blueprint) passed as argument
 // Use passed data to fill table body as defined in the template
-function generateTable({data, blueprint, isDeleted}){
+function generateTable({data, blueprint, addEdit, addRestore}){
     if(!Array.isArray(data) || data.length === 0 || !blueprint) return generateEmptyStateElement("Nothing to show. Start by adding a bookmark.");
 
     let table = document.createElement("table");
@@ -74,9 +74,10 @@ function generateTable({data, blueprint, isDeleted}){
         Object.keys(blueprint).forEach((key) => {
             tr.append(createCell(insertionHandler.insertData(item[key] ?? "", blueprint[key].type, item.id)));
         });
-        if(!isDeleted){
+        if(addEdit){
             insertionHandler.insertEditButton(tr.lastElementChild, item);
-        } else {
+        } 
+        else if (addRestore) {
             insertionHandler.insertRestoreButton(tr.lastElementChild, item);
         }
         tbody.append(tr);

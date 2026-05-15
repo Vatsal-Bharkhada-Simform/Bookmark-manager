@@ -126,7 +126,7 @@ const insertionHandler = {
         restoreButton.classList.add('button-secondary');
         restoreButton.classList.add('button-restore');
         restoreButton.dataset.id = bookmark?.id;
-        restoreButton.dataset.type = 'restore';
+        restoreButton.dataset.type = 'RESTORE';
 
         container.append(restoreButton);
         

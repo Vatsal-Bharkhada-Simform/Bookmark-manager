@@ -62,6 +62,13 @@ function addBookmarkEvents() {
             domElements.sortDropdown.lastElementChild.classList.remove("show");
         }
     }, true);
+
+    domElements.deletedBookmarkTableContainer.addEventListener("click", (e) => {
+        let element = e.target;
+        if(element && element.dataset?.type === "RESTORE" && element.dataset?.id){
+            bookmarkHandler.restoreBookmark(element.dataset.id);
+        }
+    });
 }
 
 // Open dialog in EDIT mode.

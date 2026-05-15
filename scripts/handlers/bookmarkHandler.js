@@ -1,5 +1,5 @@
-import { addBookmark, deleteBookmark, getAllBookmarks, updateBookmark } from "../controllers/bookmark.controller.js"
-import { bookmarkTemplate, EXPIRY_RANGE } from "../models/bookmark.model.js";
+import { addBookmark, deleteBookmark, getAllBookmarks, getBookmarkById, updateBookmark } from "../controllers/bookmark.controller.js"
+import { bookmarkTemplate, deletedBookmarkTemplate, EXPIRY_RANGE } from "../models/bookmark.model.js";
 import { domElements } from "../views/domElements.js";
 import { generateTable } from "../views/generateElements.js";
 import { collectionHandler } from "./collectionHandler.js";
@@ -31,9 +31,10 @@ const bookmarkHandler = {
     async populateBookmarks() {
         let fetchedBookmarks = await getAllBookmarks();
         this.allBookmarks = [];
+        this.deletedBookmarks = [];
         console.log(fetchedBookmarks);
         fetchedBookmarks.forEach(bookmark => {
-            if(bookmark.deletedAt){
+            if(bookmark.deletedAt !== ""){
                 if(!this.isExpiredBookmark(bookmark)){
                     this.deletedBookmarks.push(bookmark);
                 }
@@ -54,8 +55,8 @@ const bookmarkHandler = {
         let table = generateTable({
             data: this.bookmarks, 
             blueprint: bookmarkTemplate, 
-            isDeleted: false}
-        );
+            addEdit: true
+        });
 
         // Insert table
         domElements.bookmarkTableContainer.append(table);
@@ -250,12 +251,19 @@ const bookmarkHandler = {
         // Generate new table
         let table = generateTable({
             data: this.deletedBookmarks, 
-            blueprint: bookmarkTemplate, 
-            isDeleted: true
+            blueprint: deletedBookmarkTemplate, 
+            addRestore: true
         });
 
         // Insert table
         domElements.deletedBookmarkTableContainer.append(table);
+    },
+    async restoreBookmark(id){
+        let bookmark = await getBookmarkById(+id);
+        if(bookmark && bookmark.deletedAt !== ""){
+            bookmark.deletedAt = "";
+            this.editBookmark(bookmark);
+        }
     }
 }
 

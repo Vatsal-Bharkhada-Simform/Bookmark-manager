@@ -89,6 +89,8 @@ function addDialogEvents() {
                     res = await bookmarkHandler.addNewBookmark({...bookmark, title, url, tags: Array.from(tagSet), collections: Array.from(collectionSet), createdAt: new Date().toISOString() });
                 } else if (dialogElements.form.dataset.mode === "EDIT") {
                     let oldBookmark = bookmarkHandler.getBookmark(+dialogElements.form.dataset?.id);
+                    if(!oldBookmark) return;
+                    
                     res = await bookmarkHandler.editBookmark({ ...bookmark, ...oldBookmark, title, url, tags: Array.from(tagSet), collections: Array.from(collectionSet) });
                 }
                 if (res) {

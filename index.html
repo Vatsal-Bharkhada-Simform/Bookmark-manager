@@ -68,14 +68,6 @@
                 <h1>ZenTabs</h1>
             </div>
             <div class="header__main">
-                <form name="search-form" class="header__search u-search">
-                    <input type="search" title="Search for bookmarks and profiles" name="search" placeholder="Search for bookmarks and profiles">
-                    <button type="submit" title="search">
-                        <svg class="u-icon" aria-hidden="true">
-                            <use href="./assets/icons/sprite.svg#search"></use>
-                        </svg>
-                    </button>
-                </form>
             </div>
         </header>
         <main class="main">
@@ -89,17 +81,17 @@
                 </div>
                 <nav class="nav__wrapper">
                     <span class="nav__head">Bookmarks</span>
-                    <ul class="nav__list">
-                        <li class="nav__list-item" data-selected="true">
-                            <a href="#" class="nav-link">
+                    <ul class="nav__list" id="sidebar-container">
+                        <li class="nav__list-item">
+                            <a href="#all-bookmarks" class="nav-link" data-selected="true" data-target-container="all-bookmarks">
                                 <svg class="u-icon">
                                     <use href="./assets/icons/sprite.svg#bookmark"></use>
                                 </svg>
-                                All bookmarks
+                                All Bookmarks
                             </a>
                         </li>
                         <li class="nav__list-item">
-                            <a href="#" class="nav-link">
+                            <a href="#collections" class="nav-link" data-target-container="collections">
                                 <svg class="u-icon">
                                     <use href="./assets/icons/sprite.svg#collection"></use>
                                 </svg>
@@ -107,30 +99,11 @@
                             </a>
                         </li>
                         <li class="nav__list-item">
-                            <a href="#" class="nav-link">
+                            <a href="#deleted-bookmarks" class="nav-link" data-target-container="deleted-bookmarks">
                                 <svg class="u-icon">
                                     <use href="./assets/icons/sprite.svg#trash-bin"></use>
                                 </svg>
-                                Recently deleted
-                            </a>
-                        </li>
-                    </ul>
-                    <span class="nav__head">Profiles</span>
-                    <ul class="nav__list">
-                        <li class="nav__list-item">
-                            <a href="#" class="nav-link">
-                                <svg class="u-icon">
-                                    <use href="./assets/icons/sprite.svg#profile"></use>
-                                </svg>
-                                All profiles
-                            </a>
-                        </li>
-                        <li class="nav__list-item">
-                            <a href="#" class="nav-link">
-                                <svg class="u-icon">
-                                    <use href="./assets/icons/sprite.svg#trash-bin"></use>
-                                </svg>
-                                Recently deleted
+                                Deleted Bookmarks
                             </a>
                         </li>
                     </ul>
@@ -140,7 +113,7 @@
                 <div id="all-bookmarks" class="content__wrapper">
                     <div class="content__head">
                         <div class="head__name">
-                            <h2>All bookmarks</h2>
+                            <h2>All Bookmarks</h2>
                         </div>
                         <div class="head__options">
                             <div class="head__options-left">
@@ -204,21 +177,25 @@
                             </div>
                         </div>
                     </div>
-                    <div class="table__wrapper">
+                    <div class="table__wrapper bookmark-table">
                         <table>
-                            <thead>
-                                <tr>
-                                    <th></th>
-                                    <th>Name</th>
-                                    <th>URL</th>
-                                    <th>Tags</th>
-                                    <th>Collections</th>
-                                    <th>Visits</th>
-                                </tr>
-                            </thead>
-                            <tbody class="table__body">
-                            </tbody>
                         </table>
+                    </div>
+                </div>
+                <div id="collections" class="content__wrapper">
+                    <div class="content__head">
+                        <div class="head__name">
+                            <h2>Collections</h2>
+                        </div>
+                    </div>
+                    <div class="content__body collection__content">
+                    </div>
+                </div>
+                <div id="deleted-bookmarks" class="content__wrapper">
+                    <div class="content__head">
+                        <div class="head__name">
+                            <h2>Deleted Bookmarks</h2>
+                        </div>
                     </div>
                 </div>
                 <div class="footer">

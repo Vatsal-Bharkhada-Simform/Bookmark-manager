@@ -29,32 +29,26 @@
             border-left: 1px solid var(--gray-200);
 
             .nav__list-item {
-                padding: var(--space-md) var(--space-lg);
-                background-color: transparent;
-                border-radius: var(--round-lg);
-                margin-bottom: var(--space-xs);
-                cursor: pointer;
-
-                &:hover {
-                    background-color: var(--blue-50);
-
-                    .nav-link {
-                        color: inherit;
-                    }
-                }
-
-                &[data-selected="true"] {
-                    background-color: var(--blue-50);
-
-                    .nav-link {
-                        color: var(--color-primary-hover);
-                    }
-                }
-
                 .nav-link {
+                    display: block;
                     text-decoration: none;
                     color: var(--text-secondary);
                     white-space: nowrap;
+                    padding: var(--space-md) var(--space-lg);
+                    background-color: transparent;
+                    border-radius: var(--round-lg);
+                    margin-bottom: var(--space-xs);
+                    cursor: pointer;
+
+                    &:hover {
+                        background-color: var(--blue-50);
+                        color: var(--text-primary);
+                    }
+
+                    &[data-selected="true"] {
+                        background-color: var(--blue-50);
+                        color: var(--color-primary-hover);
+                    }
 
                     svg {
                         margin-right: var(--space-xs);

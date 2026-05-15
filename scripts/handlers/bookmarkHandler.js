@@ -1,14 +1,13 @@
 import { addBookmark, deleteBookmark, getAllBookmarks, updateBookmark } from "../controllers/bookmark.controller.js"
 import { bookmarkTemplate } from "../models/bookmark.model.js";
 import { domElements } from "../views/domElements.js";
-import { generateIconElement } from "../views/generateElements.js";
-import { insertionHandler } from "./insertionHandler.js";
+import { generateTable } from "../views/generateElements.js";
+import { collectionHandler } from "./collectionHandler.js";
 
 const bookmarkHandler = {
     allBookmarks: [],
     bookmarksToDisplay: [],
     selectedBookmarks: [],
-    displayProperties: ['checkbox', 'title', 'url', 'tags', 'collections', 'visits'],
     mode: {
         for: "",
         type: ""
@@ -21,6 +20,7 @@ const bookmarkHandler = {
         this.bookmarksToDisplay = data;
         this.selectedBookmarks = [];
         this.loadBookmarks();
+        collectionHandler.populateCollections(this.allBookmarks);
     },
     getBookmark(id) {
         return this.allBookmarks.find(bookmark => bookmark.id === id);
@@ -33,22 +33,13 @@ const bookmarkHandler = {
     },
     loadBookmarks() {
         // Clear table
-        domElements.tableBody.replaceChildren();
+        domElements.bookmarkTableContainer.replaceChildren();
 
-        // Load bookamrk entries
-        this.bookmarks.forEach(bookmark => {
-            let tr = document.createElement('tr');
+        // Generate new table
+        let table = generateTable(this.bookmarks, bookmarkTemplate, true);
 
-            this.displayProperties.forEach(prop => {
-                let td = document.createElement('td');
-                let element = insertionHandler.insertData(bookmark[prop], bookmarkTemplate[prop], +bookmark.id);
-                td.appendChild(element);
-                tr.appendChild(td);
-            });
-
-            insertionHandler.insertEditButton(tr.lastElementChild, bookmark);
-            domElements.tableBody.appendChild(tr);
-        });
+        // Insert table
+        domElements.bookmarkTableContainer.append(table);
     },
     async addNewBookmark(bookmarkData) {
         return addBookmark(bookmarkData)
@@ -77,7 +68,7 @@ const bookmarkHandler = {
         });
     },
     incrementVisitCount(id) {
-        let bookmark = this.getBookmark(id);
+        let bookmark = this.getBookmark(+id);
         bookmark.visits = +(bookmark.visits || 0) + 1;
         this.editBookmark(bookmark);
     },
@@ -197,6 +188,12 @@ const bookmarkHandler = {
                 this.bookmarks = this.bookmarks.sort((b1, b2) => (Date.parse(b1.createdAt) > Date.parse(b2.createdAt)) ? -1 : 1);
                 break;
         }
+    },
+    async removeBookmarkFromCollection(id, collection){
+        let bookmark = this.getBookmark(+id);
+        if(!bookmark) return;
+        bookmark.collections = bookmark.collections.filter(item => item !== collection);
+        await this.editBookmark(bookmark);
     }
 }
 

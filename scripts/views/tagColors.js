@@ -18,7 +18,7 @@ const tagColors = {
   Q: { background: "#F5E8FA", color: "#601A80", border: "#D9A8F0" },
   R: { background: "#DEF5FE", color: "#0D4A6E", border: "#80CEED" },
   S: { background: "#E4F7E6", color: "#1A5B20", border: "#8BD59A" },
-  T: { background: "#FEF3DC", color: "#7A4208", border: "#F9CF74" },
+  T: { background: "#ebfedc", color: "#41691b", border: "#62b119" },
   U: { background: "#F4E4FA", color: "#5A1A7A", border: "#D198EA" },
   V: { background: "#DDFAF8", color: "#0B5056", border: "#78D8D4" },
   W: { background: "#FDEAEA", color: "#7A1A1A", border: "#F4A0A0" },

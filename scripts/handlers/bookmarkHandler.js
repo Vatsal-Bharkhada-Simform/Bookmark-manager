@@ -1,5 +1,5 @@
 import { addBookmark, deleteBookmark, getAllBookmarks, updateBookmark } from "../controllers/bookmark.controller.js"
-import { bookmarkTemplate } from "../models/bookmark.model.js";
+import { bookmarkTemplate, EXPIRY_RANGE } from "../models/bookmark.model.js";
 import { domElements } from "../views/domElements.js";
 import { generateTable } from "../views/generateElements.js";
 import { collectionHandler } from "./collectionHandler.js";
@@ -8,6 +8,8 @@ const bookmarkHandler = {
     allBookmarks: [],
     bookmarksToDisplay: [],
     selectedBookmarks: [],
+    deletedBookmarks: [],
+    deletionPipeline: [],
     mode: {
         for: "",
         type: ""
@@ -26,8 +28,19 @@ const bookmarkHandler = {
         return this.allBookmarks.find(bookmark => bookmark.id === id);
     },
     async populateBookmarks() {
-        let fetchedBookmarks = await getAllBookmarks(); 
-        this.allBookmarks = fetchedBookmarks.filter(bookmark => !bookmark.deletedAt);
+        let fetchedBookmarks = await getAllBookmarks();
+        this.allBookmarks = [];
+        console.log(fetchedBookmarks);
+        fetchedBookmarks.forEach(bookmark => {
+            if(bookmark.deletedAt){
+                if(!this.isExpiredBookmark(bookmark)){
+                    this.deletedBookmarks.push(bookmark);
+                }
+            } else {
+                this.allBookmarks.push(bookmark);
+            }
+        });
+        this.permanentlyDeleteBookmarks(this.deletionPipeline);
         this.bookmarks = [...this.allBookmarks];
         this.mode.for = "";
         this.mode.type = "";
@@ -197,6 +210,33 @@ const bookmarkHandler = {
         if(!bookmark) return;
         bookmark.collections = bookmark.collections.filter(item => item !== collection);
         await this.editBookmark(bookmark);
+    },
+    permanentlyDeleteBookmarks(bookmarks){
+        if(!bookmarks || bookmarks.length === 0) return;
+        let deletePromises = [];
+
+        // Permanently Delete bookmarks one by one
+        bookmarks.forEach(bookmark => {
+            deletePromises.push(deleteBookmark(bookmark.id));
+        });
+
+        // Raise error if any request fails.
+        Promise.all(deletePromises)
+            .then(() => {
+                this.loadRecentlyDeleted();
+            })
+            .catch(err => {
+                alert('Error deleting bookmark!');
+                console.error('Error deleting bookmark:', err);
+            });
+    },
+    isExpiredBookmark(bookmark){
+        let parsedDate = Date.parse(bookmark?.deletedAt ?? "");
+        if((Date.now() - parsedDate) > EXPIRY_RANGE){
+            this.deletionPipeline.push(bookmark);
+            return true;
+        }
+        return false;
     }
 }
 

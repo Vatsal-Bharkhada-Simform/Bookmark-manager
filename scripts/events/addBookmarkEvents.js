@@ -69,6 +69,14 @@ function addBookmarkEvents() {
             bookmarkHandler.restoreBookmark(element.dataset.id);
         }
     });
+
+    domElements.deleteAllButton.addEventListener("click", () => {
+        bookmarkHandler.deleteAllBookmarks();
+    });
+
+    domElements.restoreAllButton.addEventListener("click", () => {
+        bookmarkHandler.restoreAllBookmarks();
+    });
 }
 
 // Open dialog in EDIT mode.

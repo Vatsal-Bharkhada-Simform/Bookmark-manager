@@ -32,7 +32,6 @@ const bookmarkHandler = {
         let fetchedBookmarks = await getAllBookmarks();
         this.allBookmarks = [];
         this.deletedBookmarks = [];
-        console.log(fetchedBookmarks);
         fetchedBookmarks.forEach(bookmark => {
             if(bookmark.deletedAt !== ""){
                 if(!this.isExpiredBookmark(bookmark)){
@@ -225,10 +224,10 @@ const bookmarkHandler = {
         bookmarks.forEach(bookmark => {
             deletePromises.push(deleteBookmark(bookmark.id));
         });
-
+        
         // Raise error if any request fails.
         Promise.all(deletePromises)
-            .then(() => {
+        .then(() => {
                 this.loadRecentlyDeleted();
             })
             .catch(err => {
@@ -264,6 +263,17 @@ const bookmarkHandler = {
             bookmark.deletedAt = "";
             this.editBookmark(bookmark);
         }
+    },
+    deleteAllBookmarks(){
+        let userIsSure = confirm("All bookmarks will be permanently deleted. Are you sure?");
+        if(userIsSure){
+            this.permanentlyDeleteBookmarks(this.deletedBookmarks);
+            this.deletedBookmarks = [];
+        }
+    },
+    restoreAllBookmarks(){
+        if(this.deletedBookmarks.length === 0) return;
+        this.deletedBookmarks.forEach(bookmark => this.restoreBookmark(bookmark.id));
     }
 }
 

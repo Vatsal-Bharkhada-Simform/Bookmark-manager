@@ -12,6 +12,8 @@ const domElements = {
     collectionContainer: document.querySelector(".content__body.collection__content"),
 
     deletedBookmarkTableContainer: document.querySelector(".table__wrapper.deleted-table"),
+    deleteAllButton: document.querySelector("#btn-permanently-delete"),
+    restoreAllButton: document.querySelector("#btn-restore-all"),
 }
 
 export { domElements };

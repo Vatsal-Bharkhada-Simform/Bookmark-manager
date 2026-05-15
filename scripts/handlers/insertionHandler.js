@@ -71,10 +71,8 @@ const insertionHandler = {
         checkbox.type = "checkbox";
         checkbox.title = "Select";
         checkbox.checked = false;
-        checkbox.classList.add("input-checkbox");
-        checkbox.onchange = () => {
-            bookmarkHandler.toggleSelectedBookmark(+id);
-        }
+        checkbox.classList.add("input-checkbox", "check-select-bookmark");
+        checkbox.dataset.id = id;
         return checkbox;
     },
     // Insert edit button with metadata stored in dataset attributes

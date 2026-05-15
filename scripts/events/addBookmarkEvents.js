@@ -11,6 +11,15 @@ function addBookmarkEvents() {
         if (element.dataset.type === "edit" && element.dataset.id) {
             openEditDialog(bookmarkHandler.getBookmark(+element.dataset.id));
         }
+        else if(element && element.tagName === "A" && element.dataset?.id){
+            bookmarkHandler.incrementVisitCount(element.dataset.id);
+        }
+        else if(element && element.classList?.contains("check-select-bookmark")) {
+            let id = element.dataset?.id;
+            if(id){
+                bookmarkHandler.toggleSelectedBookmark(+id);
+            }
+        }
     })
 
     // Delete selected bookmarks when delete button is clicked
@@ -53,13 +62,6 @@ function addBookmarkEvents() {
             domElements.sortDropdown.lastElementChild.classList.remove("show");
         }
     }, true);
-
-    domElements.bookmarkTableContainer.addEventListener("click", (e) => {
-        let element = e.target;
-        if(element && element.tagName === "A" && element.dataset?.id){
-            bookmarkHandler.incrementVisitCount(element.dataset.id);
-        }
-    })
 }
 
 // Open dialog in EDIT mode.

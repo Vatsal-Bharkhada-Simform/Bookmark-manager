@@ -74,10 +74,10 @@ const bookmarkHandler = {
             return false;
         });
     },
-    async editBookmark(bookmarkData) {
+    async editBookmark(bookmarkData, renderOnFinish = false) {
         return updateBookmark(bookmarkData)
         .then(() => {
-            this.populateBookmarks();
+            renderOnFinish && this.populateBookmarks();
             return true;
         })
         .catch(err => {
@@ -89,7 +89,7 @@ const bookmarkHandler = {
     incrementVisitCount(id) {
         let bookmark = this.getBookmark(+id);
         bookmark.visits = +(bookmark.visits || 0) + 1;
-        this.editBookmark(bookmark);
+        this.editBookmark(bookmark, true);
     },
     toggleSelectedBookmark(id) {
         // If bookmark already selected, remove it else add it.
@@ -214,7 +214,7 @@ const bookmarkHandler = {
         let bookmark = this.getBookmark(+id);
         if(!bookmark) return;
         bookmark.collections = bookmark.collections.filter(item => item !== collection);
-        await this.editBookmark(bookmark);
+        await this.editBookmark(bookmark, true);
     },
     async permanentlyDeleteBookmarks(bookmarks){
         if(!bookmarks || bookmarks.length === 0) return;
@@ -259,7 +259,7 @@ const bookmarkHandler = {
 
         // Hide tooltip header when table is empty
         if(this.deletedBookmarks.length !== 0){
-            domElements.deletedBookmarksHead.style.display = "block";
+            domElements.deletedBookmarksHead.style.display = "flex";
         } else {
             domElements.deletedBookmarksHead.style.display = "none";
         }
@@ -288,7 +288,11 @@ const bookmarkHandler = {
             this.deletedBookmarks.map((bookmark) =>
                 this.restoreBookmark(bookmark.id)
             )
-        ).catch(console.log);
+        )
+        .then(() => {
+            this.populateBookmarks();
+        })
+        .catch(console.log);
     }
 }
 

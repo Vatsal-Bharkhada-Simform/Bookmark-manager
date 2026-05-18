@@ -91,7 +91,7 @@ function addDialogEvents() {
                     let oldBookmark = bookmarkHandler.getBookmark(+dialogElements.form.dataset?.id);
                     if(!oldBookmark) return;
                     
-                    res = await bookmarkHandler.editBookmark({ ...bookmark, ...oldBookmark, title, url, tags: Array.from(tagSet), collections: Array.from(collectionSet) });
+                    res = await bookmarkHandler.editBookmark({ ...bookmark, ...oldBookmark, title, url, tags: Array.from(tagSet), collections: Array.from(collectionSet) }, true);
                 }
                 if (res) {
                     resetForm();

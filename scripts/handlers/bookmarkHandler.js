@@ -257,6 +257,13 @@ const bookmarkHandler = {
             emptyMessage: "No deleted bookmarks"
         });
 
+        // Hide tooltip header when table is empty
+        if(this.deletedBookmarks.length !== 0){
+            domElements.deletedBookmarksHead.style.display = "block";
+        } else {
+            domElements.deletedBookmarksHead.style.display = "none";
+        }
+
         // Insert table
         domElements.deletedBookmarkTableContainer.append(table);
     },
@@ -272,7 +279,6 @@ const bookmarkHandler = {
         if(userIsSure){
             await this.permanentlyDeleteBookmarks(this.deletedBookmarks).then(() => {
                 this.deletedBookmarks = [];
-                this.loadRecentlyDeleted();
             });
         }
     },

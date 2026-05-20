@@ -113,7 +113,25 @@ const insertionHandler = {
         tagElement.style.borderColor = tagColors[tagName[0].toUpperCase()]?.border || '#E0E0E0';
 
         return tagElement;
-    }
+    },
+    insertRestoreButton: (td, bookmark) => {
+        let container = document.createElement("div");
+        container.classList.add("edit-container");
+        container.append(td.innerText);
+        td.innerText = "";
+        
+        let restoreButton = document.createElement('button');
+        restoreButton.textContent = "Restore";
+        restoreButton.appendChild(insertionHandler.getIconElement('restore'));
+        restoreButton.classList.add('button-secondary');
+        restoreButton.classList.add('button-restore');
+        restoreButton.dataset.id = bookmark?.id;
+        restoreButton.dataset.type = 'RESTORE';
+
+        container.append(restoreButton);
+        
+        td.appendChild(container);
+    },
 }
 
 export { insertionHandler };

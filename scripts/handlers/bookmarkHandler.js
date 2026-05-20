@@ -1,5 +1,5 @@
-import { addBookmark, deleteBookmark, getAllBookmarks, updateBookmark } from "../controllers/bookmark.controller.js"
-import { bookmarkTemplate } from "../models/bookmark.model.js";
+import { addBookmark, deleteBookmark, getAllBookmarks, getBookmarkById, updateBookmark } from "../controllers/bookmark.controller.js"
+import { bookmarkTemplate, deletedBookmarkTemplate, EXPIRY_RANGE } from "../models/bookmark.model.js";
 import { domElements } from "../views/domElements.js";
 import { generateTable } from "../views/generateElements.js";
 import { collectionHandler } from "./collectionHandler.js";
@@ -8,6 +8,8 @@ const bookmarkHandler = {
     allBookmarks: [],
     bookmarksToDisplay: [],
     selectedBookmarks: [],
+    deletedBookmarks: [],
+    deletionPipeline: [],
     mode: {
         for: "",
         type: ""
@@ -20,13 +22,26 @@ const bookmarkHandler = {
         this.bookmarksToDisplay = data;
         this.selectedBookmarks = [];
         this.loadBookmarks();
+        this.loadRecentlyDeleted();
         collectionHandler.populateCollections(this.allBookmarks);
     },
     getBookmark(id) {
         return this.allBookmarks.find(bookmark => bookmark.id === id);
     },
     async populateBookmarks() {
-        this.allBookmarks = await getAllBookmarks();
+        let fetchedBookmarks = await getAllBookmarks();
+        this.allBookmarks = [];
+        this.deletedBookmarks = [];
+        fetchedBookmarks.forEach(bookmark => {
+            if(bookmark.deletedAt){
+                if(!this.isExpiredBookmark(bookmark)){
+                    this.deletedBookmarks.push(bookmark);
+                }
+            } else {
+                this.allBookmarks.push(bookmark);
+            }
+        });
+        this.permanentlyDeleteBookmarks(this.deletionPipeline);
         this.bookmarks = [...this.allBookmarks];
         this.mode.for = "";
         this.mode.type = "";
@@ -36,7 +51,11 @@ const bookmarkHandler = {
         domElements.bookmarkTableContainer.replaceChildren();
 
         // Generate new table
-        let table = generateTable(this.bookmarks, bookmarkTemplate, true);
+        let table = generateTable({
+            data: this.bookmarks, 
+            blueprint: bookmarkTemplate, 
+            addEdit: true
+        });
 
         // Insert table
         domElements.bookmarkTableContainer.append(table);
@@ -55,10 +74,10 @@ const bookmarkHandler = {
             return false;
         });
     },
-    async editBookmark(bookmarkData) {
+    async editBookmark(bookmarkData, renderOnFinish = false) {
         return updateBookmark(bookmarkData)
         .then(() => {
-            this.populateBookmarks();
+            renderOnFinish && this.populateBookmarks();
             return true;
         })
         .catch(err => {
@@ -70,7 +89,7 @@ const bookmarkHandler = {
     incrementVisitCount(id) {
         let bookmark = this.getBookmark(+id);
         bookmark.visits = +(bookmark.visits || 0) + 1;
-        this.editBookmark(bookmark);
+        this.editBookmark(bookmark, true);
     },
     toggleSelectedBookmark(id) {
         // If bookmark already selected, remove it else add it.
@@ -87,16 +106,18 @@ const bookmarkHandler = {
             domElements.deleteButton.style.display = 'none';
         }
     },
-    deleteSelectedBookmark() {
+    async deleteSelectedBookmark() {
         let deletePromises = [];
 
         // Delete bookmarks one by one
         this.selectedBookmarks.forEach(id => {
-            deletePromises.push(deleteBookmark(id));
+            let bookmark = this.getBookmark(id);
+            bookmark.deletedAt = new Date().toISOString();
+            deletePromises.push(this.editBookmark(bookmark));
         });
 
         // Raise error if any request fails.
-        Promise.all(deletePromises)
+        await Promise.all(deletePromises)
             .then(() => {
                 this.populateBookmarks();
                 domElements.deleteButton.style.display = 'none';
@@ -193,7 +214,86 @@ const bookmarkHandler = {
         let bookmark = this.getBookmark(+id);
         if(!bookmark) return;
         bookmark.collections = bookmark.collections.filter(item => item !== collection);
-        await this.editBookmark(bookmark);
+        await this.editBookmark(bookmark, true);
+    },
+    async permanentlyDeleteBookmarks(bookmarks){
+        if(!bookmarks || bookmarks.length === 0) return;
+        let deletePromises = [];
+
+        // Permanently Delete bookmarks one by one
+        bookmarks.forEach(bookmark => {
+            deletePromises.push(deleteBookmark(bookmark.id));
+        });
+        
+        // Raise error if any request fails.
+        return Promise.all(deletePromises)
+        .then(() => {
+                this.populateBookmarks();
+                this.loadRecentlyDeleted();
+                this.deletionPipeline = [];
+            })
+            .catch(err => {
+                alert('Error deleting bookmark!');
+                console.error('Error deleting bookmark:', err);
+            });
+    },
+    isExpiredBookmark(bookmark){
+        if(!bookmark.deletedAt) return;
+        let parsedDate = Date.parse(bookmark?.deletedAt);
+        if((Date.now() - parsedDate) > EXPIRY_RANGE){
+            this.deletionPipeline.push(bookmark);
+            return true;
+        }
+        return false;
+    },
+    loadRecentlyDeleted(){
+        // Clear table
+        domElements.deletedBookmarkTableContainer.replaceChildren();
+
+        // Generate new table
+        let table = generateTable({
+            data: this.deletedBookmarks, 
+            blueprint: deletedBookmarkTemplate, 
+            addRestore: true,
+            emptyMessage: "No deleted bookmarks"
+        });
+
+        // Hide tooltip header when table is empty
+        if(this.deletedBookmarks.length !== 0){
+            domElements.deletedBookmarksHead.style.display = "flex";
+        } else {
+            domElements.deletedBookmarksHead.style.display = "none";
+        }
+
+        // Insert table
+        domElements.deletedBookmarkTableContainer.append(table);
+    },
+    async restoreBookmark(id, renderOnFinish = true){
+        let bookmark = await getBookmarkById(+id);
+        if(bookmark && bookmark.deletedAt !== ""){
+            bookmark.deletedAt = "";
+            return this.editBookmark(bookmark, renderOnFinish).catch(console.log);
+        }
+    },
+    async deleteAllBookmarks(){
+        let userIsSure = confirm("All bookmarks will be permanently deleted. Are you sure?");
+        if(userIsSure){
+            await this.permanentlyDeleteBookmarks(this.deletedBookmarks).then(() => {
+                this.deletedBookmarks = [];
+            });
+        }
+    },
+    async restoreAllBookmarks(){
+        if(this.deletedBookmarks.length === 0) return;
+        await Promise.all(
+            this.deletedBookmarks.map((bookmark) =>
+                this.restoreBookmark(bookmark.id, false)
+            )
+        )
+        .then(() => {
+            this.populateBookmarks();
+        })
+        .catch(console.log);
     }
 }
 

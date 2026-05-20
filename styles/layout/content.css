@@ -27,6 +27,10 @@
                 .head__search{
                     width: clamp(12rem, 18vw, 20rem);
                 }
+
+                button:not(:last-child){
+                    margin-right: var(--space-md);
+                }
             }
 
             .head__options-right{

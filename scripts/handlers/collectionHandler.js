@@ -36,7 +36,10 @@ const collectionHandler = {
         // Generate new content elements
         let wrapper = document.createDocumentFragment();
         Object.keys(this.collections).forEach((key) => {
-            let table = generateTable(this.collections[key], collectionTableTemplate);
+            let table = generateTable({
+                data: this.collections[key], 
+                blueprint: collectionTableTemplate
+            });
             
             let tableCont = document.createElement("div");
             tableCont.append(table);

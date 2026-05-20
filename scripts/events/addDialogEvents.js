@@ -1,4 +1,5 @@
 import { bookmarkHandler } from "../handlers/bookmarkHandler.js";
+import { bookmark } from "../models/bookmark.model.js";
 import { isValidForm, isValidText } from "../utils/bookmarkValidators.js";
 import { dialogElements } from "../views/dialogElements.js";
 import { generateDeletableTag } from "../views/generateElements.js";
@@ -85,10 +86,12 @@ function addDialogEvents() {
             let res;
             try {
                 if(dialogElements.form.dataset.mode === "ADD"){
-                    res = await bookmarkHandler.addNewBookmark({ title, url, tags: Array.from(tagSet), collections: Array.from(collectionSet), createdAt: new Date().toISOString() });
+                    res = await bookmarkHandler.addNewBookmark({...bookmark, title, url, tags: Array.from(tagSet), collections: Array.from(collectionSet), createdAt: new Date().toISOString() });
                 } else if (dialogElements.form.dataset.mode === "EDIT") {
-                    let bookmark = bookmarkHandler.getBookmark(+dialogElements.form.dataset?.id);
-                    res = await bookmarkHandler.editBookmark({ ...bookmark, title, url, tags: Array.from(tagSet), collections: Array.from(collectionSet) });
+                    let oldBookmark = bookmarkHandler.getBookmark(+dialogElements.form.dataset?.id);
+                    if(!oldBookmark) return;
+                    
+                    res = await bookmarkHandler.editBookmark({ ...bookmark, ...oldBookmark, title, url, tags: Array.from(tagSet), collections: Array.from(collectionSet) }, true);
                 }
                 if (res) {
                     resetForm();

@@ -228,6 +228,7 @@ const bookmarkHandler = {
         // Raise error if any request fails.
         return Promise.all(deletePromises)
         .then(() => {
+                this.populateBookmarks();
                 this.loadRecentlyDeleted();
                 this.deletionPipeline = [];
             })
@@ -267,11 +268,11 @@ const bookmarkHandler = {
         // Insert table
         domElements.deletedBookmarkTableContainer.append(table);
     },
-    async restoreBookmark(id){
+    async restoreBookmark(id, renderOnFinish = true){
         let bookmark = await getBookmarkById(+id);
         if(bookmark && bookmark.deletedAt !== ""){
             bookmark.deletedAt = "";
-            return this.editBookmark(bookmark).catch(console.log);
+            return this.editBookmark(bookmark, renderOnFinish).catch(console.log);
         }
     },
     async deleteAllBookmarks(){
@@ -286,7 +287,7 @@ const bookmarkHandler = {
         if(this.deletedBookmarks.length === 0) return;
         await Promise.all(
             this.deletedBookmarks.map((bookmark) =>
-                this.restoreBookmark(bookmark.id)
+                this.restoreBookmark(bookmark.id, false)
             )
         )
         .then(() => {

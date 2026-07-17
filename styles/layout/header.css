@@ -1,50 +1,87 @@
-.header{
+.header {
+    background-color: var(--bg-primary);
     border-bottom: 1px solid var(--border-color);
-    background-color: var(--gray-50);
-    
-    .header__name{
-        padding: var(--space-md);
+    box-shadow: var(--shadow-xs);
+    z-index: 10;
+
+    .header__name {
+        padding: var(--space-md) var(--space-lg);
         border-right: 1px solid var(--border-color);
         display: flex;
         align-items: center;
         gap: var(--space-sm);
 
-        button{
+        h1 {
+            font-size: var(--text-lg);
+            font-weight: var(--font-bold);
+            color: var(--text-primary);
+            letter-spacing: -0.02em;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        button {
             display: none;
         }
     }
 
-    .header__main{
+    .header__main {
         display: flex;
         justify-content: center;
         align-items: center;
-        
-        .header__search{
+        padding: 0 var(--space-lg);
+
+        .header__search {
             width: clamp(14rem, 25vw, 40rem);
         }
     }
 }
 
-@media (max-width: 768px){
+/* Tablet: header collapses logo to icon width, hide h1 */
+@media (max-width: 1024px) and (min-width: 769px) {
+    .header {
+        .header__name {
+            padding: var(--space-md);
+            border-right: 1px solid var(--border-color);
+            justify-content: center;
+
+            h1 {
+                display: none;
+            }
+
+            button {
+                display: none;
+            }
+        }
+    }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
     .header {
         width: 100%;
         justify-content: center;
 
-        .header__name{
-            padding: var(--space-sm);
+        .header__name {
+            padding: var(--space-sm) var(--space-md);
             border-right: none;
             justify-self: flex-start;
-            
+
+            h1 {
+                display: block;
+            }
+
             button {
-                display: inline-block;
+                display: inline-flex;
+                align-items: center;
             }
         }
 
-        .header__main{
+        .header__main {
             flex: 1;
-            padding-right: var(--space-sm);
-            
-            .header__search input{
+            padding-right: var(--space-md);
+
+            .header__search input {
                 width: 100%;
             }
         }

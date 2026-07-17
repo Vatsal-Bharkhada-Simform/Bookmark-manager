@@ -1,74 +1,92 @@
 button {
     white-space: nowrap;
+    font-family: inherit;
 }
 
-.button-ghost{
+/* ========== GHOST ========== */
+.button-ghost {
     border: none;
     background-color: transparent;
-    color: inherit;
+    color: var(--text-secondary);
     cursor: pointer;
-    padding: calc(var(--space-sm) + var(--space-xs));
+    padding: var(--space-sm);
     border-radius: var(--round-lg);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.15s ease, color 0.15s ease;
 
-    &:hover{
-        background-color: var(--gray-200);
+    &:hover {
+        background-color: var(--surface-alt);
+        color: var(--text-primary);
     }
 }
 
+/* ========== PRIMARY ========== */
 .button-primary {
-    font-family: inherit;
     border: none;
-    background-color: var(--blue-600);
-    color: white;
-    padding: calc(var(--space-sm) + var(--space-xs)) var(--space-md);
+    background-color: var(--color-primary);
+    color: #ffffff;
+    padding: var(--space-sm) var(--space-lg);
     border-radius: var(--round-xl);
     font-size: var(--text-sm);
     font-weight: var(--font-bold);
-    box-shadow: inset 0 0 9px -2px var(--blue-300);
     cursor: pointer;
-    transition: all .2s ease;
-    
-    &:hover{
-        background-color: var(--blue-700);
-        box-shadow: 0 0 9px 0px var(--blue-200);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    transition: background-color 0.15s ease, box-shadow 0.15s ease;
+
+    &:hover {
+        background-color: var(--color-primary-hover);
+        box-shadow: 0 4px 12px rgba(79, 106, 240, 0.35);
+    }
+
+    &:active {
+        background-color: var(--color-primary-active);
+        box-shadow: none;
     }
 }
 
+/* ========== SECONDARY ========== */
 .button-secondary {
-    font-family: inherit;
-    border: none;
-    background-color: var(--blue-100);
-    color: var(--blue-600);
-    padding: calc(var(--space-sm) + var(--space-xs)) var(--space-md);
+    border: 1.5px solid var(--indigo-200);
+    background-color: var(--color-primary-soft);
+    color: var(--color-primary-hover);
+    padding: var(--space-sm) var(--space-lg);
     border-radius: var(--round-xl);
     font-size: var(--text-sm);
     font-weight: var(--font-bold);
-    box-shadow: inset 0 0 9px -2px var(--blue-200);
     cursor: pointer;
-    transition: all .2s ease;
-    
-    &:hover{
-        background-color: var(--blue-100);
-        box-shadow: 0 0 9px 0px var(--blue-100);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    transition: background-color 0.15s ease, border-color 0.15s ease;
+
+    &:hover {
+        background-color: var(--indigo-100);
+        border-color: var(--indigo-300);
     }
 }
 
+/* ========== TERTIARY ========== */
 .button-tertiary {
-    font-family: inherit;
     border: none;
     background-color: var(--bg-primary);
-    color: var(--gray-600);
-    padding: calc(var(--space-sm) + var(--space-xs)) var(--space-md);
+    color: var(--text-secondary);
+    padding: var(--space-sm) var(--space-lg);
     border-radius: var(--round-lg);
     font-size: var(--text-sm);
     font-weight: var(--font-semi-bold);
     cursor: pointer;
-    transition: all .2s ease;
-    
-    &:hover{
-        background-color: var(--blue-100);
-        color: var(--blue-600);
-        box-shadow: 0 0 9px 0px var(--blue-100);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    transition: background-color 0.15s ease, color 0.15s ease;
+
+    &:hover {
+        background-color: var(--color-primary-soft);
+        color: var(--color-primary-hover);
     }
 
     svg {
@@ -76,67 +94,64 @@ button {
     }
 }
 
+/* ========== DANGER ========== */
 .button-danger {
-    font-family: inherit;
-    border: none;
-    background-color: var(--red-50);
-    color: var(--red-700);
-    padding: calc(var(--space-sm) + var(--space-xs)) var(--space-md);
+    border: 1.5px solid var(--red-200);
+    background-color: var(--color-danger-soft);
+    color: var(--color-danger);
+    padding: var(--space-sm) var(--space-lg);
     border-radius: var(--round-xl);
     font-size: var(--text-sm);
     font-weight: var(--font-bold);
-    box-shadow: inset 0 0 9px -2px var(--red-200);
     cursor: pointer;
-    
-    &:hover{
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    transition: background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+
+    &:hover {
         background-color: var(--red-100);
-        box-shadow: 0 0 9px 0px var(--red-50);
+        border-color: var(--red-300);
+        box-shadow: 0 4px 12px rgba(224, 54, 42, 0.2);
     }
 }
 
+/* ========== DANGER GHOST ========== */
 .button-danger-ghost {
-    font-family: inherit;
     border: none;
     background-color: transparent;
-    color: var(--red-700);
+    color: var(--color-danger);
     padding: var(--space-sm) var(--space-md);
     border-radius: var(--round-lg);
     font-size: var(--text-sm);
     font-weight: var(--font-bold);
     cursor: pointer;
-    
-    &:hover{
-        background-color: var(--red-50);
-        box-shadow: inset 0 0 9px -2px var(--red-100);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    transition: background-color 0.15s ease;
+
+    &:hover {
+        background-color: var(--color-danger-soft);
     }
 }
 
-.button-close-tag{
-    font-family: inherit;
+/* ========== CLOSE TAG ========== */
+.button-close-tag {
     border: none;
     color: inherit;
-    border-radius: var(--round-xl);
-    background-color: inherit;
-    margin-left: var(--space-sm);
+    border-radius: var(--round-full);
+    background-color: transparent;
+    margin-left: var(--space-xs);
     padding: var(--space-xs);
     cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: filter 0.1s ease;
 
-    &:hover{
-        filter: brightness(90%);
-    }
-}
-
-.button-close-tag{
-    font-family: inherit;
-    border: none;
-    color: inherit;
-    border-radius: var(--round-xl);
-    background-color: inherit;
-    margin-left: var(--space-sm);
-    padding: var(--space-xs);
-    cursor: pointer;
-
-    &:hover{
-        filter: brightness(90%);
+    &:hover {
+        filter: brightness(80%);
+        background-color: rgba(0, 0, 0, 0.08);
     }
 }

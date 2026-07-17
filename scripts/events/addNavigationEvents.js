@@ -3,6 +3,31 @@ import { domElements } from "../views/domElements.js";
 let currentOpen = null;
 
 function addNavigationEvents() {
+    // Mobile sidebar open/close toggle
+    const sidebar = document.querySelector(".sidebar");
+    const hamburgerBtn = document.querySelector(".header__name button[aria-label='Open sidebar']");
+    const sidebarCloseBtn = document.querySelector(".sidebar__head button[aria-label='Close sidebar']");
+
+    function openSidebar() {
+        sidebar?.classList.add("open");
+        hamburgerBtn?.setAttribute("aria-expanded", "true");
+    }
+
+    function closeSidebar() {
+        sidebar?.classList.remove("open");
+        hamburgerBtn?.setAttribute("aria-expanded", "false");
+    }
+
+    hamburgerBtn?.addEventListener("click", openSidebar);
+    sidebarCloseBtn?.addEventListener("click", closeSidebar);
+
+    // Close sidebar when clicking outside of it on mobile
+    document.addEventListener("click", (e) => {
+        if (sidebar?.classList.contains("open") && !sidebar.contains(e.target) && e.target !== hamburgerBtn) {
+            closeSidebar();
+        }
+    });
+
     // Prevent loading invalid URL's. Load default page as fallback
     window.addEventListener('hashchange', function () {
         let hashValue = this.window.location.href.split("#")[1] ?? "";
@@ -41,8 +66,9 @@ function addNavigationEvents() {
 
     // Load selected page from the sidebar
     domElements.sidebar.addEventListener("click", (e) => {
-        if (e.target.tagName === "A") {
-            let targetId = e.target.href.split("#")[1] ?? "";
+        const link = e.target.closest("a");
+        if (link) {
+            let targetId = link.href.split("#")[1] ?? "";
             let currentSelected = document.querySelector("[data-selected='true']");
 
             if(window.location.pathname !== "/") window.location.href = window.location.origin + "#" + targetId;
@@ -50,7 +76,7 @@ function addNavigationEvents() {
             if (currentSelected) {
                 currentSelected.dataset.selected = false;
             }
-            e.target.dataset.selected = true;
+            link.dataset.selected = true;
 
             if (targetId) {
                 let targetElement = document.querySelector(`#${targetId}`);
@@ -62,6 +88,9 @@ function addNavigationEvents() {
 
                 targetElement.style.display = "flex";
             }
+
+            // Close sidebar on mobile after navigation
+            closeSidebar();
         }
     });
 }

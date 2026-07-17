@@ -1,44 +1,52 @@
-.dropdown{
+.dropdown {
     position: relative;
-    
-    .dropdown__label{
-        border: 1px solid var(--border-color);
-        background-color: inherit;
-        padding: calc(var(--space-sm) + var(--space-xs));
+
+    .dropdown__label {
+        border: 1.5px solid var(--border-color);
+        background-color: var(--bg-primary);
+        padding: var(--space-sm) var(--space-md);
         border-radius: var(--round-xl);
         font-family: inherit;
         font-size: var(--text-sm);
         font-weight: var(--font-semi-bold);
+        color: var(--text-secondary);
         outline: 2px solid transparent;
-        transition: all .2s ease;
         cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: var(--space-xs);
+        transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
 
-        &:hover{
-            background-color: var(--blue-50);
+        &:hover {
+            background-color: var(--color-primary-soft);
+            border-color: var(--indigo-200);
+            color: var(--color-primary-hover);
         }
-        
-        &:active, &:has(~.show){
-            background-color: var(--blue-50);
+
+        &:active,
+        &:has(~ .show) {
+            background-color: var(--color-primary-soft);
             color: var(--color-primary-active);
-            border-color: var(--blue-400);
+            border-color: var(--indigo-300);
         }
     }
 
-    .dropdown__items{
+    .dropdown__items {
         display: none;
         position: absolute;
-        top: 105%;
-        right:0;
-        z-index: 3;
+        top: calc(100% + var(--space-xs));
+        right: 0;
+        z-index: 10;
         flex-direction: column;
-        gap: var(--space-sm);
-        border: 1px solid var(--gray-300);
-        padding: var(--space-sm);
+        gap: var(--space-xs);
+        border: 1px solid var(--border-color);
+        padding: var(--space-xs);
         border-radius: var(--round-xl);
         background-color: var(--bg-primary);
         overflow: hidden;
-        box-shadow: 0 2px 10px 0 #00000022;
-        
+        box-shadow: var(--shadow-md);
+        min-width: max-content;
+
         .item {
             width: 100%;
             text-align: left;
@@ -46,20 +54,19 @@
         }
 
         .active {
-            background-color: var(--blue-100);
-            color: var(--blue-600);
-            box-shadow: 0 0 9px 0px var(--blue-100);
+            background-color: var(--color-primary-soft);
+            color: var(--color-primary-hover);
         }
     }
 
-    .show{
+    .show {
         display: flex;
     }
 }
 
-@media (max-width: 768px){
+@media (max-width: 768px) {
     .dropdown {
-        .dropdown__items{
+        .dropdown__items {
             right: auto;
             left: 0;
         }

@@ -111,12 +111,13 @@ function generateCollapsible(title, body, count){
     title_cont.append(heading, countElement);
     
     let icon = generateIconElement("chevron-down");
+    icon.classList.add("close");
 
     head.append(title_cont, icon);
     
     // Add body
     let c_body = document.createElement("div");
-    c_body.classList.add("collapsible__body");
+    c_body.classList.add("collapsible__body", "hidden");
     c_body.append(body);
 
     head.onclick = () => {

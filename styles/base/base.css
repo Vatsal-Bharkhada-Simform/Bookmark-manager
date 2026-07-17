@@ -13,10 +13,23 @@ body {
     font-family: "Inter", Arial, Helvetica, sans-serif;
     font-size: 62.5%;
     color: var(--text-primary);
-    letter-spacing: -.2px;
+    background-color: var(--bg-secondary);
+    letter-spacing: -0.1px;
+    line-height: 1.5;
 }
 
 input:not(input[type="checkbox"]) {
     -webkit-appearance: none;
     appearance: none;
+}
+
+/* Global focus-visible ring — keyboard navigation only */
+:focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 2px;
+}
+
+/* Remove default focus outline in favour of focus-visible */
+:focus:not(:focus-visible) {
+    outline: none;
 }

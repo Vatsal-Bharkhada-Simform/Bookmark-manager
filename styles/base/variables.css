@@ -1,143 +1,123 @@
 :root {
-    /* Colors */
-    /* ========== BLUE (Primary) ========== */
-    --blue-50: #eff6ff;
-    --blue-100: #dbeafe;
-    --blue-200: #bfdbfe;
-    --blue-300: #93c5fd;
-    --blue-400: #60a5fa;
-    --blue-500: #3b82f6;
-    --blue-600: #2563eb;
-    --blue-700: #1d4ed8;
-    --blue-800: #1e40af;
-    --blue-900: #1e3a8a;
+    /* ========================================================
+       INDIGO FROST — Light Theme Design Tokens
+       ======================================================== */
 
-    /* ========== GRAY SCALE ========== */
-    --gray-50: #f9fafb;
-    --gray-100: #f3f4f6;
-    --gray-200: #e5e7eb;
-    --gray-300: #d1d5db;
-    --gray-400: #9ca3af;
-    --gray-500: #6b7280;
-    --gray-600: #4b5563;
-    --gray-700: #374151;
-    --gray-800: #1f2933;
-    --gray-900: #111827;
-    
-    /* ========== RED ========== */
-    --red-50: #ffeae8;
-    --red-100: #ffd2d0;
-    --red-200: #fdc0bc;
-    --red-300: #fcaca7;
-    --red-400: #ff8178;
-    --red-500: #ff766c;
-    --red-600: #ff4d40;
-    --red-700: #ff2c1d;
+    /* ========== RAW PALETTE — INDIGO ========== */
+    --indigo-50:  #eef1fe;
+    --indigo-100: #dde3fd;
+    --indigo-200: #c5cdfb;
+    --indigo-300: #a0adf8;
+    --indigo-400: #7a8df4;
+    --indigo-500: #4f6af0;
+    --indigo-600: #3d57dc;
+    --indigo-700: #2e43c2;
+    --indigo-800: #2334a0;
+    --indigo-900: #1a2880;
 
-    /* ========== BACKGROUND ========== */
-    --bg-primary: #ffffff;
-    --bg-secondary: var(--gray-50);
-    --bg-tertiary: var(--gray-100);
+    /* ========== RAW PALETTE — SLATE (Neutrals) ========== */
+    --slate-50:  #f8f9fc;
+    --slate-100: #eef0f6;
+    --slate-200: #dde1ec;
+    --slate-300: #c4cadc;
+    --slate-400: #9299b8;
+    --slate-500: #6b7194;
+    --slate-600: #5a5f7a;
+    --slate-700: #3d4260;
+    --slate-800: #272b48;
+    --slate-900: #1a1d2e;
+
+    /* ========== RAW PALETTE — RED (Danger) ========== */
+    --red-50:  #fef2f1;
+    --red-100: #fde3e1;
+    --red-200: #fbc5c1;
+    --red-300: #f79a94;
+    --red-400: #f06860;
+    --red-500: #e0362a;
+    --red-600: #c42a1f;
+    --red-700: #a32117;
+
+    /* ========== SURFACES ========== */
+    --bg-primary:   #ffffff;
+    --bg-secondary: var(--slate-50);
+    --bg-tertiary:  var(--slate-100);
+
+    /* Additional surface tokens */
+    --surface:     #ffffff;
+    --surface-alt: var(--slate-100);
 
     /* ========== TEXT ========== */
-    --text-primary: var(--gray-900);
-    --text-secondary: var(--gray-600);
-    --text-muted: var(--gray-400);
-    --text-disabled: var(--gray-300);
+    --text-primary:   var(--slate-900);
+    --text-secondary: var(--slate-600);
+    --text-muted:     var(--slate-400);
+    --text-disabled:  var(--slate-300);
 
-    /* ========== BORDER ========== */
-    --border-color: var(--gray-300);
-    --border-hover: var(--gray-400);
+    /* ========== BORDERS ========== */
+    --border-color:  var(--slate-200);
+    --border-hover:  var(--slate-300);
+    --border-subtle: var(--slate-100);
 
-    /* ========== PRIMARY (SEMANTIC) ========== */
-    --color-primary: var(--blue-500);
-    --color-primary-hover: var(--blue-600);
-    --color-primary-active: var(--blue-700);
-    --color-primary-soft: var(--blue-100);
+    /* ========== PRIMARY — INDIGO (Semantic) ========== */
+    --color-primary:        var(--indigo-500);
+    --color-primary-hover:  var(--indigo-600);
+    --color-primary-active: var(--indigo-700);
+    --color-primary-soft:   var(--indigo-50);
 
-    /* ========== STATES ========== */
-    --hover-bg: var(--gray-100);
-    --active-bg: var(--gray-200);
-    --focus-ring: var(--blue-500);
+    /* ========== DANGER — RED (Semantic) ========== */
+    --color-danger:       var(--red-500);
+    --color-danger-hover: var(--red-600);
+    --color-danger-soft:  var(--red-50);
 
-    /* ========== SHADOW (optional but useful) ========== */
-    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.08);
+    /* ========== INTERACTIVE STATES ========== */
+    --hover-bg:   var(--slate-100);
+    --active-bg:  var(--slate-200);
+    --focus-ring: var(--indigo-500);
 
-    /* Spaces */
-    --space-1: 0.1rem;
-    --space-xs: 0.2rem;
-    --space-sm: 0.4rem;
-    --space-md: 0.8rem;
-    --space-lg: 1.2rem;
-    --space-xl: 1.6rem;
+    /* ========== TAG / COLLECTION TOKENS ========== */
+    --tag-bg:     var(--indigo-50);
+    --tag-border: var(--indigo-200);
+    --tag-text:   var(--indigo-700);
+
+    --collection-bg:     #e6f7f4;
+    --collection-border: #8ed5cc;
+    --collection-text:   #1a6f66;
+
+    /* ========== SHADOWS ========== */
+    --shadow-xs: 0 1px 2px rgba(26, 29, 46, 0.05);
+    --shadow-sm: 0 1px 4px rgba(26, 29, 46, 0.08);
+    --shadow-md: 0 4px 12px rgba(26, 29, 46, 0.10);
+    --shadow-lg: 0 12px 40px rgba(26, 29, 46, 0.14);
+    --shadow-xl: 0 20px 60px rgba(26, 29, 46, 0.18);
+
+    /* ========== SPACING ========== */
+    --space-1:   0.1rem;
+    --space-xs:  0.25rem;
+    --space-sm:  0.5rem;
+    --space-md:  0.75rem;
+    --space-lg:  1rem;
+    --space-xl:  1.5rem;
     --space-2xl: 2rem;
 
-    /* Font size */
-    --text-xs: 0.75rem;
-    --text-sm: 0.9rem;
-    --text-md: 1rem;
-    --text-lg: 1.25rem;
-    --text-xl: 2rem;
-    --text-2xl: 2.5rem;
+    /* ========== FONT SIZES ========== */
+    --text-xs: 0.75rem;    /* 12px */
+    --text-sm: 0.875rem;   /* 14px */
+    --text-md: 1rem;       /* 16px */
+    --text-lg: 1.125rem;   /* 18px */
+    --text-xl: 1.5rem;     /* 24px */
+    --text-2xl: 2rem;      /* 32px */
 
-    /* Font weight */
-    --font-light: 300;
-    --font-regular: 400;
+    /* ========== FONT WEIGHTS ========== */
+    --font-light:     300;
+    --font-regular:   400;
     --font-semi-bold: 500;
-    --font-bold: 600;
-    --font-heavy: 800;
+    --font-bold:      600;
+    --font-heavy:     800;
 
-    /* Border radius */
-    --round-sm: .2rem;
-    --round-md: .4rem;
-    --round-lg: .6rem;
-    --round-xl: .8rem;
-    --round-2xl: 1.2rem;
-
-    /* Experimental palette, will be used later */
-    /* --amber-50: #fffbeb;
-    --amber-100: #fef3c7;
-    --amber-200: #fde68a;
-    --amber-300: #fcd34d;
-    --amber-400: #fbbf24;
-    --amber-500: #f59e0b;
-    --amber-600: #d97706;
-    --amber-700: #b45309;
-    --amber-800: #92400e;
-    --amber-900: #78350f;
-
-    --brown-50: #faf7f2;
-    --brown-100: #f5efe6;
-    --brown-200: #e7dcc9;
-    --brown-300: #d6c3a3;
-    --brown-400: #bfa27a;
-    --brown-500: #a1845c;
-    --brown-600: #7c6546;
-    --brown-700: #5e4d36;
-    --brown-800: #3f3426;
-
-    --bg-primary: #fffdf9;
-    --bg-secondary: var(--brown-50);
-    --bg-tertiary: var(--brown-100);
-
-    --text-primary: #2d2a26;
-    --text-secondary: #5c564f;
-    --text-muted: #9a948c;
-    --text-disabled: var(--brown-200);
-
-    --border-color: var(--brown-200);
-    --border-hover: var(--brown-300);
-
-    --color-primary: var(--amber-500);
-    --color-primary-hover: var(--amber-600);
-    --color-primary-active: var(--amber-700);
-    --color-primary-soft: var(--amber-100);
-
-    --hover-bg: var(--brown-100);
-    --active-bg: var(--brown-200);
-    --focus-ring: var(--amber-500);
-
-    --shadow-sm: 0 1px 2px rgba(120, 85, 40, 0.08);
-    --shadow-md: 0 4px 6px rgba(120, 85, 40, 0.12); */
+    /* ========== BORDER RADIUS ========== */
+    --round-sm:  0.25rem;
+    --round-md:  0.375rem;
+    --round-lg:  0.5rem;
+    --round-xl:  0.75rem;
+    --round-2xl: 1rem;
+    --round-full: 9999px;
 }

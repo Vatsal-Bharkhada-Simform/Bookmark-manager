@@ -1,92 +1,115 @@
 .collapsible {
     display: flex;
     flex-direction: column;
-    border: 1px solid var(--gray-200);
+    border: 1px solid var(--border-color);
     border-radius: var(--round-lg);
     overflow: hidden;
     flex-shrink: 0;
-    min-width: 600px;
+    /* Removed min-width: 600px -- was causing horizontal overflow on mobile */
 
-    .collapsible__head{
-        padding: var(--space-md);
+    .collapsible__head {
+        padding: var(--space-md) var(--space-lg);
         display: flex;
         justify-content: space-between;
-        background-color: var(--gray-50);
+        align-items: center;
+        background-color: var(--surface-alt);
+        cursor: pointer;
+        transition: background-color 0.15s ease;
+
+        &:hover {
+            background-color: var(--color-primary-soft);
+        }
 
         .head-wrapper {
             display: flex;
             align-items: center;
             gap: var(--space-md);
-            
-            h2{
-                font-size: var(--text-md);
+
+            h2 {
+                font-size: var(--text-sm);
+                font-weight: var(--font-bold);
                 padding: var(--space-xs) var(--space-md);
-                border: 2px solid;
-                border-radius: var(--round-2xl);
-                font-weight: var(--font-semi-bold);
-                color: var(--text-primary);
-                opacity: 0.95;
-                display: inline-block;
-    
-                svg{
-                    margin-left: var(--space-sm);
+                border: 1.5px solid var(--color-primary);
+                border-radius: var(--round-full);
+                color: var(--color-primary-hover);
+                background-color: var(--color-primary-soft);
+                display: inline-flex;
+                align-items: center;
+                gap: var(--space-xs);
+                white-space: nowrap;
+                opacity: 1;
+
+                svg {
+                    margin-left: 0;
+                    flex-shrink: 0;
                 }
             }
         }
 
         svg {
-            transition: all .3s ease-in-out;
+            transition: transform 0.25s ease-in-out;
             transform: rotate(180deg);
+            color: var(--text-muted);
+            flex-shrink: 0;
         }
 
         .close {
             transform: rotate(0deg);
         }
     }
-    
-    .collapsible__body{
-        border-top: 1px solid var(--gray-200);
-        
+
+    .collapsible__body {
+        border-top: 1px solid var(--border-color);
+        overflow-x: auto;
+
         table {
             width: 100%;
+            min-width: 560px; /* Inner table min-width with scrollable wrapper */
             table-layout: fixed;
             font-size: var(--text-sm);
             border: none;
             border-spacing: 0;
 
-            thead, tbody {
+            thead,
+            tbody {
                 width: 100%;
 
                 tr {
-                    display: flex;
-                    border-bottom: 1px solid var(--gray-200);
+                    border-bottom: 1px solid var(--border-color);
+                    transition: background-color 0.12s ease;
 
                     th {
-                        font-weight: var(--font-semi-bold);
-                        color: var(--gray-400);
+                        font-size: var(--text-xs);
+                        font-weight: var(--font-bold);
+                        color: var(--text-muted);
+                        text-transform: uppercase;
+                        letter-spacing: 0.06em;
+                        background-color: var(--surface-alt);
                     }
 
-                    th, td{
-                        flex: 4;
+                    th,
+                    td {
                         text-align: left;
                         overflow: hidden;
-                        white-space: wrap;
-                        word-wrap: break-word;
+                        white-space: normal;
+                        word-break: break-word;
+                        vertical-align: middle;
+                        padding: var(--space-md) var(--space-lg);
 
-                        padding: var(--space-md);
-
-                        .u-tag{
-                            display: inline-block;
-                            margin-right: var(--space-sm);
+                        .u-tag {
+                            display: inline-flex;
+                            margin-right: var(--space-xs);
+                            margin-bottom: var(--space-xs);
                         }
 
                         a {
-                            color: var(--blue-600);
+                            color: var(--color-primary-hover);
                             text-decoration: none;
-                            white-space: break-word;
+                            font-weight: var(--font-semi-bold);
 
                             &:hover {
                                 text-decoration: underline;
+                                color: var(--color-primary-active);
                             }
                         }
 
@@ -94,23 +117,22 @@
                             visibility: hidden;
                             opacity: 0;
                             pointer-events: none;
-                            transition: all .3s ease;
+                            transition: opacity 0.2s ease, visibility 0.2s ease;
                         }
                     }
 
-                    th:nth-child(4), td:nth-child(4),
-                    th:last-child, td:last-child{
-                        display: flex;
-                        justify-content: flex-end;
-                        align-items: center;
-                        flex: 1;
+                    th:nth-child(4),
+                    td:nth-child(4),
+                    th:last-child,
+                    td:last-child {
+                        width: 5rem;
                         text-align: right;
-                        padding: 0 var(--space-md);
+                        padding: 0 var(--space-lg);
                     }
-                    
-                    &:hover td{
-                        background-color: var(--gray-50);
-                        
+
+                    &:hover td {
+                        background-color: var(--color-primary-soft);
+
                         button {
                             visibility: visible;
                             opacity: 1;
